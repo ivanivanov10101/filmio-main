@@ -89,8 +89,8 @@ const CreatePost = () => {
                     />
                     <Select onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
                         <option value='uncategorized'>Select a category</option>
-                        <option value='webtech'>WebTech</option>
-                        <option value='history'>History</option>
+                        <option value='movies'>Movies</option>
+                        <option value='tvseries'>TV Series</option>
                         <option value='science'>Science</option>
                         <option value='science-fiction'>Science & Fiction</option>
                         <option value='mystery'>Mystery</option>
@@ -104,12 +104,10 @@ const CreatePost = () => {
                     />
                     <Button
                         type='button'
-                        gradientDuoTone={'purpleToBlue'}
                         size={'sm'}
-                        outline
                         onClick={handleUploadImage}
                         disabled={!imageFileUploadingProgress === null}
-                        className='w-full md:w-32'
+                        className='text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] w-full md:w-32'
                     >
                         {imageFileUploadingProgress ? 'uploading...' : 'Upload image'}
                     </Button>
@@ -133,7 +131,7 @@ const CreatePost = () => {
                         setFormData({ ...formData, content: value });
                     }}
                 />
-                <Button type='submit' gradientDuoTone={'purpleToPink'}>
+                <Button type='submit' className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                     Publish
                 </Button>
             </form>
