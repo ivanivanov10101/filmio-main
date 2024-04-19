@@ -91,10 +91,10 @@ const CreatePost = () => {
                         <option value='uncategorized'>Select a category</option>
                         <option value='movies'>Movies</option>
                         <option value='tvseries'>TV Series</option>
-                        <option value='science'>Science</option>
-                        <option value='science-fiction'>Science & Fiction</option>
-                        <option value='mystery'>Mystery</option>
-                        <option value='facts'>Facts</option>
+                        {/*<option value='science'>Science</option>*/}
+                        {/*<option value='science-fiction'>Science & Fiction</option>*/}
+                        {/*<option value='mystery'>Mystery</option>*/}
+                        {/*<option value='facts'>Facts</option>*/}
                     </Select>
                 </div>
                 <div className='flex flex-col items-center justify-between gap-4 p-3 border-2 border-teal-500 border-dashed md:flex-row'>
