@@ -140,13 +140,14 @@ const Search = () => {
                             <option value="uncategorized">Uncategorized</option>
                             <option value="movies">Movies</option>
                             <option value="tvseries">TV Series</option>
-                            {/*<option value="science">Science</option>*/}
+                            <option value='festivals'>Festivals & Ceremonies</option>
                             {/*<option value="science-fiction">Science & Fiction</option>*/}
                             {/*<option value="mystery">Mystery</option>*/}
                             {/*<option value="facts">Facts</option>*/}
                         </Select>
                     </div>
-                    <Button type="submit" className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
+                    <Button type="submit"
+                            className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                         Apply Filters
                     </Button>
                 </form>

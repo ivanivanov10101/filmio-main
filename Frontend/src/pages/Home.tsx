@@ -31,7 +31,7 @@ const Home = () => {
             <Posts category="all" title="All Sources" />
             <Posts category="movies" title="Movies" />
             <Posts category="tvseries" title="TV Series" />
-            {/*<Posts category="science" title="Science" />*/}
+            <Posts category="festivals" title="Festivals & Ceremonies" />
             {/*<Posts category="science-fiction" title="Science & Fiction" />*/}
             {/*<Posts category="mystery" title="Mystery" />*/}
             {/*<Posts category="facts" title="Facts" />*/}
