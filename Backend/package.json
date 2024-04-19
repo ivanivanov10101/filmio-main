@@ -2,7 +2,7 @@
     "type": "module",
     "name": "mern-blog",
     "version": "1.0.0",
-    "description": "A backen of mern-blog-app",
+    "description": "The backend of filmio",
     "main": "index.js",
     "scripts": {
         "dev": "nodemon src/index.js",
@@ -14,7 +14,7 @@
         "backend",
         "blog-app"
     ],
-    "author": "Ankit Yadav",
+    "author": "Ivan Ivanov",
     "license": "ISC",
     "dependencies": {
         "bcrypt": "^5.1.1",
