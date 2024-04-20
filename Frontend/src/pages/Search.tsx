@@ -59,7 +59,7 @@ const Search = () => {
                 setLoading(false);
             }
         })();
-    }, [location.search, sidebarData]);
+    }, [location.search]);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
