@@ -68,7 +68,7 @@ const Search = () => {
             setSidebarData({ ...sidebarData, searchTerm: e.target.value });
         }
         if (e.target.id === "sort") {
-            const order = e.target.value || "desc";
+            const order = e.target.value || "asc";
             setSidebarData({ ...sidebarData, sort: order });
         }
         if (e.target.id === "category") {
@@ -125,8 +125,8 @@ const Search = () => {
                     <div className="flex items-center gap-2">
                         <label className="font-semibold">Sort:</label>
                         <Select onChange={handleChange} value={sidebarData.sort} id="sort">
-                            <option value="desc">Latest</option>
-                            <option value="asc">Oldest</option>
+                            <option value="asc">Latest</option>
+                            <option value="desc">Oldest</option>
                         </Select>
                     </div>
                     <div className="flex items-center gap-2">
