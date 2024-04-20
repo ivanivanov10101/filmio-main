@@ -92,8 +92,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
               <Button
                 type="button"
                 size="sm"
-                gradientMonochrome="success"
-                outline
+                className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
                 onClick={handleSave}
               >
                 Save
@@ -101,8 +100,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
               <Button
                 type="button"
                 size="sm"
-                gradientMonochrome="failure"
-                outline
+                className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
                 onClick={() => setIsEditing(false)}
               >
                 Cancel

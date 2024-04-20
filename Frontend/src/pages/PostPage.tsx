@@ -61,7 +61,7 @@ const PostPage = () => {
     return (
         post && (
             <main className="flex flex-col max-w-6xl min-h-screen p-3 mx-auto">
-                <h1 className="max-w-2xl p-3 mx-auto mt-10 font-serif text-3xl text-center lg:text-4xl">
+                <h1 className="p-3 mx-auto mt-10 font-serif text-3xl text-center lg:text-4xl">
                     {post.title}
                 </h1>
                 <Link
