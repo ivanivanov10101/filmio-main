@@ -60,7 +60,7 @@ const Header = () => {
                 <div className="static inline-block w-[50px]">
                     <img src="/assets/images/logo.png" alt="logo" />
                 </div>
-                <div className="relative inline-block  left-3 ">Filmio</div>
+                <div className="relative inline-block left-3 text-3xl font-bold">Filmio</div>
             </Link>
             <form onSubmit={handleSubmit} className="w-auto">
                 <TextInput
