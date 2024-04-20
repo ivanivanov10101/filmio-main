@@ -149,25 +149,21 @@ const UpdatePost = () => {
                         <option value="movies">Movies</option>
                         <option value="tvseries">TV Series</option>
                         <option value='festivals'>Festivals & Ceremonies</option>
-                        {/*<option value="science-fiction">Science & Fiction</option>*/}
-                        {/*<option value="mystery">Mystery</option>*/}
-                        {/*<option value="facts">Facts</option>*/}
                     </Select>
                 </div>
                 <div
-                    className="flex flex-col items-center justify-between gap-4 p-3 border-2 border-teal-500 border-dashed md:flex-row">
+                    className="flex flex-col items-center justify-between gap-4 p-3 md:flex-row">
                     <FileInput
                         className="w-full md:flex-1"
                         onChange={(e) => setImageFile(e.target.files && e.target.files[0])}
                     />
                     <Button
                         type="button"
-                        gradientDuoTone={"purpleToBlue"}
                         size={"sm"}
-                        outline
                         onClick={handleUploadImage}
                         disabled={!imageFileUploadingProgress === null}
-                        className="w-full md:w-32"
+                        className='text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] w-full md:w-32'
+
                     >
                         {imageFileUploadingProgress ? "uploading..." : "Upload image"}
                     </Button>
