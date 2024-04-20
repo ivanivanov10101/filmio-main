@@ -50,7 +50,7 @@ export const getPosts = asyncHandler(async (req, res) => {
     //! ......... Sorting ............ //
     if (sort) {
         let sortFix = sort.split(',').join(' ');
-        const sortValue = sortFix === 'asc' ? { createdAt: 1 } : sortFix === 'desc' ? { createdAt: -1 } : sortFix;
+        const sortValue = sortFix === 'desc' ? { createdAt: 1 } : sortFix === 'asc' ? { createdAt: -1 } : sortFix;
         postData = postData.sort(sortValue);
     }
 
@@ -115,7 +115,7 @@ export const getAllPosts = asyncHandler(async (req, res) => {
     //! ......... Sorting ............ //
     if (sort) {
         let sortFix = sort.split(',').join(' ');
-        const sortValue = sortFix === 'asc' ? { createdAt: 1 } : sortFix === 'desc' ? { createdAt: -1 } : sortFix;
+        const sortValue = sortFix === 'desc' ? { createdAt: 1 } : sortFix === 'asc' ? { createdAt: -1 } : sortFix;
         postData = postData.sort(sortValue);
     }
 
