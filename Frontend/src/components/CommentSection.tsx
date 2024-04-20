@@ -132,7 +132,7 @@ const CommentSection = ({ postId }: PropsType) => {
         </div>
       ) : (
         <div className="flex gap-1 my-5 text-sm text-teal-500">
-          <div>You must be signed in to comment.</div>
+          <div>You must be sign in to comment.</div>
           <Link to={"/sign-in"} className="text-blue-500 hover:underline">
             Sign in
           </Link>
