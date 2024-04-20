@@ -189,12 +189,12 @@ const UpdatePost = () => {
                 )}
                 <ReactQuill
                     theme="snow"
-                    placeholder="Write something..."
-                    className="mb-12 h-72"
+                    placeholder="Article text here..."
+                    className="mb-12 h-72 dark:text-white"
                     onChange={(value) => setFormDataContent(value)}
                     value={formDataContent || formData.content}
                 />
-                <Button type="submit" gradientDuoTone={"purpleToPink"}>
+                <Button type="submit" className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                     Update
                 </Button>
             </form>

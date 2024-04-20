@@ -155,7 +155,7 @@ const CommentSection = ({ postId }: PropsType) => {
             <p className="text-xs text-gray-500">
               {200 - comment.length} characters remaining
             </p>
-            <Button type="submit" gradientDuoTone={"purpleToBlue"} outline>
+            <Button type="submit" className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
               Submit
             </Button>
           </div>
