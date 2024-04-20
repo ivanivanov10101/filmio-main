@@ -15,7 +15,7 @@ type SidebarDataType = {
 const Search = () => {
     const [sidebarData, setSidebarData] = useState<SidebarDataType>({
         searchTerm: "",
-        sort: "asc",
+        sort: "desc",
         category: "all",
     });
     const [posts, setPosts] = useState<Post[] | []>([]);
@@ -68,7 +68,7 @@ const Search = () => {
             setSidebarData({ ...sidebarData, searchTerm: e.target.value });
         }
         if (e.target.id === "sort") {
-            const order = e.target.value || "asc";
+            const order = e.target.value || "desc";
             setSidebarData({ ...sidebarData, sort: order });
         }
         if (e.target.id === "category") {
