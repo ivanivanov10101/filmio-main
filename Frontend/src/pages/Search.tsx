@@ -140,10 +140,9 @@ const Search = () => {
                             <option value="uncategorized">Uncategorized</option>
                             <option value="movies">Movies</option>
                             <option value="tvseries">TV Series</option>
+                            <option value="interviews">Interviews</option>
+                            <option value="reviews">Reviews</option>
                             <option value='festivals'>Festivals & Ceremonies</option>
-                            {/*<option value="science-fiction">Science & Fiction</option>*/}
-                            {/*<option value="mystery">Mystery</option>*/}
-                            {/*<option value="facts">Facts</option>*/}
                         </Select>
                     </div>
                     <Button type="submit"

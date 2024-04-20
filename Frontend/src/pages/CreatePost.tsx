@@ -91,6 +91,8 @@ const CreatePost = () => {
                         <option value='uncategorized'>Select a category</option>
                         <option value='movies'>Movies</option>
                         <option value='tvseries'>TV Series</option>
+                        <option value='interviews'>Interviews</option>
+                        <option value='reviews'>Reviews</option>
                         <option value='festivals'>Festivals & Ceremonies</option>
                     </Select>
                 </div>

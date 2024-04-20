@@ -12,13 +12,13 @@ const Home = () => {
             >
                 <div className="ml-8 text-gray-50 py-4 [filter:drop-shadow(0px_3px_1px_#000000)]">
                     <h1 className="text-3xl font-bold lg:text-6xl">
-                        Welcome, {currentUser ? currentUser?.fullName : "to Filmio!"}
+                        Welcome {currentUser ? currentUser?.fullName : "to Filmio!"}
                     </h1>
                     <h2 className="text-lg font-semibold">
                         Filmio: The news website for film nerds!
                     </h2>
                     <p className="text-xs sm:text-sm">
-                        Find the latest news from Hollywood and across the world here
+                        Find the latest news from Hollywood and across the world here.
                     </p>
                     <Link
                         to="/search"
@@ -31,6 +31,8 @@ const Home = () => {
             <Posts category="all" title="All Sources" />
             <Posts category="movies" title="Movies" />
             <Posts category="tvseries" title="TV Series" />
+            <Posts category="interviews" title="Interviews" />
+            <Posts category="reviews" title="Reviews" />
             <Posts category="festivals" title="Festivals & Ceremonies" />
         </div>
     );
