@@ -69,13 +69,13 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
         <img
           className="w-10 h-10 bg-gray-200 rounded-full"
           src={user?.profilePicture}
-          alt={user?.userName}
+          alt={user?.fullName}
         />
       </div>
       <div className="flex-1">
         <div className="flex items-center mb-1">
           <span className="mr-1 text-xs font-bold truncate">
-            {user ? `${user.userName}` : "anonymous user"}
+            {user ? `${user.fullName}` : "anonymous user"}
           </span>
           <span className="text-xs text-gray-500">
             {moment(comment.createdAt).fromNow()}
