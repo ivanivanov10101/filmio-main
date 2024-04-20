@@ -1,5 +1,5 @@
 import { Button, Select, Spinner, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
 import { Post } from "./PostPage";
@@ -59,7 +59,7 @@ const Search = () => {
                 setLoading(false);
             }
         })();
-    }, [location.search]);
+    }, [location.search, sidebarData]);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

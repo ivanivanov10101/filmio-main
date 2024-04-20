@@ -120,19 +120,19 @@ const CommentSection = ({ postId }: PropsType) => {
           <p>Signed in as:</p>
           <img
             src={currentUser.profilePicture}
-            alt={currentUser.userName}
+            alt={currentUser.fullName}
             className="object-cover w-5 h-5 rounded-full"
           />
           <Link
             to={"/dashboard?tab=profile"}
             className="text-xs text-teal-500 hover:underline"
           >
-            {currentUser.userName}
+            {currentUser.fullName}
           </Link>
         </div>
       ) : (
         <div className="flex gap-1 my-5 text-sm text-teal-500">
-          <div>You must be sign in to comment.</div>
+          <div>You must be signed in to comment.</div>
           <Link to={"/sign-in"} className="text-blue-500 hover:underline">
             Sign in
           </Link>
