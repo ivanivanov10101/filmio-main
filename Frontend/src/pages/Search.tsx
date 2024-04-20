@@ -68,7 +68,7 @@ const Search = () => {
             setSidebarData({ ...sidebarData, searchTerm: e.target.value });
         }
         if (e.target.id === "sort") {
-            const order = e.target.value || "desc";
+            const order = e.target.value || "asc";
             setSidebarData({ ...sidebarData, sort: order });
         }
         if (e.target.id === "category") {
