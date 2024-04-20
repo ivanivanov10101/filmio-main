@@ -12,7 +12,7 @@ const Home = () => {
             >
                 <div className="ml-8 text-gray-50 py-4 [filter:drop-shadow(0px_3px_1px_#000000)]">
                     <h1 className="text-3xl font-bold lg:text-6xl">
-                        Welcome {currentUser ? currentUser?.fullName : "to Filmio!"}
+                        Welcome, {currentUser ? currentUser?.fullName + "to Filmio" : "to Filmio!"}
                     </h1>
                     <h2 className="text-lg font-semibold">
                         Filmio: The news website for film nerds!

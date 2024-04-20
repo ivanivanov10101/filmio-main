@@ -142,7 +142,7 @@ const DashProfile = () => {
       );
       dispatch(updateUserSuccess(data.data.updatedUser));
       setImageFileUploadingProgress(null);
-      setUpdateSuccess("user updated successfully.");
+      setUpdateSuccess("Account data updated successfully.");
     } catch (error) {
       if (axios.isAxiosError<ValidationError, Record<string, unknown>>(error)) {
         dispatch(updateUserFailure(error.response?.data.message));

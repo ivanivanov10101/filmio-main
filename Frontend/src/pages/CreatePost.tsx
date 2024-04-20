@@ -94,7 +94,7 @@ const CreatePost = () => {
                         <option value='festivals'>Festivals & Ceremonies</option>
                     </Select>
                 </div>
-                <div className='flex flex-col items-center justify-between gap-4 p-3 md:flex-row'>
+                <div className='flex flex-col items-center justify-between gap-4 md:flex-row'>
                     <FileInput
                         className='w-full md:flex-1'
                         onChange={(e) => setImageFile(e.target.files && e.target.files[0])}
