@@ -154,11 +154,11 @@ const Search = () => {
             </div>
             <div className="w-full">
                 <h1 className="p-3 mt-5 text-3xl font-semibold border-gray-500 sm:border-b ">
-                    Posts results:
+                    Results:
                 </h1>
                 <div className="flex flex-wrap gap-4 p-7">
                     {!loading && posts?.length === 0 && (
-                        <p className="text-xl text-gray-500">No posts found.</p>
+                        <p className="text-xl text-gray-500">No articles found.</p>
                     )}
                     {loading && (
                         <div className="grid w-full min-h-screen place-content-center">

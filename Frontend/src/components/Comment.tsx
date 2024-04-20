@@ -75,7 +75,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
       <div className="flex-1">
         <div className="flex items-center mb-1">
           <span className="mr-1 text-xs font-bold truncate">
-            {user ? `@${user.userName}` : "anonymous user"}
+            {user ? `${user.userName}` : "anonymous user"}
           </span>
           <span className="text-xs text-gray-500">
             {moment(comment.createdAt).fromNow()}

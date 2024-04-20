@@ -47,7 +47,7 @@ const Posts = ({ category, title }: PropsType) => {
                 to={"/search"}
                 className="text-lg text-center text-[#63d052] hover:no-underline hover:text-[#98e87b]"
               >
-                View all posts
+                View all articles
               </Link>
             </div>
             <PostCardSkeleton cards={3} />
@@ -65,7 +65,7 @@ const Posts = ({ category, title }: PropsType) => {
                   to={"/search"}
                   className="text-lg text-center text-[#63d052] hover:no-underline hover:text-[#98e87b]"
                 >
-                  View all posts
+                  View all articles
                 </Link>
               </div>
               <div className="flex flex-wrap justify-between gap-4">
