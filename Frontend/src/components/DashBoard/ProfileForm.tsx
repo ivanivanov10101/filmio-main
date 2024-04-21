@@ -1,6 +1,6 @@
 import { Button, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
-// import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { MdEditOff, MdEmail, MdModeEdit } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
@@ -17,8 +17,6 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useAppDispatch } from "../../store/storeHooks";
 import { handleAxiosError } from "../../utils/utils";
 import { Axios } from "../../config/api";
-import {InputAdornment, TextField} from "@mui/material";
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 type PropsType = {
   register: UseFormRegister<profileFormData>;
@@ -60,36 +58,17 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
   };
 
   return (
-
     <div>
       <div className="flex flex-col gap-4">
         <label className="relative" htmlFor="userName">
-          {/*<TextInput*/}
-          {/*  type="text"*/}
-          {/*  id="userName"*/}
-          {/*  placeholder="username"*/}
-          {/*  icon={FaUserCircle}*/}
-          {/*  defaultValue={currentUser?.userName}*/}
-          {/*  disabled={isUsernameDisabled}*/}
-          {/*  {...register("userName")}*/}
-          {/*/>*/}
-          <TextField
-              type="text"
-              id="userName"
-              label="Username"
-              defaultValue={currentUser?.userName}
-              InputLabelProps={{style: {color: 'white'}}}
-              className="outline"
-              disabled={isUsernameDisabled}
-              {...register("userName")}
-              InputProps={{
-                startAdornment: (
-                    <InputAdornment position="start">
-                      <AccountCircle />
-                    </InputAdornment>
-                ),
-              }}
-              variant="standard"
+          <TextInput
+            type="text"
+            id="userName"
+            placeholder="username"
+            icon={FaUserCircle}
+            defaultValue={currentUser?.userName}
+            disabled={isUsernameDisabled}
+            {...register("userName")}
           />
           <span
             className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
