@@ -78,6 +78,7 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
               id="userName"
               label="Username"
               defaultValue={currentUser?.userName}
+              InputLabelProps={{style: {color: 'white'}}}
               disabled={isUsernameDisabled}
               {...register("userName")}
               InputProps={{
