@@ -14,8 +14,7 @@ const Home = () => {
                     <h1 className="text-3xl font-bold lg:text-6xl">
                         Welcome {currentUser ? currentUser?.fullName : "to Filmio!"}
                     </h1>
-                    <h2 className="text-lg font-semibold">
-                        Filmio: The news website for film nerds!
+                    <h2>
                     </h2>
                     <p className="text-xs sm:text-sm">
                         Find the latest news from Hollywood and across the world here.
