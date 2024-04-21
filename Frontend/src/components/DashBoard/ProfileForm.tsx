@@ -143,13 +143,6 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
         >
           {loading ? "Loading..." : "Update"}
         </Button>
-        {currentUser && currentUser.isAdmin && (
-          <Link to={"/create-post"}>
-            <Button className="text-white w-full bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
-              Create Post
-            </Button>
-          </Link>
-        )}
       </div>
       <div className="flex justify-between mt-4 text-red-500">
         <Button
