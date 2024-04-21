@@ -17,6 +17,8 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useAppDispatch } from "../../store/storeHooks";
 import { handleAxiosError } from "../../utils/utils";
 import { Axios } from "../../config/api";
+import {InputAdornment, TextField} from "@mui/material";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 type PropsType = {
   register: UseFormRegister<profileFormData>;
@@ -58,6 +60,7 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
   };
 
   return (
+
     <div>
       <div className="flex flex-col gap-4">
         <label className="relative" htmlFor="userName">
@@ -69,6 +72,18 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
             defaultValue={currentUser?.userName}
             disabled={isUsernameDisabled}
             {...register("userName")}
+          />
+          <TextField
+              id="input-with-icon-textfield"
+              label="Full Name"
+              InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                ),
+              }}
+              variant="standard"
           />
           <span
             className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
