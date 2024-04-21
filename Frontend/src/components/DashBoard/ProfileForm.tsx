@@ -74,8 +74,12 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
             {...register("userName")}
           />
           <TextField
-              id="input-with-icon-textfield"
-              label="Full Name"
+              type="text"
+              id="userName"
+              label="Username"
+              defaultValue={currentUser?.userName}
+              disabled={isUsernameDisabled}
+              {...register("userName")}
               InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
