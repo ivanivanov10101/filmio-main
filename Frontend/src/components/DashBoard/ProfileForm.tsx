@@ -64,15 +64,15 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
     <div>
       <div className="flex flex-col gap-4">
         <label className="relative" htmlFor="userName">
-          <TextInput
-            type="text"
-            id="userName"
-            placeholder="username"
-            icon={FaUserCircle}
-            defaultValue={currentUser?.userName}
-            disabled={isUsernameDisabled}
-            {...register("userName")}
-          />
+          {/*<TextInput*/}
+          {/*  type="text"*/}
+          {/*  id="userName"*/}
+          {/*  placeholder="username"*/}
+          {/*  icon={FaUserCircle}*/}
+          {/*  defaultValue={currentUser?.userName}*/}
+          {/*  disabled={isUsernameDisabled}*/}
+          {/*  {...register("userName")}*/}
+          {/*/>*/}
           <TextField
               type="text"
               id="userName"
