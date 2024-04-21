@@ -1,6 +1,6 @@
 import { Button, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+// import { FaUserCircle } from "react-icons/fa";
 import { MdEditOff, MdEmail, MdModeEdit } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
