@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
-import { firebaseStorage } from "../../firebase";
+import { firebaseStorage } from "../../utils/firebase.ts";
 import ProfileForm from "./ProfileForm";
 import axios from "axios";
 import {

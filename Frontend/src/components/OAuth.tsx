@@ -1,7 +1,7 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { Button, Spinner } from "flowbite-react";
 import { AiFillGoogleCircle } from "react-icons/ai";
-import { firebaseApp } from "../firebase";
+import { firebaseApp } from "../utils/firebase.ts";
 import { useAppDispatch } from "../store/storeHooks";
 import { signInFailure, signInSuccess } from "../store/features/user/userSlice";
 import { useNavigate } from "react-router-dom";
