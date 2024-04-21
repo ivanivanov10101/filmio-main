@@ -65,6 +65,7 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
             type="text"
             id="userName"
             placeholder="username"
+            className="outline-dashed"
             icon={FaUserCircle}
             defaultValue={currentUser?.userName}
             disabled={isUsernameDisabled}
