@@ -15,7 +15,6 @@ import {
 } from "../../store/features/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useAppDispatch } from "../../store/storeHooks";
-import { Link } from "react-router-dom";
 import { handleAxiosError } from "../../utils/utils";
 import { Axios } from "../../config/api";
 
