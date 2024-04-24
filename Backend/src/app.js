@@ -10,7 +10,7 @@ import { commentRoutes } from './routes/comment.routes.js';
 
 const app = express();
 const corsOptions = {
-    origin: process.env.FRONDEND_LINK,
+    origin: process.env.FRONTEND,
     credentials: true,
     optionSuccessStatus: 200,
     Headers: true,
