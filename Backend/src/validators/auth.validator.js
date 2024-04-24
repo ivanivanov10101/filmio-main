@@ -1,38 +1,37 @@
 import { z } from 'zod';
 
-// create an object schema....
 const signupSchema = z.object({
     fullName: z
-        .string({ required_error: 'fullName is required' })
+        .string({ required_error: 'Both names are required' })
         .trim()
-        .min(3, { message: 'Name must be at least 3 characters' })
-        .max(100, { message: 'Name must be at most 100 characters' }),
+        .min(2, { message: 'Name must be at least 2 characters' })
+        .max(200, { message: 'Name must be at most 200 characters' }),
     userName: z
-        .string({ required_error: 'userName is required' })
+        .string({ required_error: 'Username is required' })
         .trim()
-        .min(3, { message: 'userName must be at least 3 characters' })
-        .max(30, { message: 'userName must be at most 100 characters' }),
+        .min(3, { message: 'Username must be at least 2 characters' })
+        .max(50, { message: 'Username must be at most 50 characters' }),
     email: z
-        .string({ required_error: 'email is required' })
+        .string({ required_error: 'Email address is required' })
         .trim()
         .email({ message: 'Invalid email address' })
-        .min(3, { message: 'email must be at least 3 characters' })
-        .max(100, { message: 'email must be at most 100 characters' }),
+        .min(3, { message: 'Email address must be at least 3 characters' })
+        .max(200, { message: 'Email address must be at most 200 characters' }),
     password: z
-        .string({ required_error: 'password is required' })
-        .min(8, { message: 'password must be at least 8 characters' })
-        .max(100, { message: 'password must be at most 100 characters' }),
+        .string({ required_error: 'Password is required' })
+        .min(8, { message: 'Password must be at least 8 characters' })
+        .max(100, { message: 'Password must be at most 100 characters' }),
 });
 
-const loginSchema = z.object({
-    email: z.string({ required_error: 'email is required' }).trim().email({ message: 'Invalid email address' }),
-    password: z.string({ required_error: 'password is required' }),
+const signinSchema = z.object({
+    email: z.string({ required_error: 'Email address is required' }).trim().email({ message: 'Invalid email address' }),
+    password: z.string({ required_error: 'Password is required' }),
 });
 
 const googleSchema = z.object({
-    name: z.string(),
-    email: z.string({ required_error: 'email is required' }).trim().email({ message: 'Invalid email address' }),
+    name: z.string({ required_error: 'Username is required' }),
+    email: z.string({ required_error: 'Email address is required' }).trim().email({ message: 'Invalid Email address' }),
     googlePhotoUrl: z.string(),
 });
 
-export { signupSchema, loginSchema, googleSchema };
+export { signupSchema, signinSchema, googleSchema };
