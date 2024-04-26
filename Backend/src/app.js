@@ -7,9 +7,6 @@ import { authRoutes } from './routes/auth.routes.js';
 import { userRoutes } from './routes/user.routes.js';
 import { postRoutes } from './routes/post.routes.js';
 import { commentRoutes } from './routes/comment.routes.js';
-import session from "express-session";
-import MongoStore from "connect-mongo";
-import mongoose from "mongoose";
 
 const app = express();
 const corsOptions = {
@@ -25,20 +22,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    saveUninitialized: true,
-    resave: false,
-    cookie: {
-        maxAge: 60 * 60 * 1000,
-    },
-    store: MongoStore.create({
-        client: mongoose.connection.getClient(),
-    })
-}
-))
-app.use(cookieParser(process.env.COOKIE_SECRET));
-
+app.use(cookieParser());
 
 // Routes declaration...
 app.use('/api/v1/auth', authRoutes);
@@ -49,7 +33,7 @@ app.use('/api/v1/comment', commentRoutes);
 app.get('/', (req, res) => {
     res.status(200).json({
         status: 'ok',
-        message: 'Server working.',
+        message: 'I am home route. Sever is live',
     });
 });
 

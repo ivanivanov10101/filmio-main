@@ -1,4 +1,4 @@
-const devErrors = (res, err) => {
+const devErros = (res, err) => {
     return res.status(err.statusCode).json({
         status: err.statusCode,
         message: err.message,
@@ -22,12 +22,12 @@ const globalErrorHandler = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
-    if (process.env.ENV === 'development') {
-        devErrors(res, err);
-    } else if (process.env.ENV === 'production') {
+    if (process.env.NODE_ENV === 'development') {
+        devErros(res, err);
+    } else if (process.env.NODE_ENV === 'production') {
         prodErrors(res, err);
     } else {
-        res.status(500).json({ message: 'Check the ENV environment' });
+        res.status(500).json({ message: 'NODE_ENV Eror!!' });
     }
 };
 
