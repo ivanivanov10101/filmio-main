@@ -7,20 +7,20 @@ import { useAppDispatch } from "./store/storeHooks";
 import { setUserState } from "./store/features/user/userSlice";
 import { SkeletonTheme } from "react-loading-skeleton";
 
+import Layout from "./Layouts/Layout";
+import PrivateRoute from "./components/PrivateRoutes/PrivateRoute";
+import PrivateAuthRoute from "./components/PrivateRoutes/PrivateAuthRoute";
+import OnlyAdminPrivateRoute from "./components/PrivateRoutes/OnlyAdminPrivateRoute";
+import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
 const Signin = lazy(() => import("./pages/Signin"));
 const Signup = lazy(() => import("./pages/Signup"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-import Layout from "./Layouts/Layout";
-import CreatePost from "./pages/CreatePost";
-import PrivateRoute from "./components/PrivateRoutes/PrivateRoute";
-import PrivateAuthRoute from "./components/PrivateRoutes/PrivateAuthRoute";
-import OnlyAdminPrivateRoute from "./components/PrivateRoutes/OnlyAdminPrivateRoute";
-import UpdatePost from "./pages/UpdatePost";
-import PostPage from "./pages/PostPage";
-import Search from "./pages/Search";
-import Home from "./pages/Home";
-import Error from "./pages/Error";
+const CreatePost = lazy(() => import("./pages/CreatePost"));
+const UpdatePost = lazy(() => import("./pages/UpdatePost"));
+const PostPage = lazy(() => import("./pages/PostPage"));
+const Search = lazy(() => import("./pages/Search"));
+const Error = lazy(() => import("./pages/Error"));
 
 const App = () => {
   const dispatch = useAppDispatch();

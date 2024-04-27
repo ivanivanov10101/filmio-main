@@ -1,15 +1,15 @@
 import { Button, FileInput, Select, Spinner, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import {lazy, useEffect, useState} from "react";import { useNavigate, useParams } from "react-router-dom";
+import { handleAxiosError } from "../utils/utils";
+import { useAppSelector } from "../store/storeHooks";
+import { Axios } from "../config/api";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { firebaseStorage } from "../utils/firebase.ts";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import "react-circular-progressbar/dist/styles.css";
-import ShowAlert from "../components/showAlert";
-import { useNavigate, useParams } from "react-router-dom";
-import { handleAxiosError } from "../utils/utils";
-import { useAppSelector } from "../store/storeHooks";
-import { Axios } from "../config/api";
+const ShowAlert = lazy(() => import('../components/showAlert'))
+
 
 type FormData = {
     title?: string;
