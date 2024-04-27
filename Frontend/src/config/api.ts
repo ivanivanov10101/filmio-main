@@ -1,7 +1,65 @@
 import axios from 'axios';
 import { apiBaseUrl } from '.';
+import {handleAxiosError} from "../utils/utils.ts";
+import { currentUser } from '../store/features/user/userSlice.ts';
 
 export const Axios = axios.create({
     withCredentials: true,
     baseURL: apiBaseUrl,
 });
+
+export const getUsers = async (currentUser: currentUser | null) => {
+    try {
+        const { data } = await Axios(`/user/getusers?limit=5`);
+        if (currentUser?.isAdmin) {
+            return data.data;
+        }
+    } catch (error) {
+        const err = await handleAxiosError(error);
+        console.log(err);
+    }
+}
+
+export const getPosts = async (currentUser: currentUser | null) => {
+    try {
+        const { data } = await Axios(`/post/getposts?limit=5`);
+        if (currentUser?.isAdmin) {
+            return data.data;
+        }
+    } catch (error) {
+        const err = await handleAxiosError(error);
+        console.log(err);
+    }
+}
+
+export const getComments = async (currentUser: currentUser | null) => {
+    try {
+        const { data } = await Axios(`/comment/getAllComments?limit=5`);
+        if (currentUser?.isAdmin) {
+            return data.data;
+        }
+    } catch (error) {
+        const err = await handleAxiosError(error);
+        console.log(err);
+    }
+}
+
+export const getSinglePost = async (postSlug: string | undefined) => {
+    try {
+        const { data } = await Axios(`/post/getposts?slug=${postSlug}`);
+        return data.data.posts[0];
+    } catch (error) {
+        const err = handleAxiosError(error);
+        console.log(err);
+    }
+}
+
+export const getRecentPosts = async () => {
+    try {
+        const { data } = await Axios(`/post/getallposts`);
+        return data.data.posts.reverse().slice(0, 3);
+    } catch (error) {
+        const err = handleAxiosError(error);
+        console.log(err);
+    }
+}

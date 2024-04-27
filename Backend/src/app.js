@@ -33,7 +33,7 @@ app.use('/api/v1/comment', commentRoutes);
 app.get('/', (req, res) => {
     res.status(200).json({
         status: 'ok',
-        message: 'I am home route. Sever is live',
+        message: 'Server working.',
     });
 });
 

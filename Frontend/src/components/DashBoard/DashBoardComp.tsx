@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   HiAnnotation,
   HiArrowNarrowUp,
@@ -11,8 +10,7 @@ import { useAppSelector } from "../../store/storeHooks";
 import { Post } from "../../pages/PostPage";
 import { CommentType } from "../CommentSection";
 import { UserType } from "./DashUsers";
-import { handleAxiosError } from "../../utils/utils";
-import { Axios } from "../../config/api";
+import {getComments, getPosts, getUsers} from "../../config/api";
 import { useQuery } from "@tanstack/react-query";
 
 const DashBoardComp = () => {
@@ -21,87 +19,23 @@ const DashBoardComp = () => {
   const { data: usersData, isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      try {
-        const { data } = await Axios(`/user/getusers?limit=5`);
-        if (currentUser?.isAdmin) {
-          return data.data;
-        }
-      } catch (error) {
-        const err = await handleAxiosError(error);
-        console.log(err);
-      }
+      return (await getUsers(currentUser))
     },
   });
 
   const { data: postsData } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      try {
-        const { data } = await Axios(`/post/getposts?limit=5`);
-        if (currentUser?.isAdmin) {
-          return data.data;
-        }
-      } catch (error) {
-        const err = await handleAxiosError(error);
-        console.log(err);
-      }
+      return (await getPosts(currentUser))
     },
   });
 
   const { data: commentsData } = useQuery({
     queryKey: ["comments"],
     queryFn: async () => {
-      try {
-        const { data } = await Axios(`/comment/getAllComments?limit=5`);
-        if (currentUser?.isAdmin) {
-          return data.data;
-        }
-      } catch (error) {
-        const err = await handleAxiosError(error);
-        console.log(err);
-      }
+      return (await getComments(currentUser))
     },
   });
-
-  useEffect(() => {
-    // setLoading(true);
-    if (currentUser?.isAdmin) {
-      // (async () => {
-      //     try {
-      //         const { data } = await Axios(`/user/getusers?limit=5`);
-      //         setUsers(data.data.users);
-      //         setTotalUsers(data.data.totalUsers);
-      //         setLastMonthUsers(data.data.lastMonthUsers);
-      //     } catch (error) {
-      //         const err = await handleAxiosError(error);
-      //         console.log(err);
-      //     }
-      // })();
-      // (async () => {
-      //     try {
-      //         const { data } = await Axios(`/post/getposts?limit=5`);
-      //         setPosts(data.data.posts);
-      //         setTotalPosts(data.data.totalPosts);
-      //         setLastMonthPosts(data.data.lastMonthPosts);
-      //     } catch (error) {
-      //         const err = await handleAxiosError(error);
-      //         console.log(err);
-      //     }
-      // })();
-      // (async () => {
-      //     try {
-      //         const { data } = await Axios(`/comment/getAllComments?limit=5`);
-      //         setComments(data.data.comments);
-      //         setTotalComments(data.data.totalComments);
-      //         setLastMonthComments(data.data.lastMonthComments);
-      //     } catch (error) {
-      //         const err = await handleAxiosError(error);
-      //         console.log(err);
-      //     }
-      // })();
-      // setLoading(false);
-    }
-  }, [currentUser]);
 
   if (isLoading) {
     return (

@@ -1,10 +1,9 @@
-import { Link, useParams } from "react-router-dom";
-import { handleAxiosError } from "../utils/utils";
-import { Button, Spinner } from "flowbite-react";
+import {Link, useParams} from "react-router-dom";
+import {Button, Spinner} from "flowbite-react";
 import CommentSection from "../components/CommentSection";
 import PostCard from "../components/PostCard";
-import { Axios } from "../config/api";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import {getRecentPosts, getSinglePost} from "../config/api";
+import {keepPreviousData, useQuery} from "@tanstack/react-query";
 
 export type Post = {
     _id: string;
@@ -25,27 +24,14 @@ const PostPage = () => {
     const { isLoading, data: post } = useQuery({
         queryKey: [postSlug],
         queryFn: async () => {
-            try {
-                const { data } = await Axios(`/post/getposts?slug=${postSlug}`);
-                return data.data.posts[0];
-            } catch (error) {
-                const err = handleAxiosError(error);
-                console.log(err);
-            }
+            return (await getSinglePost(postSlug))
         },
     });
 
     const { data: recentPosts } = useQuery({
         queryKey: ["recentPosts"],
         queryFn: async () => {
-            try {
-                const { data } = await Axios(`/post/getallposts`);
-                const posts = data.data.posts.reverse().slice(0, 3);
-                return posts;
-            } catch (error) {
-                const err = handleAxiosError(error);
-                console.log(err);
-            }
+            return (await getRecentPosts())
         },
         placeholderData: keepPreviousData,
     });
