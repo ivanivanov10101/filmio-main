@@ -27,7 +27,7 @@ const globalErrorHandler = (err, req, res, next) => {
     } else if (process.env.NODE_ENV === 'production') {
         prodErrors(res, err);
     } else {
-        res.status(500).json({ message: 'NODE_ENV Eror!!' });
+        res.status(500).json({ message: 'NODE_ENV Error!!' });
     }
 };
 

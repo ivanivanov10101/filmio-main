@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import {lazy, useEffect, useState} from "react";
 import { useLocation } from "react-router-dom";
-import DashProfile from "../components/DashBoard/DashProfile";
-import DashPosts from "../components/DashBoard/DashPosts";
-import DashSidebar from "../components/DashBoard/DashSidebar";
-import DashUsers from "../components/DashBoard/DashUsers";
-import DashComments from "../components/DashBoard/DashComments";
-import DashBoardComp from "../components/DashBoard/DashBoardComp";
+const DashSidebar = lazy(() => import("../components/DashBoard/DashSidebar"));
+const DashProfile = lazy(() => import("../components/DashBoard/DashProfile"));
+const DashPosts = lazy(() => import("../components/DashBoard/DashPosts"));
+const DashUsers = lazy(() => import("../components/DashBoard/DashUsers"));
+const DashComments = lazy(() => import("../components/DashBoard/DashComments"));
+const DashBoardComp = lazy(() => import("../components/DashBoard/DashBoardComp"));
 
 const Dashboard = () => {
     const location = useLocation();

@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {Button, Spinner} from "flowbite-react";
-import CommentSection from "../components/CommentSection";
+import {lazy} from "react";
+const CommentSection = lazy(() => import("../components/CommentSection"))
 import PostCard from "../components/PostCard";
 import {getRecentPosts, getSinglePost} from "../config/api";
 import {keepPreviousData, useQuery} from "@tanstack/react-query";

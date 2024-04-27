@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/storeHooks";
 import { Button, Modal, Textarea } from "flowbite-react";
-import { useEffect, useState } from "react";
+import {lazy, useEffect, useState} from "react";
 import { handleAxiosError } from "../utils/utils";
 import ShowAlert from "./showAlert";
-import Comment from "./Comment";
+const Comment = lazy(() => import("./Comment"));
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Axios } from "../config/api";
 

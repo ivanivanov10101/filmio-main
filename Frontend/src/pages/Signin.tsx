@@ -1,7 +1,9 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useState } from "react";
+import {lazy, useState} from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { Axios } from "../config/api";
+import { handleAxiosError } from "../utils/utils";
 
 import {
     setUserError,
@@ -13,10 +15,8 @@ import {
 // React Icons...
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../store/storeHooks";
-import OAuth from "../components/OAuth";
-import { Axios } from "../config/api";
-import { handleAxiosError } from "../utils/utils";
-import ShowAlert from "../components/showAlert";
+const OAuth = lazy(() => import("../components/OAuth"));
+const ShowAlert = lazy(() => import("../components/showAlert"));
 
 type SignInFormData = {
     fullName: string;
