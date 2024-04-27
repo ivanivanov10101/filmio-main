@@ -1,6 +1,6 @@
 import axios from 'axios';
-import poster from "../../public/assets/images/background_hero_compressed.jpg";
-import poster2 from "../../public/assets/images/background_hero_compressed_old.jpg";
+// import poster from "../../public/assets/images/background_hero_compressed.jpg";
+// import poster2 from "../../public/assets/images/background_hero_compressed_old.jpg";
 interface ValidationError {
     message: string;
     errors: Record<string, string[]>;
@@ -15,8 +15,8 @@ export const handleAxiosError = async (error: unknown) => {
     }
 };
 
-export const randomHeader = () => {
-    const posters = [poster, poster2]
-    const index = Math.floor(Math.random() * posters.length)
-    return posters[index];
-}
+// export const randomHeader = () => {
+//     const posters = [poster, poster2]
+//     const index = Math.floor(Math.random() * posters.length)
+//     return posters[index];
+// }
