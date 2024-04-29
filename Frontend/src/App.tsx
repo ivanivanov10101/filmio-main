@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import {lazy, Suspense, useEffect} from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Axios } from "./config/api";
 import { handleAxiosError } from "./utils/utils";
 import { useAppDispatch } from "./store/storeHooks";
@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoutes/PrivateRoute";
 import PrivateAuthRoute from "./components/PrivateRoutes/PrivateAuthRoute";
 import OnlyAdminPrivateRoute from "./components/PrivateRoutes/OnlyAdminPrivateRoute";
 import Home from "./pages/Home";
+import { Spinner } from "flowbite-react";
 const About = lazy(() => import("./pages/About"));
 const Signin = lazy(() => import("./pages/Signin"));
 const Signup = lazy(() => import("./pages/Signup"));
@@ -43,7 +44,13 @@ const App = () => {
   return (
     <SkeletonTheme baseColor="#313131" highlightColor="#525252">
       <Router>
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <div className="grid w-full min-h-screen place-content-center">
+              <Spinner size={"xl"} />
+            </div>
+          }
+        >
           <Routes>
             <Route element={<Layout />}>
               <Route element={<PrivateRoute />}>

@@ -178,10 +178,10 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
                 color="gray"
                 outline
               >
-                No, cancel
+                No
               </Button>
               <Button color="failure" onClick={handleDeleteUser}>
-                Yes, I'm sure
+                Yes
               </Button>
             </div>
           </div>

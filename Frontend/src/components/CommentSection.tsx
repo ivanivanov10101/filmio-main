@@ -211,10 +211,10 @@ const CommentSection = ({ postId }: PropsType) => {
                 color="failure"
                 onClick={() => handleDelete(commentIdToDelete)}
               >
-                Yes, I'm sure
+                Yes
               </Button>
               <Button color="gray" onClick={() => setShowModal(false)}>
-                No, cancel
+                No
               </Button>
             </div>
           </div>

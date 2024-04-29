@@ -1,7 +1,6 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-// React icons...
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
@@ -32,7 +31,7 @@ const Header = () => {
   }, [location.search]);
 
   // SignOut User....*:
-  const handleSignout = async () => {
+  const handleSignOut = async () => {
     try {
       await Axios.post(`/user/logout/${currentUser?._id}`);
       dispatch(signoutUserSuccess());
@@ -61,7 +60,7 @@ const Header = () => {
         <div className="static inline-block w-[50px]">
           <img src="/assets/images/logo.webp" alt="logo" />
         </div>
-        <div className="relative inline-block left-3 text-3xl font-bold">
+        <div className="relative inline-block left-3 text-3xl font-bold pb-1">
           Filmio
         </div>
       </Link>
@@ -108,9 +107,7 @@ const Header = () => {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
 
-            <Dropdown.Item onClick={handleSignout}>
-              <span className="w-full text-center">Sign out</span>
-            </Dropdown.Item>
+            <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to={"/sign-in"} aria-label="Sign In">
@@ -128,11 +125,6 @@ const Header = () => {
             Home
           </Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/about"} as={"div"}>
-          <Link to={"/about"} aria-label="About Page">
-            About
-          </Link>
-        </Navbar.Link>
         {currentUser?.isAdmin && (
           <Navbar.Link active={path === "/create-post"} as={"div"}>
             <Link to={"/create-post"} aria-label="Create Post">
@@ -140,6 +132,11 @@ const Header = () => {
             </Link>
           </Navbar.Link>
         )}
+        <Navbar.Link active={path === "/about"} as={"div"}>
+          <Link to={"/about"} aria-label="About Page">
+            About
+          </Link>
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

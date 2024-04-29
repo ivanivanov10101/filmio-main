@@ -179,10 +179,10 @@ const DashUsers = () => {
                 color="gray"
                 outline
               >
-                No, cancle
+                No
               </Button>
               <Button color="failure" onClick={handleDeleteUser}>
-                Yes, I'm sure
+                Yes
               </Button>
             </div>
           </div>

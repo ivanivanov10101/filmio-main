@@ -160,10 +160,10 @@ const DashComments = () => {
                 color="gray"
                 outline
               >
-                No, cancle
+                No
               </Button>
               <Button color="failure" onClick={handleDeleteComment}>
-                Yes, I'm sure
+                Yes
               </Button>
             </div>
           </div>

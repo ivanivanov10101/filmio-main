@@ -7,6 +7,7 @@ import {
   HiOutlineUserGroup,
   HiUser,
 } from "react-icons/hi";
+import { MdDashboard } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
 import {
@@ -29,7 +30,7 @@ const DashSidebar = () => {
   }, [location.search]);
 
   // SignOut User....*:
-  const handleSignout = async () => {
+  const handleSignOut = async () => {
     try {
       await Axios.post(`/user/logout/${currentUser?._id}`);
       dispatch(signoutUserSuccess());
@@ -43,6 +44,17 @@ const DashSidebar = () => {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
+          <Link to={`/dashboard`}>
+            <Sidebar.Item
+              active={tab === "profile"}
+              icon={MdDashboard}
+              labelColor="dark"
+              className="cursor-pointer"
+              as="div"
+            >
+              Dashboard
+            </Sidebar.Item>
+          </Link>
           <Link to={`/dashboard?tab=profile`}>
             <Sidebar.Item
               active={tab === "profile"}
@@ -95,7 +107,7 @@ const DashSidebar = () => {
             icon={HiArrowSmRight}
             labelColor="dark"
             className="cursor-pointer"
-            onClick={handleSignout}
+            onClick={handleSignOut}
           >
             Sign Out
           </Sidebar.Item>
