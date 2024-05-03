@@ -1,11 +1,7 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
 import {
-  HiAnnotation,
-  HiArrowSmRight,
-  HiDocumentText,
-  HiOutlineUserGroup,
-  HiUser,
+  HiUsers,
 } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
@@ -16,6 +12,10 @@ import {
 } from "../../store/features/user/userSlice";
 import { handleAxiosError } from "../../utils/utils";
 import { Axios } from "../../config/api";
+import {IoPersonCircleOutline} from "react-icons/io5";
+import {FaPencil} from "react-icons/fa6";
+import {FaRegComments} from "react-icons/fa";
+import {ImExit} from "react-icons/im";
 
 const DashSidebar = () => {
   const { currentUser } = useAppSelector((state) => state.user);
@@ -58,7 +58,7 @@ const DashSidebar = () => {
           <Link to={`/dashboard?tab=profile`}>
             <Sidebar.Item
               active={tab === "profile"}
-              icon={HiUser}
+              icon={IoPersonCircleOutline}
               label={currentUser?.isAdmin ? "Admin" : "User"}
               labelColor="dark"
               className="cursor-pointer"
@@ -71,7 +71,7 @@ const DashSidebar = () => {
             <Link to={`/dashboard?tab=posts`}>
               <Sidebar.Item
                 active={tab === "posts"}
-                icon={HiDocumentText}
+                icon={FaPencil}
                 className="cursor-pointer"
                 as="div"
               >
@@ -83,7 +83,7 @@ const DashSidebar = () => {
             <Link to={`/dashboard?tab=users`}>
               <Sidebar.Item
                 active={tab === "users"}
-                icon={HiOutlineUserGroup}
+                icon={HiUsers}
                 className="cursor-pointer"
                 as="div"
               >
@@ -95,7 +95,7 @@ const DashSidebar = () => {
             <Link to={`/dashboard?tab=comments`}>
               <Sidebar.Item
                 active={tab === "comments"}
-                icon={HiAnnotation}
+                icon={FaRegComments}
                 className="cursor-pointer"
                 as="div"
               >
@@ -104,7 +104,7 @@ const DashSidebar = () => {
             </Link>
           )}
           <Sidebar.Item
-            icon={HiArrowSmRight}
+            icon={ImExit}
             labelColor="dark"
             className="cursor-pointer"
             onClick={handleSignOut}

@@ -42,7 +42,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+    <SkeletonTheme baseColor="#313131" highlightColor="#525252" >
       <Router>
         <Suspense
           fallback={

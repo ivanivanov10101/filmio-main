@@ -36,7 +36,7 @@ const DashBoardComp = () => {
 
   return (
     <div className="max-w-6xl p-5 md:mx-auto">
-      <div className="rounded-md  py-10 px-14">
+      <div className="rounded-md py-10 px-14">
         <h1 className="text-2xl font-bold pb-3">Statistics</h1>
         <div className="flex flex-wrap gap-4 justify-between">
           <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md dark:bg-slate-800 md:w-72">

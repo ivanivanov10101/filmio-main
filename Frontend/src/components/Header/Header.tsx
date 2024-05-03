@@ -1,10 +1,6 @@
-import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
+import {Avatar, Dropdown, Button, Navbar, TextInput, DarkThemeToggle} from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon, FaSun } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
-import { toggleTheme } from "../../store/features/theme/themeSlice";
 import {
   deleteUserFailure,
   signoutUserSuccess,
@@ -12,9 +8,9 @@ import {
 import { FormEvent, useEffect, useState } from "react";
 import { handleAxiosError } from "../../utils/utils";
 import { Axios } from "../../config/api";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
-  const { theme } = useAppSelector((state) => state.theme);
   const { currentUser } = useAppSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const location = useLocation();
@@ -69,21 +65,13 @@ const Header = () => {
           type="text"
           placeholder="Search..."
           rightIcon={AiOutlineSearch}
-          className="hidden sm:inline w-96 focus:border-none"
+          className="hidden sm:inline"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       <div className="flex gap-2 md:order-2">
-        <Button
-          className="w-12 h-10 rounded-md"
-          aria-label="Theme Switcher"
-          color="gray"
-          pill
-          onClick={() => dispatch(toggleTheme())}
-        >
-          {theme === "dark" ? <FaMoon /> : <FaSun />}
-        </Button>
+        <DarkThemeToggle/>
         {currentUser ? (
           <Dropdown
             inline
