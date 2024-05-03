@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import store, { persistor } from "./store/Store.ts";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "@radix-ui/themes/styles.css";
 import { Flowbite } from "flowbite-react";
 export const queryClient = new QueryClient({
   defaultOptions: {
