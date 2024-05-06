@@ -22,7 +22,7 @@ const PostCard = ({ post }: PropsType) => {
         </Link>
         <span className="text-sm italic">
           <Link to={`/search?sort=asc&category=${post.category}`}>
-            <Button color="light" size={"xs"} pill>
+            <Button color="light" size={"xs"}>
               {post.category}
             </Button>
           </Link>
