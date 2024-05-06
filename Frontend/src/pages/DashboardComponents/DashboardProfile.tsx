@@ -1,23 +1,24 @@
 import { Alert } from "flowbite-react";
 import { useForm } from "react-hook-form";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks.ts";
 import { firebaseStorage } from "../../utils/firebase.ts";
-import ProfileForm from "./ProfileForm";
+import ProfileForm from "./ProfileForm.tsx";
 import axios from "axios";
 import {
   setUserError,
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
-} from "../../store/features/user/userSlice";
-import ShowAlert from "../showAlert";
-import { Axios } from "../../config/api";
+} from "../../store/userSlice.ts";
+import ShowAlert from "../../components/showAlert.tsx";
+import { Axios } from "../../config/api.ts";
 
 export type profileFormData = {
+  fullName: string | null;
   userName: string | null;
   email: string | null;
   password: string | null;
@@ -28,7 +29,7 @@ interface ValidationError {
   errors: Record<string, string[]>;
 }
 
-const DashProfile = () => {
+const DashboardProfile = () => {
   const { currentUser, error, loading } = useAppSelector((state) => state.user);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageFileUrl, setImageFileUrl] = useState<string | null>(null);
@@ -99,7 +100,7 @@ const DashProfile = () => {
 
   // Form Submit....*;
   const handleFormSubmit = async (data: profileFormData) => {
-    const { userName, email, password } = data;
+    const { fullName, userName, email, password } = data;
 
     if (
       imageFileUploadingProgress &&
@@ -110,6 +111,7 @@ const DashProfile = () => {
     }
 
     if (
+      (fullName === undefined || fullName === currentUser?.fullName) &&
       (userName === undefined || userName === currentUser?.userName) &&
       (email === undefined || email === currentUser?.email) &&
       password === undefined &&
@@ -120,6 +122,7 @@ const DashProfile = () => {
 
     const profilePicture = uploadedImageUrl || undefined;
     const formData = {
+      fullName,
       userName,
       email,
       password,
@@ -131,7 +134,7 @@ const DashProfile = () => {
     try {
       if (
         Object.keys(formData).length === 0 ||
-        (!userName && !email && !password && !profilePicture)
+        (!fullName && !userName && !email && !password && !profilePicture)
       ) {
         return dispatch(setUserError("No changes made in profile"));
       }
@@ -237,4 +240,4 @@ const DashProfile = () => {
   );
 };
 
-export default DashProfile;
+export default DashboardProfile;

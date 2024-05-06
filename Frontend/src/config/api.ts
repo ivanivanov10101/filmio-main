@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { apiBaseUrl } from '.';
+import { apiBaseUrl } from './environmental_data.ts';
 import {handleAxiosError} from "../utils/utils.ts";
-import { currentUser } from '../store/features/user/userSlice.ts';
+import { currentUser } from '../store/userSlice.ts';
 
 export const Axios = axios.create({
     withCredentials: true,

@@ -3,14 +3,14 @@ import { FaRegComments } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../store/storeHooks";
-import { Post } from "../../pages/PostPage";
-import { CommentType } from "../CommentSection";
-import { UserType } from "./DashUsers";
-import { getComments, getPosts, getUsers } from "../../config/api";
+import { useAppSelector } from "../../store/storeHooks.ts";
+import { Post } from "../PostPage.tsx";
+import { CommentType } from "../../components/CommentSection.tsx";
+import { UserType } from "./DashboardUsers.tsx";
+import { getComments, getPosts, getUsers } from "../../config/api.ts";
 import { useQuery } from "@tanstack/react-query";
 
-const DashBoardComp = () => {
+const DashboardMainPage = () => {
   const { currentUser } = useAppSelector((state) => state.user);
 
   const { data: usersData } = useQuery({
@@ -39,76 +39,90 @@ const DashBoardComp = () => {
       <div className="rounded-md py-10 px-14">
         <h1 className="text-2xl font-bold pb-3">Statistics</h1>
         <div className="flex flex-wrap gap-4 justify-between">
-          <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md dark:bg-slate-800 md:w-72">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="text-gray-500 uppercase text-md">Total Users</h3>
-                <p className="text-2xl">{usersData?.totalUsers}</p>
+          <Link to={"/dashboard?tab=users"}>
+            <div className="flex flex-col w-full gap-4 p-3 bg-white rounded-md shadow-md dark:bg-slate-800 md:w-72">
+              <div className="flex justify-between">
+                <div>
+                  <h3 className="text-gray-500 uppercase text-md">
+                    Total Users
+                  </h3>
+                  <p className="text-2xl">{usersData?.totalUsers}</p>
+                </div>
+                <HiUsers className="p-3 text-5xl text-white bg-teal-600 rounded-full shadow-lg" />
               </div>
-              <HiUsers className="p-3 text-5xl text-white bg-teal-600 rounded-full shadow-lg" />
-            </div>
-            <div className="flex gap-2 text-sm">
-              <span
-                className={`flex items-center ${
-                  usersData?.lastMonthUsers ? "text-green-500" : "text-red-500"
-                }`}
-              >
-                {usersData?.lastMonthUsers > 0 && <HiArrowNarrowUp />}
-                {usersData?.lastMonthUsers}
-              </span>
-              <div className="text-gray-500">Last month</div>
-            </div>
-          </div>
-          <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md dark:bg-slate-800 md:w-72">
-            <div className="flex justify-between">
-              <div className="">
-                <h3 className="text-gray-500 uppercase text-md">
-                  Total Comments
-                </h3>
-                <p className="text-2xl">{commentsData?.totalComments}</p>
+              <div className="flex gap-2 text-sm">
+                <span
+                  className={`flex items-center ${
+                    usersData?.lastMonthUsers
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {usersData?.lastMonthUsers > 0 && <HiArrowNarrowUp />}
+                  {usersData?.lastMonthUsers}
+                </span>
+                <div className="text-gray-500">Last month</div>
               </div>
-              <FaRegComments className="p-3 text-5xl text-white bg-indigo-600 rounded-full shadow-lg" />
             </div>
-            <div className="flex gap-2 text-sm">
-              <span
-                className={`flex items-center ${
-                  commentsData?.lastMonthComments
-                    ? "text-green-500"
-                    : "text-red-500"
-                }`}
-              >
-                {commentsData?.lastMonthComments > 0 && <HiArrowNarrowUp />}
-                {commentsData?.lastMonthComments}
-              </span>
-              <div className="text-gray-500">Last month</div>
-            </div>
-          </div>
-          <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md dark:bg-slate-800 md:w-72">
-            <div className="flex justify-between">
-              <div className="">
-                <h3 className="text-gray-500 uppercase text-md">Total Posts</h3>
-                <p className="text-2xl">{postsData?.totalPosts}</p>
+          </Link>
+          <Link to={"/dashboard?tab=comments"}>
+            <div className="flex flex-col w-full gap-4 p-3 rounded-md bg-white shadow-md dark:bg-slate-800 md:w-72">
+              <div className="flex justify-between">
+                <div className="">
+                  <h3 className="text-gray-500 uppercase text-md">
+                    Total Comments
+                  </h3>
+                  <p className="text-2xl">{commentsData?.totalComments}</p>
+                </div>
+                <FaRegComments className="p-3 text-5xl text-white bg-indigo-600 rounded-full shadow-lg" />
               </div>
-              <FaPencil className="p-3 text-5xl text-white bg-lime-600 rounded-full shadow-lg" />
+              <div className="flex gap-2 text-sm">
+                <span
+                  className={`flex items-center ${
+                    commentsData?.lastMonthComments
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {commentsData?.lastMonthComments > 0 && <HiArrowNarrowUp />}
+                  {commentsData?.lastMonthComments}
+                </span>
+                <div className="text-gray-500">Last month</div>
+              </div>
             </div>
-            <div className="flex gap-2 text-sm">
-              <span
-                className={`flex items-center ${
-                  postsData?.lastMonthPosts ? "text-green-500" : "text-red-500"
-                }`}
-              >
-                {postsData?.lastMonthPosts > 0 && <HiArrowNarrowUp />}
-                {postsData?.lastMonthPosts}
-              </span>
-              <div className="text-gray-500">Last month</div>
+          </Link>
+          <Link to={"/dashboard?tab=posts"}>
+            <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md bg-white dark:bg-slate-800 md:w-72">
+              <div className="flex justify-between">
+                <div className="">
+                  <h3 className="text-gray-500 uppercase text-md">
+                    Total Posts
+                  </h3>
+                  <p className="text-2xl">{postsData?.totalPosts}</p>
+                </div>
+                <FaPencil className="p-3 text-5xl text-white bg-lime-600 rounded-full shadow-lg" />
+              </div>
+              <div className="flex gap-2 text-sm">
+                <span
+                  className={`flex items-center ${
+                    postsData?.lastMonthPosts
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {postsData?.lastMonthPosts > 0 && <HiArrowNarrowUp />}
+                  {postsData?.lastMonthPosts}
+                </span>
+                <div className="text-gray-500">Last month</div>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="max-w-6xl py-3 md:mx-auto">
-        <div className="rounded-md  py-8 px-14">
+        <div className="rounded-md py-8 px-14">
           <div className="text-2xl font-bold pb-3">Recents</div>
-          <div className="flex flex-col flex-1 w-full p-2 rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
             <div className="flex justify-between p-3 text-sm font-semibold">
               <h1 className="p-2 text-center">Users</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
@@ -137,7 +151,7 @@ const DashBoardComp = () => {
                 ))}
             </Table>
           </div>
-          <div className="flex flex-col flex-1 w-full p-2 rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
             <div className="flex justify-between p-3 text-sm font-semibold">
               <h1 className="p-2 text-center">Comments</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
@@ -162,7 +176,7 @@ const DashBoardComp = () => {
                 ))}
             </Table>
           </div>
-          <div className="flex flex-col flex-wrap flex-1 p-2 rounded-md shadow-md md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-wrap flex-1 p-2 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
             <div className="flex justify-between p-3 text-sm font-semibold">
               <h1 className="p-2 text-center">Posts</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
@@ -171,8 +185,8 @@ const DashBoardComp = () => {
             </div>
             <Table hoverable>
               <Table.Head className="[&>*]:text-center">
-                <Table.HeadCell>Post image</Table.HeadCell>
-                <Table.HeadCell>Post Title</Table.HeadCell>
+                <Table.HeadCell>Article image</Table.HeadCell>
+                <Table.HeadCell>Article Title</Table.HeadCell>
                 <Table.HeadCell>Category</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
@@ -206,4 +220,4 @@ const DashBoardComp = () => {
   );
 };
 
-export default DashBoardComp;
+export default DashboardMainPage;

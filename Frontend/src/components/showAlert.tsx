@@ -1,7 +1,7 @@
 import { Alert } from "flowbite-react";
 import { useEffect } from "react";
 
-type alertProps = {
+type popupAlertType = {
   message: string | undefined;
   type: "success" | "failure";
   className?: string;
@@ -15,7 +15,7 @@ const ShowAlert = ({
   onClose,
   className,
   errorDuration,
-}: alertProps) => {
+}: popupAlertType) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (onClose) {
@@ -29,7 +29,7 @@ const ShowAlert = ({
   }, [onClose, errorDuration]);
 
   return (
-    <Alert className={`mt-5 text-center ${className}`} color={type}>
+    <Alert className={`${className}`} color={type}>
       {message}
     </Alert>
   );

@@ -5,19 +5,19 @@ import {
 } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks.ts";
 import {
   deleteUserFailure,
   signoutUserSuccess,
-} from "../../store/features/user/userSlice";
-import { handleAxiosError } from "../../utils/utils";
-import { Axios } from "../../config/api";
+} from "../../store/userSlice.ts";
+import { handleAxiosError } from "../../utils/utils.ts";
+import { Axios } from "../../config/api.ts";
 import {IoPersonCircleOutline} from "react-icons/io5";
 import {FaPencil} from "react-icons/fa6";
 import {FaRegComments} from "react-icons/fa";
 import {ImExit} from "react-icons/im";
 
-const DashSidebar = () => {
+const DashboardSidebar = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const location = useLocation();
   const [tab, setTab] = useState<string | null>();
@@ -41,7 +41,7 @@ const DashSidebar = () => {
   };
 
   return (
-    <Sidebar className="w-full md:w-56">
+    <Sidebar className="w-full md:w-56 shadow-lg dark:shadow-2xl">
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
           <Link to={`/dashboard`}>
@@ -117,4 +117,4 @@ const DashSidebar = () => {
   );
 };
 
-export default DashSidebar;
+export default DashboardSidebar;

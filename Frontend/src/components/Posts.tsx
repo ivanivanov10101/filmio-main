@@ -5,9 +5,8 @@ import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
 
-// swiper...*:
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
@@ -35,7 +34,7 @@ const Posts = ({ category, title }: PropsType) => {
   });
   return (
     <>
-      <div className="flex flex-col max-w-6xl gap-8 p-1 mx-auto">
+      <div className="flex flex-col max-w-[75rem] gap-8 mx-auto">
         {isLoading ? (
           <div className="flex flex-col gap-6 ">
             <div className="flex items-center justify-between px-3">
@@ -44,8 +43,8 @@ const Posts = ({ category, title }: PropsType) => {
                 <hr className="w-full mt-2" />
               </h2>
               <Link
-                to={"/search"}
-                className="text-lg text-center text-[#63d052] hover:no-underline hover:text-[#98e87b]"
+                to={`/search`}
+                className="text-lg text-center text-[#63d052] hover:text-[#98e87b]"
               >
                 View all articles
               </Link>
@@ -62,13 +61,13 @@ const Posts = ({ category, title }: PropsType) => {
                   <hr className="w-full mt-2" />
                 </h2>
                 <Link
-                  to={"/search"}
+                  to={`/search?sort=asc&category=${category}`}
                   className="text-lg text-center text-[#63d052] hover:no-underline hover:text-[#98e87b]"
                 >
                   View all articles
                 </Link>
               </div>
-              <div className="flex flex-wrap justify-between gap-4">
+              <div className="flex flex-wrap justify-between gap-4 pb-4 ml-4 mr-4">
                 <Swiper
                   pagination={{
                     clickable: true,
@@ -87,9 +86,8 @@ const Posts = ({ category, title }: PropsType) => {
                       spaceBetween: 30,
                     },
                   }}
-                  modules={[Pagination, Navigation]}
-                  navigation={true}
-                  className="mySwiper h-[420px]"
+                  modules={[Pagination]}
+                  className="mySwiper h-[26.25rem]"
                 >
                   {posts?.map((post: Post) => (
                     <SwiperSlide key={post._id}>

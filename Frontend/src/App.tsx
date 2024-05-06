@@ -4,7 +4,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { Axios } from "./config/api";
 import { handleAxiosError } from "./utils/utils";
 import { useAppDispatch } from "./store/storeHooks";
-import { setUserState } from "./store/features/user/userSlice";
+import { setUserState } from "./store/userSlice.ts";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 import Layout from "./Layouts/Layout";
@@ -13,15 +13,15 @@ import PrivateAuthRoute from "./components/PrivateRoutes/PrivateAuthRoute";
 import OnlyAdminPrivateRoute from "./components/PrivateRoutes/OnlyAdminPrivateRoute";
 import Home from "./pages/Home";
 import { Spinner } from "flowbite-react";
-const About = lazy(() => import("./pages/About"));
-const Signin = lazy(() => import("./pages/Signin"));
-const Signup = lazy(() => import("./pages/Signup"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const CreatePost = lazy(() => import("./pages/CreatePost"));
-const UpdatePost = lazy(() => import("./pages/UpdatePost"));
+const About = lazy(() => import("./pages/AboutPage.tsx"));
+const SignInPage = lazy(() => import("./pages/SignInPage.tsx"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage.tsx"));
+const Dashboard = lazy(() => import("./pages/DashboardComponents/Dashboard.tsx"));
+const CreatePostPage = lazy(() => import("./pages/CreatePostPage.tsx"));
+const UpdatePostPage = lazy(() => import("./pages/UpdatePostPage"));
 const PostPage = lazy(() => import("./pages/PostPage"));
 const Search = lazy(() => import("./pages/Search"));
-const Error = lazy(() => import("./pages/Error"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx"));
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -42,7 +42,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <SkeletonTheme baseColor="#313131" highlightColor="#525252" >
+    <SkeletonTheme baseColor="#6C7A89" highlightColor="#525252" >
       <Router>
         <Suspense
           fallback={
@@ -57,18 +57,18 @@ const App = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
               <Route element={<PrivateAuthRoute />}>
-                <Route path="/sign-in" element={<Signin />} />
-                <Route path="/sign-up" element={<Signup />} />
+                <Route path="/sign-in" element={<SignInPage />} />
+                <Route path="/sign-up" element={<SignUpPage />} />
               </Route>
               <Route element={<OnlyAdminPrivateRoute />}>
-                <Route path="/create-post" element={<CreatePost />} />
-                <Route path="/update-post/:postId" element={<UpdatePost />} />
+                <Route path="/create-post" element={<CreatePostPage />} />
+                <Route path="/update-post/:postId" element={<UpdatePostPage />} />
               </Route>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/post/:postSlug" element={<PostPage />} />
               <Route path="/search" element={<Search />} />
-              <Route path="*" element={<Error />} />
+              <Route path="*" element={<ErrorPage />} />
             </Route>
           </Routes>
         </Suspense>

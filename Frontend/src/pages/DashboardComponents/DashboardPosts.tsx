@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/storeHooks";
+import { useAppSelector } from "../../store/storeHooks.ts";
 import { Button, Modal, Spinner, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { handleAxiosError } from "../../utils/utils";
-import { Axios } from "../../config/api";
+import { handleAxiosError } from "../../utils/utils.ts";
+import { Axios } from "../../config/api.ts";
 
 type Post = {
   _id: string;
@@ -19,7 +19,7 @@ type Post = {
   __v: number;
 };
 
-const DashPosts = () => {
+const DashboardPosts = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState<boolean>(true);
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(false);
@@ -102,8 +102,8 @@ const DashPosts = () => {
           <Table hoverable className="shadow-md">
             <Table.Head>
               <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
+              <Table.HeadCell>Article image</Table.HeadCell>
+              <Table.HeadCell>Article title</Table.HeadCell>
               <Table.HeadCell>category</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>Edit</Table.HeadCell>
@@ -209,4 +209,4 @@ const DashPosts = () => {
   );
 };
 
-export default DashPosts;
+export default DashboardPosts;

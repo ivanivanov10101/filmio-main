@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/storeHooks";
+import { useAppSelector } from "../../store/storeHooks.ts";
 import { Button, Modal, Spinner, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { handleAxiosError } from "../../utils/utils";
-import { CommentType } from "../CommentSection";
-import { Axios } from "../../config/api";
+import { handleAxiosError } from "../../utils/utils.ts";
+import { CommentType } from "../../components/CommentSection.tsx";
+import { Axios } from "../../config/api.ts";
 
-const DashComments = () => {
+const DashboardComments = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState<boolean>(true);
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(false);
@@ -173,4 +173,4 @@ const DashComments = () => {
   );
 };
 
-export default DashComments;
+export default DashboardComments;

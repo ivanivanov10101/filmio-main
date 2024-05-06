@@ -6,7 +6,7 @@ const FooterComponent = () => {
   return (
     <Footer
       container
-      className="border-t-4 max-h-72 dark:bg-[rgba(49,57,66,1)]"
+      className="border-t-4 dark:bg-[rgba(49,57,66,1)]"
     >
       <div className="w-full mx-auto max-w-6xl">
         <div className="flex flex-col justify-between md:flex-row md:px-14">

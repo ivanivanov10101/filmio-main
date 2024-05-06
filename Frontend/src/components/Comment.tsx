@@ -43,13 +43,11 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
     })();
   }, [comment]);
 
-  // handleEdit function....*:
   const handleEdit = () => {
     setIsEditing(true);
     setEditedContent(comment.content);
   };
 
-  // handleSave function....*:
   const handleSave = async () => {
     try {
       await Axios.put(`/comment/edit-comment/${comment._id}`, {
@@ -64,16 +62,16 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
   };
 
   return (
-    <div className="flex p-4 text-sm border-b dark:border-gray-600">
-      <div className="flex-shrink-0 mr-3">
+    <div className="flex p-4 mx-3 mb-4 text-sm shadow-md rounded-lg bg-gray-100 dark:bg-gray-700">
+      <div className="mr-4">
         <img
-          className="w-10 h-10 bg-gray-200 rounded-full"
+          className="w-16 h-16 rounded-full"
           src={user?.profilePicture}
           alt={user?.fullName}
         />
       </div>
       <div className="flex-1">
-        <div className="flex items-center mb-1">
+        <div className="flex items-center mb-2">
           <span className="mr-1 text-xs font-bold truncate">
             {user ? `${user.fullName}` : "anonymous user"}
           </span>
@@ -84,14 +82,13 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
         {isEditing ? (
           <>
             <Textarea
-              className="mb-2 resize-none"
+              className="mb-4 drop-shadow-md"
               value={editedContent}
               onChange={(e) => setEditedContent(e.target.value)}
             />
-            <div className="flex justify-end gap-2 text-xs">
+            <div className="flex justify-end gap-2 text-xs drop-shadow-md">
               <Button
                 type="button"
-                size="sm"
                 className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
                 onClick={handleSave}
               >
@@ -109,18 +106,18 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
           </>
         ) : (
           <>
-            <p className="pb-2 text-gray-500">{comment.content}</p>
+            <p className="pb-2 text-neutral">{comment.content}</p>
             <div className="flex items-center gap-2 pt-2 text-xs border-t dark:border-gray-700 max-w-fit">
               <button
                 type="button"
                 onClick={() => onLike(comment._id)}
-                className={`text-gray-400 hover:text-blue-500 ${
+                className={`text-gray-400 hover:text-[#63d052] ${
                   currentUser &&
                   comment.likes.includes(currentUser._id) &&
                   "!text-blue-500"
                 }`}
               >
-                <FaThumbsUp className="text-sm" />
+                <FaThumbsUp />
               </button>
               <p className="text-gray-400">
                 {comment.numberOfLikes > 0 &&
@@ -135,7 +132,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
                       <button
                         type="button"
                         onClick={handleEdit}
-                        className="text-gray-400 hover:text-blue-500"
+                        className="text-gray-400 hover:text-[#63d052]"
                       >
                         Edit
                       </button>
@@ -143,7 +140,7 @@ const Comment = ({ comment, onLike, onEdit, onDelete }: PropsType) => {
                     <button
                       type="button"
                       onClick={() => onDelete(comment._id)}
-                      className="text-gray-400 hover:text-red-500"
+                      className="text-gray-400 hover:text-[#63d052]"
                     >
                       Delete
                     </button>

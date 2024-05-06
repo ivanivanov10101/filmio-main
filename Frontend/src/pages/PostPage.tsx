@@ -1,97 +1,108 @@
-import {Link, useParams} from "react-router-dom";
-import {Button, Spinner} from "flowbite-react";
-import {lazy} from "react";
-const CommentSection = lazy(() => import("../components/CommentSection"))
+import { Link, useParams } from "react-router-dom";
+import { Button } from "flowbite-react";
+import { lazy } from "react";
+const CommentSection = lazy(() => import("../components/CommentSection"));
 import PostCard from "../components/PostCard";
-import {getRecentPosts, getSinglePost} from "../config/api";
-import {keepPreviousData, useQuery} from "@tanstack/react-query";
+import { getRecentPosts, getSinglePost } from "../config/api";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+// import {useAppSelector} from "../store/storeHooks.ts";
 
 export type Post = {
-    _id: string;
-    userId: string;
-    title: string;
-    slug: string;
-    content: string;
-    image: string;
-    category: string;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
+  _id: string;
+  userId: string;
+  title: string;
+  slug: string;
+  content: string;
+  image: string;
+  category: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
 };
 
 const PostPage = () => {
-    const { postSlug } = useParams();
+  const { postSlug } = useParams();
+  // const { currentUser } = useAppSelector((state) => state.user);
+  const { data: post } = useQuery({
+    queryKey: [postSlug],
+    queryFn: async () => {
+      return await getSinglePost(postSlug);
+    },
+  });
 
-    const { isLoading, data: post } = useQuery({
-        queryKey: [postSlug],
-        queryFn: async () => {
-            return (await getSinglePost(postSlug))
-        },
-    });
+  const { data: recentArticles } = useQuery({
+    queryKey: ["recentPosts"],
+    queryFn: async () => {
+      return await getRecentPosts();
+    },
+    placeholderData: keepPreviousData,
+  });
 
-    const { data: recentPosts } = useQuery({
-        queryKey: ["recentPosts"],
-        queryFn: async () => {
-            return (await getRecentPosts())
-        },
-        placeholderData: keepPreviousData,
-    });
-    6;
+  const articleLength = post?.content.length / 1000;
+  const articleDate = new Date(post?.createdAt).toLocaleDateString();
 
-    if (isLoading) {
-        return (
-            <div className="grid min-h-screen place-content-center">
-                <Spinner size={"xl"} />
-            </div>
-        );
-    }
-    return (
-        post && (
-            <main className="flex flex-col max-w-6xl min-h-screen p-3 mx-auto">
-                <h1 className="p-3 mx-auto mt-10 font-serif text-3xl text-center lg:text-4xl">
-                    {post.title}
-                </h1>
-                <Link
-                    to={`/search?category=${post?.category}`}
-                    className="self-center mt-5"
-                >
-                    <Button color="gray" size={"xs"} pill>
-                        {post.category}
-                    </Button>
-                </Link>
-                <img
-                    src={post.image}
-                    alt={post.slug}
-                    className="mt-10 p-3 max-h-[600px] w-full object-cover"
-                />
-                <div className="flex justify-between w-full max-w-2xl p-3 mx-auto text-xs border-b border-slate-500">
-                    <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-                    <span className="italic">
-            {(post.content.length / 1000).toFixed(0)} mins read
-          </span>
-                </div>
-                <div
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                    className="w-full max-w-3xl p-3 mx-auto xl:max-w-4xl post-content"
-                ></div>
-                <div>
-                    <CommentSection postId={post._id} />
-                </div>
-                <div className="flex flex-col items-center justify-center mb-5">
-                    <h1 className="flex flex-col items-center pb-1 mt-5 text-xl">
-                        Recent Articles <hr className="w-[170px] mx-auto mt-2" />
-                    </h1>
+  return (
+    post && (
+      <div className="px-6">
+        <main className="flex flex-col max-w-6xl min-h-screen p-3 mx-auto my-8 drop-shadow-2xl bg-white dark:bg-[#243036] rounded-2xl">
+          <h1 className="p-3 mx-auto mt-6 font-serif text-4xl text-center">
+            {post.title}
+          </h1>
+          <Link
+            to={`/search?category=${post?.category}`}
+            className="self-center mt-2"
+          >
+            <Button color="gray">{post.category}</Button>
+          </Link>
+          <img
+            src={post.image}
+            alt={post.slug}
+            className="mt-6 p-2 max-h-[600px] w-full object-cover rounded-3xl"
+          />
+          <div className="flex justify-between w-full max-w-[52rem] p-3 border-b border-gray-600 mx-auto text-sm italic">
+            <span>{articleDate}</span>
+            <span>
+              {articleLength > 2 ? (
+                <p>{articleLength.toFixed(0)} mins to read</p>
+              ) : (
+                <p>{articleLength.toFixed(0)} min to read</p>
+              )}
+            </span>
+          </div>
+          <div
+            dangerouslySetInnerHTML={{ __html: post.content }}
+            className="post-content w-full p-5 text-md mx-auto max-w-5xl"
+          ></div>
+          {/*{currentUser?.isAdmin ? (*/}
+          {/*    <Button className="max-w-36 float-right">*/}
+          {/*        <Link*/}
+          {/*            to={`/update-post/${post._id}`}*/}
+          {/*            className="flex:justify-center text-black hover:text-gray-700 dark:text-gray-400 dark:hover:text-white"*/}
+          {/*        >*/}
+          {/*            Edit this article*/}
+          {/*        </Link>*/}
+          {/*    </Button>*/}
 
-                    <div className="flex flex-wrap justify-center gap-5 mt-5">
-                        {recentPosts &&
-                            recentPosts.map((recentpost: Post) => (
-                                <PostCard key={recentpost._id} post={recentpost} />
-                            ))}
-                    </div>
-                </div>
-            </main>
-        )
-    );
+          {/*) : null}*/}
+          <div>
+            <CommentSection postId={post._id} />
+          </div>
+        </main>
+        <div className="flex flex-col items-center justify-center mb-14">
+          <h1 className="flex flex-col items-center pb-1 mt-5 mb-2 text-2xl">
+            Recent Articles <hr className="mx-auto mt-2 w-[25rem]" />
+          </h1>
+
+          <div className="flex flex-wrap justify-center mt-5 gap-7">
+            {recentArticles &&
+              recentArticles.map((recentArticle: Post) => (
+                <PostCard key={recentArticle._id} post={recentArticle} />
+              ))}
+          </div>
+        </div>
+      </div>
+    )
+  );
 };
 
 export default PostPage;

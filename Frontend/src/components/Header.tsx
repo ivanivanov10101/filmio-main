@@ -1,13 +1,13 @@
 import {Avatar, Dropdown, Button, Navbar, TextInput, DarkThemeToggle} from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks";
+import { useAppDispatch, useAppSelector } from "../store/storeHooks.ts";
 import {
   deleteUserFailure,
   signoutUserSuccess,
-} from "../../store/features/user/userSlice";
+} from "../store/userSlice.ts";
 import { FormEvent, useEffect, useState } from "react";
-import { handleAxiosError } from "../../utils/utils";
-import { Axios } from "../../config/api";
+import { handleAxiosError } from "../utils/utils.ts";
+import { Axios } from "../config/api.ts";
 import { AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
@@ -26,7 +26,6 @@ const Header = () => {
     }
   }, [location.search]);
 
-  // SignOut User....*:
   const handleSignOut = async () => {
     try {
       await Axios.post(`/user/logout/${currentUser?._id}`);
@@ -53,7 +52,7 @@ const Header = () => {
         className="relative self-center inline-block text-sm font-semibold whitespace-nowrap sm:text-xl dark:text-white"
         aria-label="Home Page"
       >
-        <div className="static inline-block w-[50px]">
+        <div className="static inline-block w-[50px] pt-2 pl-2">
           <img src="/assets/images/logo.webp" alt="logo" />
         </div>
         <div className="relative inline-block left-3 text-3xl font-bold pb-1">
@@ -77,20 +76,16 @@ const Header = () => {
             inline
             arrowIcon={false}
             label={
-              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+              <Avatar alt="user" img={currentUser.profilePicture} rounded className="p-1 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full" />
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{currentUser.userName}</span>
-              <span className="block text-sm font-medium">
+              <span className="block">{currentUser.userName}</span>
+              <span className="block font-medium">
                 {currentUser.email}
               </span>
             </Dropdown.Header>
-            {currentUser.isAdmin && (
-              <Link to={"/dashboard"} aria-label="Dashboard">
-                <Dropdown.Item>Dashboard</Dropdown.Item>
-              </Link>
-            )}
+
             <Link to={"/dashboard?tab=profile"} aria-label="Profile">
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
@@ -104,24 +99,30 @@ const Header = () => {
             </Button>
           </Link>
         )}
-
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
         <Navbar.Link active={path === "/"} as={"div"}>
-          <Link to={"/"} aria-label="Home Page">
+          <Link to={"/"} aria-label="Home Page" className="no-underline hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
             Home
           </Link>
         </Navbar.Link>
         {currentUser?.isAdmin && (
           <Navbar.Link active={path === "/create-post"} as={"div"}>
-            <Link to={"/create-post"} aria-label="Create Post">
+            <Link to={"/create-post"} aria-label="Create Post" className="border-none hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
               Create
             </Link>
           </Navbar.Link>
         )}
+        {currentUser?.isAdmin && (
+            <Navbar.Link active={path === "/dashboard"} as={"div"}>
+              <Link to={"dashboard"} aria-label="Dashboard" className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
+                Dashboard
+              </Link>
+            </Navbar.Link>
+        )}
         <Navbar.Link active={path === "/about"} as={"div"}>
-          <Link to={"/about"} aria-label="About Page">
+          <Link to={"/about"} aria-label="About Page" className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
             About
           </Link>
         </Navbar.Link>

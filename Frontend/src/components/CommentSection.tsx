@@ -116,7 +116,7 @@ const CommentSection = ({ postId }: PropsType) => {
   return (
     <div className="w-full max-w-2xl p-3 mx-auto">
       {currentUser ? (
-        <div className="flex items-center gap-1 my-5 text-sm text-gray-500 ">
+        <div className="flex items-center gap-1 my-5 text-sm text-gray-500">
           <p>Signed in as:</p>
           <img
             src={currentUser.profilePicture}
@@ -125,35 +125,35 @@ const CommentSection = ({ postId }: PropsType) => {
           />
           <Link
             to={"/dashboard?tab=profile"}
-            className="text-xs text-teal-500 hover:underline"
+            className="text-xs text-[#63d052]"
           >
             {currentUser.fullName}
           </Link>
         </div>
       ) : (
-        <div className="flex gap-1 my-5 text-sm text-teal-500">
+        <div className="flex gap-1 my-5 text-sm text-[#63d052]">
           <div>You must be signed in to comment.</div>
-          <Link to={"/sign-in"} className="text-blue-500 hover:underline">
+          <Link to={"/sign-in"} className="text-[#63d052] hover:underline">
             Sign in
           </Link>
         </div>
       )}
       {currentUser && (
         <form
-          className="p-3 border border-teal-500 rounded-md"
+          className="p-3 border border-none rounded-md drop-shadow-md"
           onSubmit={handleSubmit}
         >
           <Textarea
             placeholder="Add a comment..."
-            rows={3}
-            maxLength={200}
+            rows={5}
+            maxLength={350}
             className="resize-none"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <div className="flex items-center justify-between mt-5">
+          <div className="flex items-center justify-between mt-3">
             <p className="text-xs text-gray-500">
-              {200 - comment.length} characters remaining
+              {350 - comment.length} characters remaining
             </p>
             <Button type="submit" className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
               Submit
@@ -170,12 +170,12 @@ const CommentSection = ({ postId }: PropsType) => {
         </form>
       )}
       {comments.length === 0 ? (
-        <p className="my-5 text-sm">No comments yet!</p>
+        <p className="my-8 px-4 text-sm">No comments yet!</p>
       ) : (
         <>
-          <div className="flex items-center gap-1 my-5 text-sm">
-            <p>Comments</p>
-            <div className="px-2 py-1 border border-gray-400 rounded-sm">
+          <div className="flex items-center gap-1 my-5 px-4 text-sm">
+            <p>Comments: </p>
+            <div className="px-2">
               <p>{comments.length}</p>
             </div>
           </div>
@@ -206,14 +206,15 @@ const CommentSection = ({ postId }: PropsType) => {
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
               Are you sure you want to delete this comment?
             </h3>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-6">
               <Button
-                color="failure"
+                color="success"
                 onClick={() => handleDelete(commentIdToDelete)}
+                className="px-2"
               >
                 Yes
               </Button>
-              <Button color="gray" onClick={() => setShowModal(false)}>
+              <Button color="gray" onClick={() => setShowModal(false)} className="px-2">
                 No
               </Button>
             </div>

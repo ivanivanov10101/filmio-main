@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/storeHooks";
+import { useAppSelector } from "../../store/storeHooks.ts";
 import { Button, Modal, Spinner, Table } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { handleAxiosError } from "../../utils/utils";
+import { handleAxiosError } from "../../utils/utils.ts";
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
-import { Axios } from "../../config/api";
+import { Axios } from "../../config/api.ts";
 
 export type UserType = {
   _id: string;
@@ -19,7 +19,7 @@ export type UserType = {
   __v: number;
 };
 
-const DashUsers = () => {
+const DashboardUsers = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState<boolean>(true);
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(false);
@@ -192,4 +192,4 @@ const DashUsers = () => {
   );
 };
 
-export default DashUsers;
+export default DashboardUsers;

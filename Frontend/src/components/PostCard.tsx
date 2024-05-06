@@ -8,7 +8,7 @@ type PropsType = {
 
 const PostCard = ({ post }: PropsType) => {
   return (
-    <div className="group relative w-full border shadow-md dark:[box-shadow:13px_13px_33px_-5px_rgba(0,0,0,0.41)] border-[#63d052] hover:border-2 h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.275rem]">
+    <div className="group relative w-full shadow-xl bg-white dark:bg-[#202a2e] dark:[box-shadow:13px_13px_13px_-5px_rgba(0,0,0,0.41)] h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.5rem] mx-0.5">
       <Link to={`/post/${post.slug}`}>
         <img
           src={post.image}
@@ -17,9 +17,11 @@ const PostCard = ({ post }: PropsType) => {
         />
       </Link>
       <div className="flex flex-col gap-2 p-3">
-        <p className="text-base font-semibold line-clamp-2">{post.title}</p>
+        <Link to={`/post/${post.slug}`}>
+          <p className="text-base font-semibold line-clamp-2">{post.title}</p>
+        </Link>
         <span className="text-sm italic">
-          <Link to={`/search?category=${post.category}`}>
+          <Link to={`/search?sort=asc&category=${post.category}`}>
             <Button color="light" size={"xs"} pill>
               {post.category}
             </Button>
