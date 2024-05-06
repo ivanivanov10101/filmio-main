@@ -45,9 +45,9 @@ const PostPage = () => {
     post && (
       <div className="px-6">
         <main className="flex flex-col max-w-6xl min-h-screen p-3 mx-auto my-8 drop-shadow-2xl bg-white dark:bg-[#243036] rounded-2xl">
-          <h1 className="p-3 mx-auto mt-6 font-serif text-4xl text-center">
+          <h2 className="p-3 mx-auto mt-6 font-semibold text-2xl md:text-4xl text-center">
             {post.title}
-          </h1>
+          </h2>
           <Link
             to={`/search?category=${post?.category}`}
             className="self-center mt-2"

@@ -54,11 +54,10 @@ const Posts = ({ category, title }: PropsType) => {
         ) : (
           posts &&
           posts.length > 0 && (
-            <div className="flex flex-col gap-6 ">
+            <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between px-3">
                 <h2 className="text-3xl font-bold">
                   {title}
-                  <hr className="w-full mt-2" />
                 </h2>
                 <Link
                   to={`/search?sort=asc&category=${category}`}
@@ -87,7 +86,7 @@ const Posts = ({ category, title }: PropsType) => {
                     },
                   }}
                   modules={[Pagination]}
-                  className="mySwiper h-[26.25rem]"
+                  className="mySwiper h-[26.5rem]"
                 >
                   {posts?.map((post: Post) => (
                     <SwiperSlide key={post._id}>

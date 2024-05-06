@@ -125,7 +125,7 @@ const CommentSection = ({ postId }: PropsType) => {
           />
           <Link
             to={"/dashboard?tab=profile"}
-            className="text-xs text-[#63d052]"
+            className="text-xs pt-1 text-[#63d052]"
           >
             {currentUser.fullName}
           </Link>
