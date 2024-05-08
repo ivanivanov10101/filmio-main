@@ -1,9 +1,30 @@
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../store/storeHooks";
 import Posts from "../components/Posts";
+import { Carousel } from "flowbite-react";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { Axios } from "../config/api.ts";
+import {carouselTheme, handleAxiosError} from "../utils/utils.ts";
+import { Post } from "./PostPage.tsx";
+import CarouselSlide from "../components/CarouselSlide.tsx";
 
 const Home = () => {
   const { currentUser: user } = useAppSelector((state) => state.user);
+
+  const { data: posts } = useQuery({
+    queryKey: ["carousel_posts"],
+    queryFn: async () => {
+      try {
+        const { data } = await Axios(`/post/getallposts`);
+        return data.data.posts.reverse().slice(0, 9);
+      } catch (error) {
+        const err = await handleAxiosError(error);
+        console.log(err);
+        return err;
+      }
+    },
+    placeholderData: keepPreviousData,
+  });
 
   return (
     <div>
@@ -23,12 +44,24 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <Posts category="all" title="All Sources" />
-      <Posts category="movies" title="Movies" />
-      <Posts category="tvseries" title="TV Series" />
-      <Posts category="interviews" title="Interviews" />
-      <Posts category="reviews" title="Reviews" />
-      <Posts category="festivals" title="Festivals & Ceremonies" />
+      <div className="h-96">
+        <Carousel
+          className="flex flex-col max-w-[73rem] mx-auto mt-8 rounded-lg [box-shadow:-0px_2px_6px_0px_rgba(0,0,0,0.75)]"
+          theme={carouselTheme}
+        >
+          {posts?.map((post: Post) => (
+            <CarouselSlide key={post._id} post={post} />
+          ))}
+        </Carousel>
+      </div>
+      <div className="mt-12">
+        {/*<Posts category="all" title="All Sources" />*/}
+        <Posts category="movies" title="Movies" />
+        <Posts category="tvseries" title="TV Series" />
+        <Posts category="interviews" title="Interviews" />
+        <Posts category="reviews" title="Reviews" />
+        <Posts category="festivals" title="Festivals & Ceremonies" />
+      </div>
     </div>
   );
 };

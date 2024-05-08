@@ -2,15 +2,15 @@ import { Router } from 'express';
 import { deleteUser, getUser, getUsers, logoutUser, updateUser } from '../controllers/user.controller.js';
 import verifyToken from '../middlewares/auth.middleware.js';
 
-const router = new Router();
+const expressRouter = new Router();
 
 // Public Routes....*:
-router.route('/getuser/:userId').get(getUser);
+expressRouter.route('/getuser/:userId').get(getUser);
 
 // Private Routes....*:
-router.route('/update/:userId').put(verifyToken, updateUser);
-router.route('/delete/:userId').delete(verifyToken, deleteUser);
-router.route('/logout/:userId').post(verifyToken, logoutUser);
-router.route('/getusers').get(verifyToken, getUsers);
+expressRouter.route('/update/:userId').put(verifyToken, updateUser);
+expressRouter.route('/delete/:userId').delete(verifyToken, deleteUser);
+expressRouter.route('/logout/:userId').post(verifyToken, logoutUser);
+expressRouter.route('/getusers').get(verifyToken, getUsers);
 
-export { router as userRoutes };
+export { expressRouter as userRoutes };

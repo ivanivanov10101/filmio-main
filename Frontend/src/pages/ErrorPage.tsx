@@ -5,10 +5,10 @@ const ErrorPage = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-white dark:bg-[#192023]">
+    <section className="bg-gray-100 dark:bg-[#192023]">
       <div className="container flex items-center p-6 mx-auto my-20">
         <div className="flex flex-col items-center mx-auto text-center">
-          <p className="p-3 text-sm font-medium rounded-full bg-blue-50 dark:bg-gray-800">
+          <p className="p-3 text-sm font-medium rounded-full border-solid border-2 border-gray-800 dark:border-gray-200 bg-blue-50 dark:bg-gray-800">
             <TbExclamationMark size={30} />
           </p>
           <h1 className="mt-3 text-3xl font-semibold dark:text-white">

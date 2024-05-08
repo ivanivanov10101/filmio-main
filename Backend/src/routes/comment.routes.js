@@ -11,16 +11,16 @@ import {
 import { createCommentSchema } from '../validators/comment.validator.js';
 import validate from '../middlewares/validator.middleware.js';
 
-const router = new Router();
+const expressRouter = new Router();
 
 // Public routes....*:
-router.route('/getPostComments/:postId').get(getPostComments);
+expressRouter.route('/getPostComments/:postId').get(getPostComments);
 
 // Private routes....*:
-router.route('/create').post(verifyToken, validate(createCommentSchema), createComment);
-router.route('/like-comment/:commentId').put(verifyToken, likeComment);
-router.route('/edit-comment/:commentId').put(verifyToken, editComment);
-router.route('/delete-comment/:commentId').delete(verifyToken, deleteComment);
-router.route('/getAllComments').get(verifyToken, getAllComments);
+expressRouter.route('/create').post(verifyToken, validate(createCommentSchema), createComment);
+expressRouter.route('/like-comment/:commentId').put(verifyToken, likeComment);
+expressRouter.route('/edit-comment/:commentId').put(verifyToken, editComment);
+expressRouter.route('/delete-comment/:commentId').delete(verifyToken, deleteComment);
+expressRouter.route('/getAllComments').get(verifyToken, getAllComments);
 
-export { router as commentRoutes };
+export { expressRouter as userCommentRoutes };

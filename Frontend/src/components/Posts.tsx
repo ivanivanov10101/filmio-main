@@ -55,10 +55,8 @@ const Posts = ({ category, title }: PropsType) => {
           posts &&
           posts.length > 0 && (
             <div className="flex flex-col gap-6">
-              <div className="flex items-center justify-between px-3">
-                <h2 className="text-3xl font-bold">
-                  {title}
-                </h2>
+              <div className="flex items-center justify-between px-6">
+                <h2 className="text-3xl font-bold">{title}</h2>
                 <Link
                   to={`/search?sort=asc&category=${category}`}
                   className="text-lg text-center text-[#63d052] hover:no-underline hover:text-[#98e87b]"

@@ -4,12 +4,12 @@ import { createPost, deletePost, getAllPosts, getPosts, updatePost } from '../co
 import { createPostSchema } from '../validators/post.valodator.js';
 import validate from '../middlewares/validator.middleware.js';
 
-const router = Router();
+const expressRouter = Router();
 
-router.route('/create').post(verifyToken, validate(createPostSchema), createPost);
-router.route('/getposts').get(getPosts);
-router.route('/getallposts').get(getAllPosts);
-router.route('/deletepost/:postId/:userId').delete(verifyToken, deletePost);
-router.route('/updatepost/:postId/:userId').put(verifyToken, updatePost);
+expressRouter.route('/create').post(verifyToken, validate(createPostSchema), createPost);
+expressRouter.route('/getposts').get(getPosts);
+expressRouter.route('/getallposts').get(getAllPosts);
+expressRouter.route('/deletepost/:postId/:userId').delete(verifyToken, deletePost);
+expressRouter.route('/updatepost/:postId/:userId').put(verifyToken, updatePost);
 
-export { router as postRoutes };
+export { expressRouter as newsArticleRoutes };

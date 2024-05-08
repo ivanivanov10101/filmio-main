@@ -1,23 +1,11 @@
 import { lazy, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-const DashboardSidebar = lazy(
-  () => import("./DashboardSidebar.tsx"),
-);
-const DashboardProfile = lazy(
-  () => import("./DashboardProfile.tsx"),
-);
-const DashboardPosts = lazy(
-  () => import("./DashboardPosts.tsx"),
-);
-const DashboardUsers = lazy(
-  () => import("./DashboardUsers.tsx"),
-);
-const DashboardComments = lazy(
-  () => import("./DashboardComments.tsx"),
-);
-const DashboardMainPage = lazy(
-  () => import("./DashboardMainPage.tsx"),
-);
+const DashboardSidebar = lazy(() => import("./DashboardSidebar.tsx"));
+const DashboardProfile = lazy(() => import("./DashboardProfile.tsx"));
+const DashboardPosts = lazy(() => import("./DashboardPosts.tsx"));
+const DashboardUsers = lazy(() => import("./DashboardUsers.tsx"));
+const DashboardComments = lazy(() => import("./DashboardComments.tsx"));
+const DashboardMainPage = lazy(() => import("./DashboardMainPage.tsx"));
 
 const Dashboard = () => {
   const location = useLocation();
@@ -31,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <div className="md:flex-row flex flex-col">
-      <div>
+      <div className="md:min-h-screen">
         <DashboardSidebar />
       </div>
       {tabNameFromParam === null && <DashboardMainPage />}
