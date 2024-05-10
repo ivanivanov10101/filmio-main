@@ -16,8 +16,8 @@ backend.use(globalErrorHandler);
     try {
         await connectDB();
 
-        backend.listen(process.env.PORT || 8000, () => {
-            console.log(` Running on PORT ${process.env.PORT || 8000}`);
+        backend.listen(process.env.PORT || 8001, () => {
+            console.log(` Running on PORT ${process.env.PORT || 8001}`);
         });
     } catch (error) {
         console.log(`Error: \n ${error}`);

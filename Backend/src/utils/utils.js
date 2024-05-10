@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+import User from '../schemas/user.model.js';
 import customError from './customErrorHandler.js';
 
 export const generateAccessAndRefreshToken = async (userId) => {
