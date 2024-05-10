@@ -10,7 +10,7 @@ const userSchema = new Schema(
         password: { type: String, required: true, minLegth: 6 },
         profilePicture: {
             type: String,
-            default: 'https://firebasestorage.googleapis.com/v0/b/mern-site-2b794.appspot.com/o/default-avatar-icon-of-social-media-user-vector.jpg?alt=media&token=cdbf5676-155e-40cc-a66a-3175a100dadc',
+            default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
         },
         isAdmin: { type: Boolean, default: false },
         refreshToken: { type: String },

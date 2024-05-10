@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-export const commentSchema = new Schema(
+const commentSchema = new Schema(
     {
         content: { type: String, required: true },
         postId: { type: String, required: true },
