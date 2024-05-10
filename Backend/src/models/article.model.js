@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const postSchema = new Schema(
+const articleSchema = new Schema(
     {
         userId: { type: String, required: true },
         title: { type: String, required: true, unique: true },
@@ -16,5 +16,5 @@ const postSchema = new Schema(
     { timestamps: true }
 );
 
-const Post = model('Post', postSchema);
-export default Post;
+const Article = model('Post', articleSchema);
+export default Article;

@@ -18,7 +18,7 @@ const prodErrors = (res, err) => {
     }
 };
 
-const globalErrorHandler = (err, req, res, next) => {
+const projectHandler = (err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
@@ -31,4 +31,4 @@ const globalErrorHandler = (err, req, res, next) => {
     }
 };
 
-export default globalErrorHandler;
+export default projectHandler;

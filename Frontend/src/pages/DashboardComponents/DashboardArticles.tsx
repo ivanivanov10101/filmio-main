@@ -19,7 +19,7 @@ type Post = {
   __v: number;
 };
 
-const DashboardPosts = () => {
+const DashboardArticles = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState<boolean>(true);
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(false);
@@ -186,7 +186,7 @@ const DashboardPosts = () => {
           <div className="text-center">
             <HiOutlineExclamationCircle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200" />
             <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this post?
+              Are you sure you want to delete this article?
             </h3>
             <div className="flex justify-center gap-5">
               <Button
@@ -209,4 +209,4 @@ const DashboardPosts = () => {
   );
 };
 
-export default DashboardPosts;
+export default DashboardArticles;

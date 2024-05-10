@@ -13,4 +13,4 @@ expressRouter.route('/delete/:userId').delete(verifyToken, deleteUser);
 expressRouter.route('/logout/:userId').post(verifyToken, logoutUser);
 expressRouter.route('/getusers').get(verifyToken, getUsers);
 
-export { expressRouter as userRoutes };
+export { expressRouter as accountRoutes };

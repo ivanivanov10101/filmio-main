@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
-// create an object schema....
-const signupSchema = z.object({
+const accountSignUpSchema = z.object({
     fullName: z
         .string({ required_error: 'Both names are required' })
         .trim()
@@ -24,15 +23,15 @@ const signupSchema = z.object({
         .max(200, { message: 'Password must be at most 200 characters' }),
 });
 
-const loginSchema = z.object({
+const accountSignInSchema = z.object({
     email: z.string({ required_error: 'Email address is required' }).trim().email({ message: 'Email address is not correct' }),
     password: z.string({ required_error: 'Password is required' }),
 });
 
-const googleSchema = z.object({
+const OAuthSchema = z.object({
     name: z.string(),
     email: z.string({ required_error: 'Email address is required' }).trim().email({ message: 'Email address is not correct' }),
     googlePhotoUrl: z.string(),
 });
 
-export { signupSchema, loginSchema, googleSchema };
+export { accountSignUpSchema, accountSignInSchema, OAuthSchema };

@@ -1,9 +1,8 @@
 import customError from '../utils/customErrorHandler.js';
 
-const validate = (schema) => async (req, res, next) => {
+const validate = (schema) => async (request, response, next) => {
     try {
-        const parseBody = await schema.parseAsync(req.body);
-        req.body = parseBody;
+        request.body = await schema.parseAsync(request.body);
         next();
     } catch (err) {
         next(new customError(422, err.errors[0].message));

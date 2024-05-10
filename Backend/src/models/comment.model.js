@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const commentSchema = new Schema(
+const commentsSchema = new Schema(
     {
         content: { type: String, required: true },
         postId: { type: String, required: true },
@@ -11,5 +11,5 @@ const commentSchema = new Schema(
     { timestamps: true }
 );
 
-const Comment = model('Comment', commentSchema);
-export default Comment;
+const Comments = model('Comment', commentsSchema);
+export default Comments;

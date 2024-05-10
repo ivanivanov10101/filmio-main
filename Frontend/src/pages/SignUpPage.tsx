@@ -79,7 +79,7 @@ const SignUpPage = () => {
               </p>
             </div>
             <div>
-              <Label value="Your Username: " htmlFor="username" />
+              <Label value="Your username: " htmlFor="username" />
               <TextInput
                 type="text"
                 placeholder="Username"

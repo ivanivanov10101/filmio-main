@@ -3,14 +3,14 @@ dotenv.config();
 import backend from './backend.js';
 import connectDB from './db/connectDB.js';
 import customError from './utils/customErrorHandler.js';
-import globalErrorHandler from './middlewares/globalErrorHandler.middleware.js';
+import projectHandler from './middlewares/projectHandler.middleware.js';
 
 // error handling for unhandled routes....
 backend.all('*', (req, res, next) => {
     return next(new customError(404, `404 Error The ${req.originalUrl} URL could not be found on the server.`));
 });
 
-backend.use(globalErrorHandler);
+backend.use(projectHandler);
 
 (async () => {
     try {

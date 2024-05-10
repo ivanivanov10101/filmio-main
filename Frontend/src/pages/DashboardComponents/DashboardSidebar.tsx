@@ -75,7 +75,7 @@ const DashboardSidebar = () => {
                 className="cursor-pointer"
                 as="div"
               >
-                Posts
+                Articles
               </Sidebar.Item>
             </Link>
           )}

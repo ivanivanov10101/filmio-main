@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const userSchema = new Schema(
+const accountSchema = new Schema(
     {
         fullName: { type: String, required: true, trim: true },
         userName: { type: String, required: true, unique: true, trim: true },
@@ -18,18 +18,18 @@ const userSchema = new Schema(
     { timestamps: true }
 );
 
-userSchema.pre('save', async function (next) {
+accountSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 10);
     }
     next();
 });
 
-userSchema.methods.isPasswordCorrect = async function (password) {
+accountSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken = function () {
+accountSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -45,7 +45,7 @@ userSchema.methods.generateAccessToken = function () {
     );
 };
 
-userSchema.methods.generateRefreshToken = function () {
+accountSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
@@ -61,5 +61,5 @@ userSchema.methods.generateRefreshToken = function () {
     );
 };
 
-const User = model('User', userSchema);
-export default User;
+const Account = model('User', accountSchema);
+export default Account;

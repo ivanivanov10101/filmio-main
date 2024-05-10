@@ -1,100 +1,133 @@
-import Comment from '../models/comment.model.js';
-import ApiResponse from '../utils/ApiResponse.js';
-import asyncHandler from '../utils/asyncHandler.js';
-import customError from '../utils/customErrorHandler.js';
+import Comments from "../models/comment.model.js";
+import ApiResponse from "../utils/ApiResponse.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import customError from "../utils/customErrorHandler.js";
 
-export const createComment = asyncHandler(async (req, res, next) => {
-    const { content, postId, userId } = req.body;
+export const commentCreationHandler = asyncHandler(async (request, response, next) => {
+  const { content, postId, userId } = request.body;
 
-    if (userId !== req.user.id) {
-        return next(new customError(403, 'you are not allowed to create a comment'));
-    }
-
-    const comment = new Comment({
-        postId,
-        userId,
-        content,
-    });
-
-    const newComment = await comment.save();
-
-    res.status(200).send(new ApiResponse(200, newComment, 'Comment has been created successfully'));
-});
-
-export const getPostComments = asyncHandler(async (req, res, next) => {
-    const comments = await Comment.find({ postId: req.params.postId }).sort({ createdAt: -1 });
-
-    res.status(200).send(new ApiResponse(200, comments, 'success'));
-});
-
-export const getAllComments = asyncHandler(async (req, res, next) => {
-    if (!req.user.isAdmin) {
-        return next(new customError(403, 'you are not allowed to get all comments'));
-    }
-
-    const startIndex = parseInt(req.query.startIndex) || 0;
-    const limit = parseInt(req.query.limit) || 9;
-    const sortDirection = req.query.sort === 'desc' ? -1 : 1;
-
-    const comments = await Comment.find().sort({ createdAt: sortDirection }).skip(startIndex).limit(limit);
-    const totalComments = await Comment.countDocuments();
-
-    const now = new Date();
-    const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-    const lastMonthComments = await Comment.countDocuments({ createdAt: { $gte: oneMonthAgo } });
-
-    res.status(200).json(new ApiResponse(200, { comments, totalComments, lastMonthComments }, 'fetched all comments'));
-});
-
-export const likeComment = asyncHandler(async (req, res, next) => {
-    const comment = await Comment.findById(req.params.commentId);
-    if (!comment) {
-        return next(new customError(404, 'comment not found'));
-    }
-
-    const userIndex = comment.likes.indexOf(req.user.id);
-    if (userIndex === -1) {
-        comment.numberOfLikes += 1;
-        comment.likes.push(req.user.id);
-    } else {
-        comment.numberOfLikes -= 1;
-        comment.likes.splice(userIndex, 1);
-    }
-
-    await comment.save();
-
-    res.status(200).json(new ApiResponse(200, comment, 'likes updated'));
-});
-
-export const editComment = asyncHandler(async (req, res, next) => {
-    const comment = await Comment.findById(req.params.commentId);
-    if (!comment) {
-        return next(new customError(404, 'Comment not found'));
-    }
-
-    if (comment.userId !== req.user.id) {
-        return next(new customError(403, 'You are not allowed to edit this comment'));
-    }
-
-    const editedComment = await Comment.findByIdAndUpdate(
-        req.params.commentId,
-        { content: req.body.content },
-        { new: true }
+  if (userId !== request.user.id) {
+    return next(
+      new customError(403, "You need to be logged in to create a comment."),
     );
+  }
 
-    res.status(200).json(new ApiResponse(200, editedComment, 'comment updated'));
+  const comment = new Comments({
+    postId,
+    userId,
+    content,
+  });
+
+  const newComment = await comment.save();
+
+  response
+    .status(200)
+    .send(
+      new ApiResponse(200, newComment, "Comment has been posted successfully."),
+    );
 });
 
-export const deleteComment = asyncHandler(async (req, res, next) => {
-    const comment = await Comment.findById(req.params.commentId);
-    if (!comment) {
-        return next(new customError(404, 'Comment not found'));
-    }
-    if (comment.userId !== req.user.id && !req.user.isAdmin) {
-        return next(new customError(403, 'You are not allowed to delete this comment'));
-    }
+export const postCommentHandler = asyncHandler(async (request, response) => {
+  const comments = await Comments.find({ postId: request.params.postId }).sort({
+    createdAt: -1,
+  });
 
-    await Comment.findByIdAndDelete(req.params.commentId);
+  response.status(200).send(new ApiResponse(200, comments, "Comments fetched successfully."));
+});
 
-    res.status(200).json(new ApiResponse(200, null, 'comment has been deleted'));
+export const allPostCommentHandler = asyncHandler(async (request, response, next) => {
+  if (!request.user.isAdmin) {
+    return next(
+      new customError(403, "You need to be an admin to get all posts."),
+    );
+  }
+
+  const startIndex = parseInt(request.query.startIndex) || 0;
+  const limit = parseInt(request.query.limit) || 9;
+  const sortDirection = request.query.sort === "desc" ? -1 : 1;
+
+  const comments = await Comments.find()
+    .sort({ createdAt: sortDirection })
+    .skip(startIndex)
+    .limit(limit);
+
+  const totalComments = await Comments.countDocuments();
+
+  const currentDate = new Date();
+  const oneMonthAgo = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() - 1,
+    currentDate.getDate(),
+  );
+  const lastMonthComments = await Comments.countDocuments({
+    createdAt: { $gte: oneMonthAgo },
+  });
+
+  response
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { comments, totalComments, lastMonthComments },
+        "All comments fetched succesfully.",
+      ),
+    );
+});
+
+export const commentLikesHandler = asyncHandler(async (request, response, next) => {
+  const commentBody = await Comments.findById(request.params.commentId);
+
+  if (!commentBody) {
+    return next(new customError(404, "Comment does not exist."));
+  }
+
+  const accountIndex = commentBody.likes.indexOf(request.user.id);
+  if (accountIndex === -1) {
+    commentBody.numberOfLikes += 1;
+    commentBody.likes.push(request.user.id);
+  } else {
+    commentBody.numberOfLikes -= 1;
+    commentBody.likes.splice(accountIndex, 1);
+  }
+
+  await commentBody.save();
+
+  response.status(200).json(new ApiResponse(200, commentBody, "Comment Likes Updated"));
+});
+
+export const commentEditingHandler = asyncHandler(async (request, response, next) => {
+  const commentBody = await Comments.findById(request.params.commentId);
+  if (!commentBody) {
+    return next(new customError(404, "Comment does not exist."));
+  }
+
+  if (commentBody.userId !== request.user.id) {
+    return next(
+      new customError(403, "You need to be logged in to edit this comment."),
+    );
+  }
+
+  const editedComment = await Comments.findByIdAndUpdate(
+    request.params.commentId,
+    { content: request.body.content },
+    { new: true },
+  );
+
+  response.status(200).json(new ApiResponse(200, editedComment, "Comment content updated."));
+});
+
+export const commentDeletingHandler = asyncHandler(async (request, response, next) => {
+  const comment = await Comments.findById(request.params.commentId);
+  if (!comment) {
+    return next(new customError(404, "Comment has already been deleted."));
+  }
+  if (comment.userId !== request.user.id && !request.user.isAdmin) {
+    return next(
+      new customError(403, "You need to be logged in as an admin to delete comments."),
+    );
+  }
+
+  await Comments.findByIdAndDelete(request.params.commentId);
+
+  response.status(200).json(new ApiResponse(200, null, "Comment deleted."));
 });

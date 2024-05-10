@@ -4,8 +4,8 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { authorizationRoutes } from './routes/auth.routes.js';
-import { userRoutes } from './routes/user.routes.js';
-import { newsArticleRoutes } from './routes/post.routes.js';
+import { accountRoutes } from './routes/user.routes.js';
+import { newsArticleRoutes } from './routes/article.routes.js';
 import { userCommentRoutes } from './routes/comment.routes.js';
 
 const backend = express();
@@ -27,7 +27,7 @@ backend.use(cookieParser());
 
 
 backend.use('/api/auth', authorizationRoutes);
-backend.use('/api/user', userRoutes);
+backend.use('/api/user', accountRoutes);
 backend.use('/api/post', newsArticleRoutes);
 backend.use('/api/comment', userCommentRoutes);
 

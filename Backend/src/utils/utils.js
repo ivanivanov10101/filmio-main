@@ -1,9 +1,9 @@
-import User from '../models/user.model.js';
+import Account from '../models/user.model.js';
 import customError from './customErrorHandler.js';
 
-export const generateAccessAndRefreshToken = async (userId) => {
+export const generateTokens = async (userId) => {
     try {
-        const user = await User.findById(userId);
+        const user = await Account.findById(userId);
         const accessToken = user.generateAccessToken();
         const refreshToken = user.generateRefreshToken();
 

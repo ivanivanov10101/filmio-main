@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+import Account from '../models/user.model.js';
 import customError from '../utils/customErrorHandler.js';
 import jwt from 'jsonwebtoken';
 
@@ -6,13 +6,14 @@ const verifyToken = async (req, _, next) => {
     try {
         const token = req.cookies?.accessToken;
         if (!token) {
-            return next(new customError(401, 'unauthorized'));
+            return next(new customError(401, 'Unauthorized Access Token'));
         }
 
-        const decodeToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-        const user = await User.findById(decodeToken._id).select('-password -refreshToken');
+        const jwtVerifyToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+        const user = await Account.findById(jwtVerifyToken._id).select('-password -refreshToken');
         if (!user) {
-            return next(new customError(401, 'Invalid access token'));
+            return next(new customError(401, 'Invalid Access Token'));
         }
 
         req.user = user;

@@ -1,4 +1,4 @@
-import User from '../models/user.model.js';
+import Account from '../models/user.model.js';
 import ApiResponse from '../utils/ApiResponse.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import customError from '../utils/customErrorHandler.js';
@@ -13,7 +13,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
         return next(new customError(403, 'You are not allowed to update this user'));
     }
 
-    const user = await User.findById(req.params.userId);
+    const user = await Account.findById(req.params.userId);
 
     if (userName) {
         if (userName.length < 7 || userName.length > 20) {
@@ -25,7 +25,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
         if (!userName.match(/^[a-zA-Z0-9]+$/)) {
             return next(new customError(400, 'userName can only contains letter or number'));
         }
-        const isUsernameMatched = await User.findOne({ userName: userName.toLowerCase() });
+        const isUsernameMatched = await Account.findOne({ userName: userName.toLowerCase() });
         if (isUsernameMatched) {
             const isAuthorizedUserName = isUsernameMatched.userName === user.userName;
             if (!isAuthorizedUserName) {
@@ -46,7 +46,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
         if (email.length < 7) {
             return next(new customError(400, 'email must be at least 7 characters'));
         }
-        const isEmailMatched = await User.findOne({ email: email });
+        const isEmailMatched = await Account.findOne({ email: email });
         if (isEmailMatched) {
             const isAuthorizedEmail = isEmailMatched.email === user.email;
             if (!isAuthorizedEmail) {
@@ -77,7 +77,7 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
     if (!req.user.isAdmin && req.user.id !== req.params.userId) {
         return next(new customError(403, 'You are not allowed to delete this user'));
     }
-    const deleteUser = await User.findByIdAndDelete(req.params.userId);
+    const deleteUser = await Account.findByIdAndDelete(req.params.userId);
     if (!deleteUser) {
         return next(new customError(403, 'Error while deleting user'));
     }
@@ -97,7 +97,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
         return next(new customError(403, 'You are not allowed to logout this user'));
     }
 
-    await User.findByIdAndUpdate(req.user._id, { $unset: { refreshToken: 1 } });
+    await Account.findByIdAndUpdate(req.user._id, { $unset: { refreshToken: 1 } });
 
     res.status(200)
         .clearCookie('accessToken', accessTokenOptions)
@@ -114,26 +114,26 @@ export const getUsers = asyncHandler(async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.sort === 'asc' ? 1 : -1;
 
-    const users = await User.find()
+    const users = await Account.find()
         .sort({ createdAt: sortDirection })
         .skip(startIndex)
         .limit(limit)
         .select('-password');
 
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await Account.countDocuments();
 
     const now = new Date();
     const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-    const lastMonthUsers = await User.countDocuments({ createdAt: { $gte: oneMonthAgo } });
+    const lastMonthUsers = await Account.countDocuments({ createdAt: { $gte: oneMonthAgo } });
 
     return res.status(200).json(new ApiResponse(200, { users, totalUsers, lastMonthUsers }, 'Users'));
 });
 
 export const getUser = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.params.userId).select('-password -email -refreshToken');
+    const user = await Account.findById(req.params.userId).select('-password -email -refreshToken');
     if (!user) {
-        return next(new customError(404, 'User cannot found'));
+        return next(new customError(404, 'Account not found'));
     }
 
-    res.status(200).json(new ApiResponse(200, user, 'success'));
+    res.status(200).json(new ApiResponse(200, user, 'Login successful.'));
 });

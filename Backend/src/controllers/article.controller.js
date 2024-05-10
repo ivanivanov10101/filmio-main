@@ -1,38 +1,37 @@
-import Post from '../models/post.model.js';
+import Article from '../models/article.model.js';
 import ApiResponse from '../utils/ApiResponse.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import customError from '../utils/customErrorHandler.js';
 
-export const createPost = asyncHandler(async (req, res, next) => {
-    const { title, content, category } = req.body;
+export const articleCreationHandler = asyncHandler(async (request, response, next) => {
+    const { title } = request.body;
 
-    if (!req.user.isAdmin) {
-        return next(new customError(403, 'You are not allowed to create a post'));
+    if (!request.user.isAdmin) {
+        return next(new customError(403, 'You need to be an admin in order to create an article.'));
     }
 
-    const post = await Post.findOne({ title });
-    if (post) {
-        return next(new customError(403, 'Create unique post or title'));
+    const article = await Article.findOne({ title });
+    if (article) {
+        return next(new customError(403, 'Choose an unique title for your article.'));
     }
 
-    const slug = req.body.title
+    const slug = request.body.title
         .split(' ')
         .join('-')
         .toLowerCase()
         .replace(/[^a-zA-Z0-9-]/g, '');
 
-    const newPost = new Post({ ...req.body, userId: req.user.id, slug });
-    const createdPost = await newPost.save();
+    const newArticle = new Article({ ...request.body, userId: request.user.id, slug });
+    const createdArticle = await newArticle.save();
 
-    res.status(201).json(new ApiResponse(201, { post: createdPost }, 'post has been created successfully'));
+    response.status(201).json(new ApiResponse(201, { post: createdArticle }, 'Article posted.'));
 });
 
-export const getPosts = asyncHandler(async (req, res) => {
-    const { userId, searchTerm, title, slug, category, postId, sort, select, page, limit } = req.query;
+export const articleGetterHandler = asyncHandler(async (request, response) => {
+    const { userId, searchTerm, title, slug, category, postId, sort, select, page, limit } = request.query;
     let queryObject = {};
-    let postData;
+    let articleData;
 
-    //! ......... Data Filteration ............ //
     userId && (queryObject.userId = { $regex: userId, $options: 'i' });
     category && (queryObject.category = { $regex: category, $options: 'i' });
     category === 'all' && delete queryObject.category;
@@ -45,38 +44,34 @@ export const getPosts = asyncHandler(async (req, res) => {
         ],
     };
     title && (queryObject.title = { $regex: title, $options: 'i' });
-    postData = Post.find(queryObject);
+    articleData = Article.find(queryObject);
 
-    //! ......... Sorting ............ //
     if (sort) {
         let sortFix = sort.split(',').join(' ');
         const sortValue = sortFix === 'desc' ? { createdAt: 1 } : sortFix === 'asc' ? { createdAt: -1 } : sortFix;
-        postData = postData.sort(sortValue);
+        articleData = articleData.sort(sortValue);
     }
 
-    //! ....... Finding Select items ....... //
     if (select) {
         let selectFix = select.split(',').join(' ');
-        postData = postData.select(selectFix);
+        articleData = articleData.select(selectFix);
     }
 
-    //! ....... Pagination ....... //
     let Page = +page || 1;
     let Limit = +limit || 9;
     let skip = (Page - 1) * Limit;
     const leftRange = skip + 1;
     const rightRange = Limit * Page || Limit;
-    postData = postData.skip(skip).limit(Limit);
+    articleData = articleData.skip(skip).limit(Limit);
 
-    //! ....... Sending Response ....... //
-    const posts = await postData;
-    const totalPosts = await Post.countDocuments();
+    const posts = await articleData;
+    const totalPosts = await Article.countDocuments();
 
     const now = new Date();
     const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-    const lastMonthPosts = await Post.countDocuments({ createdAt: { $gte: oneMonthAgo } });
+    const lastMonthPosts = await Article.countDocuments({ createdAt: { $gte: oneMonthAgo } });
 
-    res.status(200).json(
+    response.status(200).json(
         new ApiResponse(
             200,
             {
@@ -92,12 +87,11 @@ export const getPosts = asyncHandler(async (req, res) => {
     );
 });
 
-export const getAllPosts = asyncHandler(async (req, res) => {
-    const { userId, searchTerm, title, slug, category, postId, sort, select, page, limit } = req.query;
+export const allArticlesGetterHandler = asyncHandler(async (request, response) => {
+    const { userId, searchTerm, title, slug, category, postId, sort, select, page } = request.query;
     let queryObject = {};
-    let postData;
+    let articleData;
 
-    //! ......... Data Filteration ............ //
     userId && (queryObject.userId = { $regex: userId, $options: 'i' });
     category && (queryObject.category = { $regex: category, $options: 'i' });
     category === 'all' && delete queryObject.category;
@@ -110,35 +104,31 @@ export const getAllPosts = asyncHandler(async (req, res) => {
         ],
     };
     title && (queryObject.title = { $regex: title, $options: 'i' });
-    postData = Post.find(queryObject);
+    articleData = Article.find(queryObject);
 
-    //! ......... Sorting ............ //
     if (sort) {
         let sortFix = sort.split(',').join(' ');
         const sortValue = sortFix === 'desc' ? { createdAt: 1 } : sortFix === 'asc' ? { createdAt: -1 } : sortFix;
-        postData = postData.sort(sortValue);
+        articleData = articleData.sort(sortValue);
     }
 
-    //! ....... Finding Select items ....... //
     if (select) {
         let selectFix = select.split(',').join(' ');
-        postData = postData.select(selectFix);
+        articleData = articleData.select(selectFix);
     }
 
-    //! ....... Pagination ....... //
     let Page = +page || 1;
     let skip = Page - 1;
-    postData = postData.skip(skip);
+    articleData = articleData.skip(skip);
 
-    //! ....... Sending Response ....... //
-    const posts = await postData;
-    const totalPosts = await Post.countDocuments();
+    const posts = await articleData;
+    const totalPosts = await Article.countDocuments();
 
     const now = new Date();
     const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-    const lastMonthPosts = await Post.countDocuments({ createdAt: { $gte: oneMonthAgo } });
+    const lastMonthPosts = await Article.countDocuments({ createdAt: { $gte: oneMonthAgo } });
 
-    res.status(200).json(
+    response.status(200).json(
         new ApiResponse(
             200,
             {
@@ -153,44 +143,40 @@ export const getAllPosts = asyncHandler(async (req, res) => {
     );
 });
 
-export const deletePost = asyncHandler(async (req, res, next) => {
-    if (req.user.id !== req.params.userId) {
-        return next(new customError(403, 'You are not allowed to delete this post'));
+export const articleDeletionHandler = asyncHandler(async (request, response, next) => {
+    if (request.user.id !== request.params.userId) {
+        return next(new customError(403, 'You need to be logged in to delete this article.'));
     }
 
-    await Post.findByIdAndDelete(req.params.postId);
+    await Article.findByIdAndDelete(request.params.postId);
 
-    res.status(200).json(new ApiResponse(200, {}, 'The post has been deleted'));
+    response.status(200).json(new ApiResponse(200, {}, 'The article has been deleted.'));
 });
 
-export const updatePost = asyncHandler(async (req, res, next) => {
-    if (req.user.id !== req.params.userId) {
-        return next(new customError(403, 'You are not allowed to update this post'));
+export const articleUpdatingHandler = asyncHandler(async (request, response, next) => {
+    if (request.user.id !== request.params.userId) {
+        return next(new customError(403, 'You need to be logged in to update this article.'));
     }
-    console.log(req.body);
-    const slug = req.body.title
+    console.log(request.body);
+    const slug = request.body.title
         .split(' ')
         .join('-')
         .toLowerCase()
         .replace(/[^a-zA-Z0-9-]/g, '');
 
-    console.log(slug);
-
-    const updatedPost = await Post.findByIdAndUpdate(
-        req.params.postId,
+    const updatedArticle = await Article.findByIdAndUpdate(
+        request.params.postId,
         {
             $set: {
-                title: req.body.title,
+                title: request.body.title,
                 slug,
-                content: req.body.content,
-                category: req.body.category,
-                image: req.body.image,
+                content: request.body.content,
+                category: request.body.category,
+                image: request.body.image,
             },
         },
         { new: true }
     );
 
-    console.log(updatePost);
-
-    res.status(201).json(new ApiResponse(201, updatedPost, 'post has been updated successfully'));
+    response.status(201).json(new ApiResponse(201, updatedArticle, 'post has been updated successfully'));
 });
