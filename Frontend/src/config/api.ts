@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { apiBaseUrl } from './environmental_data.ts';
 import {handleAxiosError} from "../utils/utils.ts";
-import { currentUser } from '../store/userSlice.ts';
+import { currentAccount } from '../store/userSlice.ts';
 
 export const Axios = axios.create({
     withCredentials: true,
     baseURL: apiBaseUrl,
 });
 
-export const getUsers = async (currentUser: currentUser | null) => {
+export const getUsers = async (currentUser: currentAccount | null) => {
     try {
         const { data } = await Axios(`/user/getusers?limit=5`);
         if (currentUser?.isAdmin) {
@@ -20,7 +20,7 @@ export const getUsers = async (currentUser: currentUser | null) => {
     }
 }
 
-export const getPosts = async (currentUser: currentUser | null) => {
+export const getPosts = async (currentUser: currentAccount | null) => {
     try {
         const { data } = await Axios(`/post/getposts?limit=5`);
         if (currentUser?.isAdmin) {
@@ -32,7 +32,7 @@ export const getPosts = async (currentUser: currentUser | null) => {
     }
 }
 
-export const getComments = async (currentUser: currentUser | null) => {
+export const getComments = async (currentUser: currentAccount | null) => {
     try {
         const { data } = await Axios(`/comment/getAllComments?limit=5`);
         if (currentUser?.isAdmin) {

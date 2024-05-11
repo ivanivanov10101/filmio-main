@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export type currentUser = {
+export type currentAccount = {
     _id: string;
     fullName: string;
     userName: string;
@@ -13,7 +13,7 @@ export type currentUser = {
 };
 
 type InitialState = {
-    currentUser: currentUser | null;
+    currentUser: currentAccount | null;
     loading: boolean;
     error: string | null | undefined;
 };
@@ -28,7 +28,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUserState: (state: InitialState, { payload }: PayloadAction<currentUser | null>) => {
+        setUserState: (state: InitialState, { payload }: PayloadAction<currentAccount | null>) => {
             state.currentUser = payload;
             state.loading = false;
             state.error = null;
@@ -40,7 +40,7 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
-        signInSuccess: (state: InitialState, { payload }: PayloadAction<currentUser>) => {
+        signInSuccess: (state: InitialState, { payload }: PayloadAction<currentAccount>) => {
             state.currentUser = payload;
             state.loading = false;
             state.error = null;
@@ -53,7 +53,7 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
-        updateUserSuccess: (state: InitialState, { payload }: PayloadAction<currentUser>) => {
+        updateUserSuccess: (state: InitialState, { payload }: PayloadAction<currentAccount>) => {
             state.currentUser = payload;
             state.loading = false;
             state.error = null;

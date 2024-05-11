@@ -7,7 +7,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import { UseFormRegister } from "react-hook-form";
 import { profileFormData } from "./DashboardProfile.tsx";
 import {
-  currentUser,
+  currentAccount,
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
@@ -21,7 +21,7 @@ import {FaPerson} from "react-icons/fa6";
 
 type PropsType = {
   register: UseFormRegister<profileFormData>;
-  currentUser: currentUser | null;
+  currentUser: currentAccount | null;
   loading: boolean;
 };
 

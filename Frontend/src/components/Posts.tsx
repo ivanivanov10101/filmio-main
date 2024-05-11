@@ -1,5 +1,5 @@
 import { Post } from "../pages/PostPage";
-import {getAllArticlesCategory} from "../config/api";
+import { getAllArticlesCategory } from "../config/api";
 import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -20,7 +20,7 @@ const Posts = ({ category, title }: PropsType) => {
   const { isLoading, data: posts } = useQuery({
     queryKey: [category],
     queryFn: async () => {
-      return await getAllArticlesCategory(category)
+      return await getAllArticlesCategory(category);
     },
     placeholderData: keepPreviousData,
   });
