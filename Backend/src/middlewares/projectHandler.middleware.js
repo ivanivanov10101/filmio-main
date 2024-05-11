@@ -1,33 +1,33 @@
-const devErros = (res, err) => {
-    return res.status(err.statusCode).json({
-        status: err.statusCode,
-        message: err.message,
-        stackTrace: err.stack,
-        error: err,
+const devErros = (response, error) => {
+    return response.status(error.statusCode).json({
+        status: error.statusCode,
+        message: error.message,
+        stackTrace: error.stack,
+        error: error,
     });
 };
 
-const prodErrors = (res, err) => {
-    if (err.isOperational) {
-        return res.status(err.statusCode).json({ status: err.statusCode, message: err.message });
+const prodErrors = (response, error) => {
+    if (error.isOperational) {
+        return response.status(error.statusCode).json({ status: error.statusCode, message: error.message });
     } else {
-        return res.status(err.statusCode).json({
+        return response.status(error.statusCode).json({
             status: 'error',
             message: 'Something went wrong! Please try again later',
         });
     }
 };
 
-const projectHandler = (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
+const projectHandler = (error, request, response) => {
+    error.statusCode = error.statusCode || 500;
+    error.status = error.status || 'error';
 
     if (process.env.NODE_ENV === 'development') {
-        devErros(res, err);
+        devErros(response, error);
     } else if (process.env.NODE_ENV === 'production') {
-        prodErrors(res, err);
+        prodErrors(response, error);
     } else {
-        res.status(500).json({ message: 'NODE_ENV Error!!' });
+        response.status(500).json({ message: 'NODE_ENV Error!!' });
     }
 };
 

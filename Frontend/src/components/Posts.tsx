@@ -1,6 +1,5 @@
 import { Post } from "../pages/PostPage";
-import { Axios } from "../config/api";
-import { handleAxiosError } from "../utils/utils";
+import {getAllArticlesCategory} from "../config/api";
 import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -21,14 +20,7 @@ const Posts = ({ category, title }: PropsType) => {
   const { isLoading, data: posts } = useQuery({
     queryKey: [category],
     queryFn: async () => {
-      try {
-        const { data } = await Axios(`/post/getallposts?category=${category}`);
-        return data.data.posts.reverse().slice(0, 9);
-      } catch (error) {
-        const err = await handleAxiosError(error);
-        console.log(err);
-        return err;
-      }
+      return await getAllArticlesCategory(category)
     },
     placeholderData: keepPreviousData,
   });

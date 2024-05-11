@@ -63,3 +63,14 @@ export const getRecentPosts = async () => {
         console.log(err);
     }
 }
+
+export const getAllArticlesCategory = async (category: string) => {
+    try {
+        const { data } = await Axios(`/post/getallposts?category=${category}`);
+        return data.data.posts.reverse().slice(0, 9);
+    } catch (error) {
+        const err = await handleAxiosError(error);
+        console.log(err);
+        return err;
+    }
+}
