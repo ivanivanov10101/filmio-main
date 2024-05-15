@@ -38,17 +38,17 @@ const DashboardMainPage = () => {
     <div className="max-w-6xl p-5 md:mx-auto">
       <div className="rounded-md py-10 px-14">
         <h1 className="text-2xl font-bold pb-3">Statistics</h1>
-        <div className="flex flex-wrap gap-4 justify-between">
+        <div className="flex flex-wrap gap-4 justify-between ">
           <Link to={"/dashboard?tab=users"}>
             <div className="flex flex-col w-full gap-4 p-3 bg-white rounded-md shadow-md dark:bg-slate-800 md:w-72">
               <div className="flex justify-between">
                 <div>
-                  <h3 className="text-gray-500 uppercase text-md">
+                  <h3 className="text-gray-500 uppercase text-md min-w-36">
                     Total Users
                   </h3>
                   <p className="text-2xl">{usersData?.totalUsers}</p>
                 </div>
-                <HiUsers className="p-3 text-5xl text-white bg-teal-600 rounded-full shadow-lg" />
+                <HiUsers className="p-3 text-5xl text-teal-600 drop-shadow-xl" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span
@@ -69,12 +69,12 @@ const DashboardMainPage = () => {
             <div className="flex flex-col w-full gap-4 p-3 rounded-md bg-white shadow-md dark:bg-slate-800 md:w-72">
               <div className="flex justify-between">
                 <div className="">
-                  <h3 className="text-gray-500 uppercase text-md">
+                  <h3 className="text-gray-500 uppercase text-md min-w-36">
                     Total Comments
                   </h3>
                   <p className="text-2xl">{commentsData?.totalComments}</p>
                 </div>
-                <FaRegComments className="p-3 text-5xl text-white bg-indigo-600 rounded-full shadow-lg" />
+                <FaRegComments className="p-3 text-5xl text-indigo-600 drop-shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span
@@ -95,12 +95,12 @@ const DashboardMainPage = () => {
             <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md bg-white dark:bg-slate-800 md:w-72">
               <div className="flex justify-between">
                 <div className="">
-                  <h3 className="text-gray-500 uppercase text-md">
+                  <h3 className="text-gray-500 uppercase text-md min-w-36">
                     Total Posts
                   </h3>
                   <p className="text-2xl">{postsData?.totalPosts}</p>
                 </div>
-                <FaPencil className="p-3 text-5xl text-white bg-lime-600 rounded-full shadow-lg" />
+                <FaPencil className="p-3 text-5xl text-lime-600 drop-shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span

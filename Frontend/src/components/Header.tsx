@@ -121,7 +121,7 @@ const Header = () => {
               </Link>
             </Navbar.Link>
         )}
-        <Navbar.Link active={path === "/about"} as={"div"}>
+        <Navbar.Link active={path === "/about"} as={"div"} className="hidden xl:inline">
           <Link to={"/about"} aria-label="About Page" className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
             About
           </Link>

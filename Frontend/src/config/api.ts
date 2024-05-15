@@ -57,7 +57,7 @@ export const getSinglePost = async (postSlug: string | undefined) => {
 export const getRecentPosts = async () => {
     try {
         const { data } = await Axios(`/post/getallposts`);
-        return data.data.posts.reverse().slice(0, 3);
+        return data.data.posts.reverse().slice(0, 10);
     } catch (error) {
         const err = handleAxiosError(error);
         console.log(err);
