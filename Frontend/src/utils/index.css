@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.post-content p {
+    margin-bottom: 1rem;
+}
+
+.post-content a:hover {
+    text-decoration: underline;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-slider {
+    background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 100%
+    );
+}
+
+.mySwiper {
+
+}
+
+.swiper-button-next {
+    color: grey;
+    margin-right: 1vw;
+    padding: 2rem;
+    border-radius: 5%;
+    background-color: rgba(169, 169, 169, 0.25);
+    box-shadow: 10px 10px 80px rgba(0, 0, 0, 0.5);
+}
+
+.swiper-button-next:hover {
+    color: white;
+    background-color: rgba(169, 169, 169, 0.55);
+}
+
+.swiper-button-prev {
+    color: grey;
+    margin-left: 1vw;
+    padding: 2rem;
+    border-radius: 5%;
+    background-color: rgba(169, 169, 169, 0.25);
+    box-shadow: 10px 10px 80px rgba(0, 0, 0, 0.5);
+}
+
+.swiper-button-prev:hover {
+    color: white;
+    background-color: rgba(169, 169, 169, 0.55);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #63d052 !important;
+}

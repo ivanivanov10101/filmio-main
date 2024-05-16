@@ -3,20 +3,19 @@ import { getAllArticlesCategory } from "../config/api";
 import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import PostCardSkeleton from "./PostCardSkeleton";
+import "swiper/css";
+import "swiper/css/pagination";
 
 type PropsType = {
   category: string;
   title: string;
 };
 
-const Posts = ({ category, title }: PropsType) => {
+const Posts = ({  category, title }: PropsType) => {
   const { isLoading, data: posts } = useQuery({
     queryKey: [category],
     queryFn: async () => {
@@ -26,9 +25,9 @@ const Posts = ({ category, title }: PropsType) => {
   });
   return (
     <>
-      <div className="flex flex-col max-w-[75rem] gap-8 mx-auto">
-        {isLoading ? (
-          <div className="flex flex-col gap-6 ">
+      <div className="flex flex-col max-w-[75rem] p-1 gap-8 mx-auto">
+        { isLoading ? (
+          <div className="flex flex-col gap-6 mx-auto">
             <div className="flex items-center justify-between px-3">
               <h2 className="text-3xl font-bold">
                 {title}

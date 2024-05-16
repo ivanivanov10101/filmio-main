@@ -8,7 +8,7 @@ type PropsType = {
 
 const PostCard = ({ post }: PropsType) => {
   return (
-    <div className="group relative w-full shadow-xl bg-white dark:bg-[#202a2e] dark:[box-shadow:13px_13px_13px_-5px_rgba(0,0,0,0.41)] h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.5rem] mx-0.5">
+    <div className="group relative w-full mb-10 shadow-xl bg-white dark:bg-[#202a2e] dark:[box-shadow:13px_13px_13px_-5px_rgba(0,0,0,0.41)] h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.5rem] mx-0.5">
       <Link to={`/post/${post.slug}`}>
         <img
           src={post.image}

@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Post } from "./PostPage.tsx";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getRecentPosts } from "../config/api.ts";
-import "swiper/css";
+
 import "swiper/css/navigation";
-import "../utils/styles.css";
+import "../utils/index.css";
 import CarouselElement from "../components/CarouselElement.tsx";
 import HomeTopBar from "../components/HomeTopBar.tsx";
 
@@ -26,7 +26,7 @@ const Home = () => {
         <Swiper
           modules={[Navigation]}
           navigation
-          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-md drop-shadow-lg shadow-md "
+          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-xl drop-shadow-lg shadow-lg"
         >
           {posts?.map((post: Post) => (
             <SwiperSlide key={post._id}>
@@ -37,7 +37,6 @@ const Home = () => {
       </div>
 
       <div className="mt-12">
-        {/*<Posts category="all" title="All Sources" />*/}
         <Posts category="movies" title="Movies" />
         <Posts category="tvseries" title="TV Series" />
         <Posts category="interviews" title="Interviews" />

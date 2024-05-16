@@ -12,7 +12,7 @@ const PostCardSkeleton = ({ cards = 1 }: PropsType) => {
           .fill(0)
           .map(() => (
             <div
-              className="group w-full shadow-xl border-1 border-[#6C7A89] rounded-md sm:w-[360px] transition-all"
+              className="group w-full shadow-xl border-1 border-[#6C7A89] rounded-md sm:w-[360px] mb-8 transition-all"
               key={Math.random()}
             >
               <Skeleton height={220} className="p-2" />
