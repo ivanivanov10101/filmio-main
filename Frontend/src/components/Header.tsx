@@ -1,10 +1,14 @@
-import {Avatar, Dropdown, Button, Navbar, TextInput, DarkThemeToggle} from "flowbite-react";
+import {
+  Avatar,
+  Dropdown,
+  Button,
+  Navbar,
+  TextInput,
+  DarkThemeToggle,
+} from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/storeHooks.ts";
-import {
-  deleteUserFailure,
-  signoutUserSuccess,
-} from "../store/userSlice.ts";
+import { deleteUserFailure, signoutUserSuccess } from "../store/userSlice.ts";
 import { FormEvent, useEffect, useState } from "react";
 import { handleAxiosError } from "../utils/utils.ts";
 import { Axios } from "../config/api.ts";
@@ -70,20 +74,23 @@ const Header = () => {
         />
       </form>
       <div className="flex gap-2 md:order-2">
-        <DarkThemeToggle/>
+        <DarkThemeToggle />
         {currentUser ? (
           <Dropdown
             inline
             arrowIcon={false}
             label={
-              <Avatar alt="user" img={currentUser.profilePicture} rounded className="p-1 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full" />
+              <Avatar
+                alt="user"
+                img={currentUser.profilePicture}
+                rounded
+                className="p-1 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-full"
+              />
             }
           >
             <Dropdown.Header>
               <span className="block">{currentUser.userName}</span>
-              <span className="block font-medium">
-                {currentUser.email}
-              </span>
+              <span className="block font-medium">{currentUser.email}</span>
             </Dropdown.Header>
 
             <Link to={"/dashboard?tab=profile"} aria-label="Profile">
@@ -103,26 +110,46 @@ const Header = () => {
       </div>
       <Navbar.Collapse>
         <Navbar.Link active={path === "/"} as={"div"}>
-          <Link to={"/"} aria-label="Home Page" className="no-underline hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
+          <Link
+            to={"/"}
+            aria-label="Home Page"
+            className="no-underline hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
+          >
             Home
           </Link>
         </Navbar.Link>
         {currentUser?.isAdmin && (
           <Navbar.Link active={path === "/create-post"} as={"div"}>
-            <Link to={"/create-post"} aria-label="Create Post" className="border-none hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
+            <Link
+              to={"/create-post"}
+              aria-label="Create Post"
+              className="border-none hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
+            >
               Create
             </Link>
           </Navbar.Link>
         )}
         {currentUser?.isAdmin && (
-            <Navbar.Link active={path === "/dashboard"} as={"div"}>
-              <Link to={"dashboard"} aria-label="Dashboard" className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
-                Dashboard
-              </Link>
-            </Navbar.Link>
+          <Navbar.Link active={path === "/dashboard"} as={"div"}>
+            <Link
+              to={"dashboard"}
+              aria-label="Dashboard"
+              className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
+            >
+              Dashboard
+            </Link>
+          </Navbar.Link>
         )}
-        <Navbar.Link active={path === "/about"} as={"div"} className="hidden xl:inline">
-          <Link to={"/about"} aria-label="About Page" className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700">
+        <Navbar.Link
+          active={path === "/about"}
+          as={"div"}
+          className="hidden xl:inline"
+        >
+          <Link
+            to={"/about"}
+            aria-label="About Page"
+            className="hover:bg-gray-100 px-2 py-3 rounded-lg dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700"
+          >
             About
           </Link>
         </Navbar.Link>

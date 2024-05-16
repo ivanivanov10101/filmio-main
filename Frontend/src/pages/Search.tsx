@@ -1,8 +1,8 @@
 import { Button, Select, Spinner, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import PostCard from "../components/PostCard";
-import { Post } from "./PostPage";
+import ArticleCard from "../components/ArticleCard.tsx";
+import { Article } from "./ArticlePage.tsx";
 import { handleAxiosError } from "../utils/utils";
 import { Axios } from "../config/api";
 
@@ -18,7 +18,7 @@ const Search = () => {
     sort: "asc",
     category: "all",
   });
-  const [articles, setArticles] = useState<Post[] | []>([]);
+  const [articles, setArticles] = useState<Article[] | []>([]);
   const [loadingData, setLoadingData] = useState<boolean>(false);
   const [loadMoreArticles, setLoadMoreArticles] = useState<boolean>(false);
   const [showMoreArticles, setShowMoreArticles] = useState<boolean>(false);
@@ -83,7 +83,8 @@ const Search = () => {
     sidebarFilters.searchTerm &&
       urlParams.set("searchTerm", sidebarFilters.searchTerm);
     sidebarFilters.sort && urlParams.set("sort", sidebarFilters.sort);
-    sidebarFilters.category && urlParams.set("category", sidebarFilters.category);
+    sidebarFilters.category &&
+      urlParams.set("category", sidebarFilters.category);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -112,9 +113,7 @@ const Search = () => {
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold">Filter:</h1>
           <div className="flex items-center gap-3">
-            <h6 className="font-semibold whitespace-nowrap">
-              Search for:
-            </h6>
+            <h6 className="font-semibold whitespace-nowrap">Search for:</h6>
             <TextInput
               placeholder="Search..."
               id="searchTerm"
@@ -125,7 +124,11 @@ const Search = () => {
           </div>
           <div className="flex items-center gap-3">
             <h6 className="font-semibold whitespace-nowrap">Sort by:</h6>
-            <Select onChange={handleChange} value={sidebarFilters.sort} id="sort">
+            <Select
+              onChange={handleChange}
+              value={sidebarFilters.sort}
+              id="sort"
+            >
               <option value="asc">New</option>
               <option value="desc">Old</option>
             </Select>
@@ -161,7 +164,9 @@ const Search = () => {
           )}
           {!loadingData &&
             articles &&
-            articles.map((article) => <PostCard key={article._id} post={article} />)}
+            articles.map((article) => (
+              <ArticleCard key={article._id} article={article} />
+            ))}
           {showMoreArticles && !loadMoreArticles && (
             <Button
               className="self-center w-32 py-2 mt-4 mx-auto text-sm text-white focus:ring-[#63d052] bg-[#63d052]"

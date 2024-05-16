@@ -18,7 +18,7 @@ const DashboardComments = () => {
   );
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchArticles = async () => {
       setLoading(true);
       try {
         const { data } = await Axios(`/comment/getAllComments`);
@@ -35,7 +35,7 @@ const DashboardComments = () => {
         setLoading(false);
       }
     };
-    fetchPosts();
+    fetchArticles();
   }, [currentUser?._id]);
 
   const handleShowMore = async () => {
@@ -59,7 +59,6 @@ const DashboardComments = () => {
     }
   };
 
-  // Delete User..
   const handleDeleteComment = async () => {
     setShowModal(false);
     try {

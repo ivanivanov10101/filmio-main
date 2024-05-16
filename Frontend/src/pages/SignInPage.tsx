@@ -128,7 +128,7 @@ const SignInPage = () => {
             >
               {loading ? (
                 <>
-                  <Spinner/>
+                  <Spinner />
                   <span className="pl-3">Loading...</span>
                 </>
               ) : (
@@ -139,10 +139,7 @@ const SignInPage = () => {
           </form>
           <div className="h-2 p-3 pb-5 text-neutral">
             <span className="pr-2">Don't have an account yet?</span>
-            <Link
-              to={"/sign-up"}
-              className="text-blue-500 hover:text-blue-100"
-            >
+            <Link to={"/sign-up"} className="text-blue-500 hover:text-blue-100">
               Sign Up
             </Link>
           </div>

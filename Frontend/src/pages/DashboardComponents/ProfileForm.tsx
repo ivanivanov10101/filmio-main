@@ -17,7 +17,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useAppDispatch } from "../../store/storeHooks.ts";
 import { handleAxiosError } from "../../utils/utils.ts";
 import { Axios } from "../../config/api.ts";
-import {FaPerson} from "react-icons/fa6";
+import { FaPerson } from "react-icons/fa6";
 
 type PropsType = {
   register: UseFormRegister<profileFormData>;
@@ -64,113 +64,113 @@ const ProfileForm = ({ register, currentUser, loading }: PropsType) => {
       <div className="flex flex-col gap-4">
         <label className="relative" htmlFor="fullName">
           <TextInput
-              type="text"
-              id="fullName"
-              placeholder="Your full name."
-              icon={FaPerson}
-              defaultValue={currentUser?.fullName}
-              disabled={isFullnameDisabled}
-              {...register("fullName")}
+            type="text"
+            id="fullName"
+            placeholder="Your full name."
+            icon={FaPerson}
+            defaultValue={currentUser?.fullName}
+            disabled={isFullnameDisabled}
+            {...register("fullName")}
           />
           <span
-              className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
-              onClick={() => setIsFullnameDisabled((prev) => !prev)}
+            className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
+            onClick={() => setIsFullnameDisabled((prev) => !prev)}
           >
-            {isFullnameDisabled ? <MdModeEdit/> : <MdEditOff/>}
+            {isFullnameDisabled ? <MdModeEdit /> : <MdEditOff />}
           </span>
         </label>
         <label className="relative" htmlFor="userName">
           <TextInput
-              type="text"
-              id="userName"
-              placeholder="Your username"
-              icon={FaUserCircle}
-              defaultValue={currentUser?.userName}
-              disabled={isUsernameDisabled}
-              {...register("userName")}
+            type="text"
+            id="userName"
+            placeholder="Your username"
+            icon={FaUserCircle}
+            defaultValue={currentUser?.userName}
+            disabled={isUsernameDisabled}
+            {...register("userName")}
           />
           <span
-              className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
-              onClick={() => setIsUsernameDisabled((prev) => !prev)}
+            className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
+            onClick={() => setIsUsernameDisabled((prev) => !prev)}
           >
-            {isUsernameDisabled ? <MdModeEdit/> : <MdEditOff/>}
+            {isUsernameDisabled ? <MdModeEdit /> : <MdEditOff />}
           </span>
         </label>
         <label className="relative" htmlFor="email">
           <TextInput
-              type="email"
-              id="email"
-              placeholder="Your email"
-              icon={MdEmail}
-              defaultValue={currentUser?.email}
-              disabled={isEmailDisabled}
-              {...register("email", {
-                pattern: {
-                  value:
-                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
-                  message: "Invalid Email Id",
-                },
-              })}
+            type="email"
+            id="email"
+            placeholder="Your email"
+            icon={MdEmail}
+            defaultValue={currentUser?.email}
+            disabled={isEmailDisabled}
+            {...register("email", {
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                message: "Invalid Email Id",
+              },
+            })}
           />
           <span
-              className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
-              onClick={() => setIsEmailDisabled((prev) => !prev)}
+            className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
+            onClick={() => setIsEmailDisabled((prev) => !prev)}
           >
-            {isEmailDisabled ? <MdModeEdit/> : <MdEditOff/>}
+            {isEmailDisabled ? <MdModeEdit /> : <MdEditOff />}
           </span>
         </label>
 
         <label className="relative" htmlFor="password">
           <TextInput
-              type={isPasswordVisible ? "text" : "password"}
-              id="password"
-              disabled={isPasswordDisabled}
-              icon={RiLockPasswordFill}
-              placeholder="*************"
-              {...register("password", {
-                validate: {
-                  lengthError: (value) => {
-                    if (!isPasswordDisabled && value) {
-                      return (
-                          value.length >= 8 ||
-                          "password must be at least 8 characters"
-                      );
-                    }
-                  },
+            type={isPasswordVisible ? "text" : "password"}
+            id="password"
+            disabled={isPasswordDisabled}
+            icon={RiLockPasswordFill}
+            placeholder="*************"
+            {...register("password", {
+              validate: {
+                lengthError: (value) => {
+                  if (!isPasswordDisabled && value) {
+                    return (
+                      value.length >= 8 ||
+                      "password must be at least 8 characters"
+                    );
+                  }
                 },
-              })}
+              },
+            })}
           />
           <span
-              className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-10 top-2 hover:bg-blue-900 hover:text-white"
-              onClick={() => setIsPasswordVisible((prev) => !prev)}
+            className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-10 top-2 hover:bg-blue-900 hover:text-white"
+            onClick={() => setIsPasswordVisible((prev) => !prev)}
           >
-            {isPasswordVisible ? <BsFillEyeFill/> : <BsFillEyeSlashFill/>}
+            {isPasswordVisible ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
           </span>
           <span
-              className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
-              onClick={() => setIsPasswordDisabled((prev) => !prev)}
+            className="absolute p-1.5 transition-all duration-200 ease-in-out rounded-full cursor-pointer right-3 top-2 hover:bg-blue-900 hover:text-white"
+            onClick={() => setIsPasswordDisabled((prev) => !prev)}
           >
-            {isPasswordDisabled ? <MdModeEdit/> : <MdEditOff/>}
+            {isPasswordDisabled ? <MdModeEdit /> : <MdEditOff />}
           </span>
         </label>
         <Button
-            type="submit"
-            disabled={loading}
-            className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
+          type="submit"
+          disabled={loading}
+          className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
         >
           {loading ? "Loading..." : "Update"}
         </Button>
       </div>
       <div className="flex justify-between mt-4 text-red-500">
         <Button
-            className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] cursor-pointer"
-            onClick={() => setShowModal(true)}
+          className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] cursor-pointer"
+          onClick={() => setShowModal(true)}
         >
           Delete Account
         </Button>
         <Button
-            className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] cursor-pointer"
-            onClick={handleSignout}
+          className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973] cursor-pointer"
+          onClick={handleSignout}
         >
           Sign Out
         </Button>

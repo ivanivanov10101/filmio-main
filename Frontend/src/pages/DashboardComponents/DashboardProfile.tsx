@@ -68,7 +68,10 @@ const DashboardProfile = () => {
       setImageFileUploadError(null);
       const fileName = `${new Date().getTime()}-${Math.round(Math.random() * 10000000000)}-${imageFile?.name}`;
       const firebaseStorageReference = ref(firebaseStorage, fileName);
-      const uploadTask = uploadBytesResumable(firebaseStorageReference, imageFile);
+      const uploadTask = uploadBytesResumable(
+        firebaseStorageReference,
+        imageFile,
+      );
       uploadTask.on(
         "state_changed",
         (snapshot) => {

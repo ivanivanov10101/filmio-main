@@ -1,20 +1,19 @@
-import Posts from "../components/Posts";
+import Articles from "../components/Articles.tsx";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Post } from "./PostPage.tsx";
+import { Article } from "./ArticlePage.tsx";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { getRecentPosts } from "../config/api.ts";
-
+import { getRecentArticles } from "../config/api.ts";
 import "swiper/css/navigation";
 import "../utils/index.css";
 import CarouselElement from "../components/CarouselElement.tsx";
 import HomeTopBar from "../components/HomeTopBar.tsx";
 
 const Home = () => {
-  const { data: posts } = useQuery({
+  const { data: articles } = useQuery({
     queryKey: ["carousel"],
     queryFn: async () => {
-      return await getRecentPosts();
+      return await getRecentArticles();
     },
     placeholderData: keepPreviousData,
   });
@@ -26,22 +25,22 @@ const Home = () => {
         <Swiper
           modules={[Navigation]}
           navigation
-          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-xl drop-shadow-lg shadow-lg"
+          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-xl drop-shadow-lg shadow-lg mb-12"
         >
-          {posts?.map((post: Post) => (
-            <SwiperSlide key={post._id}>
-              <CarouselElement key={post._id} post={post} />
+          {articles?.map((article: Article) => (
+            <SwiperSlide key={article._id}>
+              <CarouselElement key={article._id} article={article} />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      <div className="mt-12">
-        <Posts category="movies" title="Movies" />
-        <Posts category="tvseries" title="TV Series" />
-        <Posts category="interviews" title="Interviews" />
-        <Posts category="reviews" title="Reviews" />
-        <Posts category="festivals" title="Festivals & Ceremonies" />
+      <div >
+        <Articles category="movies" title="Movies" />
+        <Articles category="tvseries" title="TV Series" />
+        <Articles category="interviews" title="Interviews" />
+        <Articles category="reviews" title="Reviews" />
+        <Articles category="festivals" title="Festivals & Ceremonies" />
       </div>
     </div>
   );

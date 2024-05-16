@@ -4,10 +4,10 @@ import { FaPencil } from "react-icons/fa6";
 import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../store/storeHooks.ts";
-import { Post } from "../PostPage.tsx";
+import { Article } from "../ArticlePage.tsx";
 import { CommentType } from "../../components/CommentSection.tsx";
 import { UserType } from "./DashboardUsers.tsx";
-import { getComments, getPosts, getUsers } from "../../config/api.ts";
+import { getComments, getArticles, getUsers } from "../../config/api.ts";
 import { useQuery } from "@tanstack/react-query";
 
 const DashboardMainPage = () => {
@@ -20,10 +20,10 @@ const DashboardMainPage = () => {
     },
   });
 
-  const { data: postsData } = useQuery({
-    queryKey: ["posts"],
+  const { data: articleData } = useQuery({
+    queryKey: ["articles"],
     queryFn: async () => {
-      return await getPosts(currentUser);
+      return await getArticles(currentUser);
     },
   });
 
@@ -96,22 +96,22 @@ const DashboardMainPage = () => {
               <div className="flex justify-between">
                 <div className="">
                   <h3 className="text-gray-500 uppercase text-md min-w-36">
-                    Total Posts
+                    Total Articles
                   </h3>
-                  <p className="text-2xl">{postsData?.totalPosts}</p>
+                  <p className="text-2xl">{articleData?.totalPosts}</p>
                 </div>
                 <FaPencil className="p-3 text-5xl text-lime-600 drop-shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span
                   className={`flex items-center ${
-                    postsData?.lastMonthPosts
+                    articleData?.lastMonthPosts
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
                 >
-                  {postsData?.lastMonthPosts > 0 && <HiArrowNarrowUp />}
-                  {postsData?.lastMonthPosts}
+                  {articleData?.lastMonthPosts > 0 && <HiArrowNarrowUp />}
+                  {articleData?.lastMonthPosts}
                 </span>
                 <div className="text-gray-500">Last month</div>
               </div>
@@ -190,8 +190,8 @@ const DashboardMainPage = () => {
                 <Table.HeadCell>Category</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                {postsData &&
-                  postsData.posts.map((post: Post) => (
+                {articleData &&
+                  articleData.posts.map((post: Article) => (
                     <Table.Row
                       key={post._id}
                       className=" bg-white dark:border-gray-700 dark:bg-gray-800 [&>*]:text-center"

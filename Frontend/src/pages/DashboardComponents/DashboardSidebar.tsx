@@ -1,8 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import {
-  HiUsers,
-} from "react-icons/hi";
+import { HiUsers } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks.ts";
@@ -12,10 +10,10 @@ import {
 } from "../../store/userSlice.ts";
 import { handleAxiosError } from "../../utils/utils.ts";
 import { Axios } from "../../config/api.ts";
-import {IoPersonCircleOutline} from "react-icons/io5";
-import {FaPencil} from "react-icons/fa6";
-import {FaRegComments} from "react-icons/fa";
-import {ImExit} from "react-icons/im";
+import { IoPersonCircleOutline } from "react-icons/io5";
+import { FaPencil } from "react-icons/fa6";
+import { FaRegComments } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
 
 const DashboardSidebar = () => {
   const { currentUser } = useAppSelector((state) => state.user);

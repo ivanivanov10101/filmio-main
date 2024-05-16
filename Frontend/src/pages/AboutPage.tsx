@@ -4,9 +4,7 @@ const AboutPage = () => {
   return (
     <div className="flex justify-center mx-5 my-36 flex-1">
       <div className="text-center">
-        <h1 className="text-2xl font-bold m-9">
-          About Filmio
-        </h1>
+        <h1 className="text-2xl font-bold m-9">About Filmio</h1>
         <div className="flex flex-col gap-4">
           <p>
             Filmio is a portfolio project website made by{" "}

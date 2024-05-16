@@ -191,10 +191,7 @@ const SignUpPage = () => {
           </form>
           <div className="h-2 p-3 pb-5 text-neutral">
             <span>Have an account already?</span>
-            <Link
-              to={"/sign-in"}
-              className="text-blue-400 hover:text-blue-200"
-            >
+            <Link to={"/sign-in"} className="text-blue-400 hover:text-blue-200">
               Sign In
             </Link>
           </div>

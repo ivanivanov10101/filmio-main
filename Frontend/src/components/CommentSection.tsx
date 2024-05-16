@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/storeHooks";
 import { Button, Modal, Textarea } from "flowbite-react";
-import {lazy, useEffect, useState} from "react";
+import { lazy, useEffect, useState } from "react";
 import { handleAxiosError } from "../utils/utils";
 import ShowAlert from "./showAlert";
 const Comment = lazy(() => import("./Comment"));
@@ -155,7 +155,10 @@ const CommentSection = ({ postId }: PropsType) => {
             <p className="text-xs text-gray-500">
               {350 - comment.length} characters remaining
             </p>
-            <Button type="submit" className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
+            <Button
+              type="submit"
+              className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]"
+            >
               Submit
             </Button>
           </div>
@@ -214,7 +217,11 @@ const CommentSection = ({ postId }: PropsType) => {
               >
                 Yes
               </Button>
-              <Button color="gray" onClick={() => setShowModal(false)} className="px-2">
+              <Button
+                color="gray"
+                onClick={() => setShowModal(false)}
+                className="px-2"
+              >
                 No
               </Button>
             </div>

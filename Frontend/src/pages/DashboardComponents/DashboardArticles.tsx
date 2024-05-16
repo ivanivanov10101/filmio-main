@@ -6,7 +6,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { handleAxiosError } from "../../utils/utils.ts";
 import { Axios } from "../../config/api.ts";
 
-type Post = {
+type Article = {
   _id: string;
   userId: string;
   title: string;
@@ -23,11 +23,11 @@ const DashboardArticles = () => {
   const { currentUser } = useAppSelector((state) => state.user);
   const [loading, setLoading] = useState<boolean>(true);
   const [showMoreLoading, setShowMoreLoading] = useState<boolean>(false);
-  const [userPosts, setUserPosts] = useState<Post[]>([]);
+  const [userArticles, setUserArticles] = useState<Article[]>([]);
   const [showMore, setShowMore] = useState<boolean>(true);
-  const [pageNo, setPageNo] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<number>(1);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [postId, setPostId] = useState<string | null>(null);
+  const [articleID, setArticleID] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -36,7 +36,7 @@ const DashboardArticles = () => {
         const { data } = await Axios(
           `/post/getposts?userId=${currentUser?._id}`,
         );
-        setUserPosts(data.data.posts);
+        setUserArticles(data.data.posts);
         if (data.data.posts.length < 9) {
           setShowMore(false);
         } else {
@@ -49,19 +49,19 @@ const DashboardArticles = () => {
         setLoading(false);
       }
     };
-    setPageNo((prev) => prev + 1);
+    setPageNumber((prev) => prev + 1);
     fetchPosts();
   }, [currentUser?._id]);
 
   const handleShowMore = async () => {
     setShowMoreLoading(true);
-    setPageNo((prev) => prev + 1);
+    setPageNumber((prev) => prev + 1);
     try {
-      console.log(pageNo);
+      console.log(pageNumber);
       const { data } = await Axios(
-        `/post/getposts?userId=${currentUser?._id}&page=${pageNo}`,
+        `/post/getposts?userId=${currentUser?._id}&page=${pageNumber}`,
       );
-      setUserPosts([...userPosts, ...data.data.posts]);
+      setUserArticles([...userArticles, ...data.data.posts]);
       if (data.data.posts.length < 9) {
         setShowMore(false);
       } else {
@@ -79,8 +79,8 @@ const DashboardArticles = () => {
   const handleDeletePost = async () => {
     setShowModal(false);
     try {
-      await Axios.delete(`/post/deletepost/${postId}/${currentUser?._id}`);
-      setUserPosts((prev) => prev.filter((post) => post._id !== postId));
+      await Axios.delete(`/post/deletepost/${articleID}/${currentUser?._id}`);
+      setUserArticles((prev) => prev.filter((article) => article._id !== articleID));
     } catch (error) {
       const err = await handleAxiosError(error);
       console.log(err);
@@ -97,7 +97,7 @@ const DashboardArticles = () => {
 
   return (
     <div className="p-3 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
-      {currentUser?.isAdmin && userPosts && userPosts.length > 0 ? (
+      {currentUser?.isAdmin && userArticles && userArticles.length > 0 ? (
         <>
           <Table hoverable className="shadow-md">
             <Table.Head>
@@ -109,38 +109,38 @@ const DashboardArticles = () => {
               <Table.HeadCell>Edit</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              {userPosts.map((post) => (
+              {userArticles.map((article) => (
                 <Table.Row
-                  key={post._id}
+                  key={article._id}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Table.Cell>
-                    {new Date(post.updatedAt).toLocaleDateString()}
+                    {new Date(article.updatedAt).toLocaleDateString()}
                   </Table.Cell>
                   <Table.Cell>
-                    <Link to={`/post/${post.slug}`}>
+                    <Link to={`/post/${article.slug}`}>
                       <img
-                        src={post.image}
-                        alt={post.title}
+                        src={article.image}
+                        alt={article.title}
                         className="object-cover w-20 h-10 bg-gray-500"
                       />
                     </Link>
                   </Table.Cell>
                   <Table.Cell>
                     <Link
-                      to={`/post/${post.slug}`}
+                      to={`/post/${article.slug}`}
                       className="font-medium text-gray-900 cursor-pointer dark:text-white"
                     >
-                      {post.title}
+                      {article.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell>{article.category}</Table.Cell>
                   <Table.Cell>
                     <span
                       className="font-medium text-red-500 cursor-pointer hover:underline"
                       onClick={() => {
                         setShowModal(true);
-                        setPostId(post._id);
+                        setArticleID(article._id);
                       }}
                     >
                       Delete
@@ -148,7 +148,7 @@ const DashboardArticles = () => {
                   </Table.Cell>
                   <Table.Cell>
                     <Link
-                      to={`/update-post/${post._id}`}
+                      to={`/update-post/${article._id}`}
                       className="text-teal-500 hover:underline"
                     >
                       <span>Edit</span>

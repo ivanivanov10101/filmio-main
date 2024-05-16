@@ -7,7 +7,7 @@ import { useAppDispatch } from "../store/storeHooks";
 import { signInFailure, signInSuccess } from "../store/userSlice.ts";
 import { Axios } from "../config/api";
 import { useState } from "react";
-import {FaGoogle} from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 
 const OAuth = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -21,7 +21,10 @@ const OAuth = () => {
 
     setLoading(true);
     try {
-      const firebaseOAuthLoginResult = await signInWithPopup(firebaseAuth, googleAuthProvider);
+      const firebaseOAuthLoginResult = await signInWithPopup(
+        firebaseAuth,
+        googleAuthProvider,
+      );
       const completeLoginData = {
         name: firebaseOAuthLoginResult.user.displayName,
         email: firebaseOAuthLoginResult.user.email,
@@ -40,13 +43,10 @@ const OAuth = () => {
   };
 
   return (
-    <Button
-      type="button"
-      onClick={handleLogin}
-    >
+    <Button type="button" onClick={handleLogin}>
       {loading ? (
         <>
-          <Spinner/>
+          <Spinner />
           <span className="pl-3">Loading...</span>
         </>
       ) : (

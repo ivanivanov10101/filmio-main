@@ -16,10 +16,12 @@ import { Spinner } from "flowbite-react";
 const About = lazy(() => import("./pages/AboutPage.tsx"));
 const SignInPage = lazy(() => import("./pages/SignInPage.tsx"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage.tsx"));
-const Dashboard = lazy(() => import("./pages/DashboardComponents/Dashboard.tsx"));
-const CreatePostPage = lazy(() => import("./pages/CreatePostPage.tsx"));
-const UpdatePostPage = lazy(() => import("./pages/UpdatePostPage"));
-const PostPage = lazy(() => import("./pages/PostPage"));
+const Dashboard = lazy(
+  () => import("./pages/DashboardComponents/Dashboard.tsx"),
+);
+const CreateArticlePage = lazy(() => import("./pages/CreateArticlePage.tsx"));
+const UpdateArticlePage = lazy(() => import("./pages/UpdateArticlePage.tsx"));
+const ArticlePage = lazy(() => import("./pages/ArticlePage.tsx"));
 const Search = lazy(() => import("./pages/Search"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage.tsx"));
 
@@ -42,7 +44,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <SkeletonTheme baseColor="#6C7A89" highlightColor="#525252" >
+    <SkeletonTheme baseColor="#6C7A89" highlightColor="#525252">
       <Router>
         <Suspense
           fallback={
@@ -61,12 +63,15 @@ const App = () => {
                 <Route path="/sign-up" element={<SignUpPage />} />
               </Route>
               <Route element={<OnlyAdminPrivateRoute />}>
-                <Route path="/create-post" element={<CreatePostPage />} />
-                <Route path="/update-post/:postId" element={<UpdatePostPage />} />
+                <Route path="/create-post" element={<CreateArticlePage />} />
+                <Route
+                  path="/update-post/:postId"
+                  element={<UpdateArticlePage />}
+                />
               </Route>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/post/:postSlug" element={<PostPage />} />
+              <Route path="/post/:postSlug" element={<ArticlePage />} />
               <Route path="/search" element={<Search />} />
               <Route path="*" element={<ErrorPage />} />
             </Route>

@@ -1,6 +1,6 @@
-import { Post } from "../pages/PostPage";
+import { Article } from "../pages/ArticlePage.tsx";
 import { getAllArticlesCategory } from "../config/api";
-import PostCard from "./PostCard";
+import ArticleCard from "./ArticleCard.tsx";
 import { Link } from "react-router-dom";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,8 +15,8 @@ type PropsType = {
   title: string;
 };
 
-const Posts = ({  category, title }: PropsType) => {
-  const { isLoading, data: posts } = useQuery({
+const Articles = ({ category, title }: PropsType) => {
+  const { isLoading, data: articles } = useQuery({
     queryKey: [category],
     queryFn: async () => {
       return await getAllArticlesCategory(category);
@@ -26,7 +26,7 @@ const Posts = ({  category, title }: PropsType) => {
   return (
     <>
       <div className="flex flex-col max-w-[75rem] p-1 gap-8 mx-auto">
-        { isLoading ? (
+        {isLoading ? (
           <div className="flex flex-col gap-6 mx-auto">
             <div className="flex items-center justify-between px-3">
               <h2 className="text-3xl font-bold">
@@ -43,8 +43,8 @@ const Posts = ({  category, title }: PropsType) => {
             <PostCardSkeleton cards={3} />
           </div>
         ) : (
-          posts &&
-          posts.length > 0 && (
+          articles &&
+          articles.length > 0 && (
             <div className="flex flex-col gap-6">
               <div className="flex items-center justify-between px-6">
                 <h2 className="text-3xl font-bold">{title}</h2>
@@ -77,9 +77,9 @@ const Posts = ({  category, title }: PropsType) => {
                   modules={[Pagination]}
                   className="mySwiper h-[26.5rem]"
                 >
-                  {posts?.map((post: Post) => (
-                    <SwiperSlide key={post._id}>
-                      <PostCard key={post._id} post={post} />
+                  {articles?.map((article: Article) => (
+                    <SwiperSlide key={article._id}>
+                      <ArticleCard key={article._id} article={article} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -92,4 +92,4 @@ const Posts = ({  category, title }: PropsType) => {
   );
 };
 
-export default Posts;
+export default Articles;

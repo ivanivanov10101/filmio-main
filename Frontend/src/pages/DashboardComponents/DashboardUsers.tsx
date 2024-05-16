@@ -29,7 +29,7 @@ const DashboardUsers = () => {
   const [userIdToDelete, setUserIdToDelete] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchArticles = async () => {
       setLoading(true);
       try {
         const { data } = await Axios(`/user/getusers`);
@@ -46,7 +46,7 @@ const DashboardUsers = () => {
         setLoading(false);
       }
     };
-    fetchPosts();
+    fetchArticles();
   }, [currentUser?._id]);
 
   const handleShowMore = async () => {
