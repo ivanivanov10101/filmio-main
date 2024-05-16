@@ -12,7 +12,9 @@ export const accountRegistrationHandler = asyncHandler(
   async (request, response, next) => {
     const { fullName, userName, email, password } = request.body;
 
-    const accountBody = await Account.findOne({ $or: [{ userName }, { email }] });
+    const accountBody = await Account.findOne({
+      $or: [{ userName }, { email }],
+    });
     if (accountBody) {
       return next(
         new customError(
@@ -59,14 +61,11 @@ export const accountLoginHandler = asyncHandler(
       );
     }
 
-    const { accessToken, refreshToken } = await generateTokens(
-      accountBody._id,
-    );
+    const { accessToken, refreshToken } = await generateTokens(accountBody._id);
     const user = await Account.findById(accountBody._id).select(
       "-password -refreshToken",
     );
 
-    // Response...
     return response
       .cookie("accessToken", accessToken, accessTokenOptions)
       .cookie("refreshToken", refreshToken, refreshTokenOptions)
@@ -92,9 +91,7 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
 
     await accountBody.save();
 
-    const { accessToken, refreshToken } = await generateTokens(
-      accountBody._id,
-    );
+    const { accessToken, refreshToken } = await generateTokens(accountBody._id);
     const userRes = await Account.findById(accountBody._id).select(
       "-password -refreshToken",
     );
@@ -118,19 +115,17 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
       name.toLowerCase().split(" ").join("") +
       Math.random().toString(36).slice(-8);
 
-    const newUser = new Account({
+    const newAccount = new Account({
       fullName: name,
       userName,
       email,
       password,
       profilePicture: googlePhotoUrl,
     });
-    await newUser.save();
+    await newAccount.save();
 
-    const { accessToken, refreshToken } = await generateTokens(
-      newUser._id,
-    );
-    const singleUser = await Account.findById(newUser._id).select(
+    const { accessToken, refreshToken } = await generateTokens(newAccount._id);
+    const singleUser = await Account.findById(newAccount._id).select(
       "-password -refreshToken",
     );
 
@@ -149,5 +144,13 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
 });
 
 export const validateToken = asyncHandler(async (req, res) => {
-  res.status(200).json(new ApiResponse(200, { user: req.user }, "Account successfully validated."));
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { user: req.user },
+        "Account successfully validated.",
+      ),
+    );
 });

@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/Header.tsx";
-import FooterCom from "../components/Footer.tsx";
+import FooterComponent from "../components/FooterComponent.tsx";
 import { useEffect } from "react";
 
 const Layout = () => {
@@ -14,7 +14,7 @@ const Layout = () => {
       <div className="flex-1">
         <Outlet />
       </div>
-      <FooterCom />
+      <FooterComponent />
     </div>
   );
 };

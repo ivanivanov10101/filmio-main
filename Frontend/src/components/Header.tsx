@@ -50,7 +50,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar className="border-b-4 [box-shadow:0_1px_18px_-5px_rgba(0,0,0,0.41)] dark:bg-[rgb(20,19,31)] dark:bg-[linear-gradient(90deg,_rgba(20,19,31,0.9669117647058824)_0%,_rgba(41,47,55,1)_37%,_rgba(10,33,37,1)_100%)]">
+    <Navbar className="border-b-4 dark:border-neutral-800 [box-shadow:0_1px_18px_-5px_rgba(0,0,0,0.41)] dark:bg-[rgb(20,19,31)] dark:bg-[linear-gradient(90deg,_rgba(20,19,31,0.9669117647058824)_0%,_rgba(41,47,55,1)_37%,_rgba(10,33,37,1)_100%)]">
       <Link
         to={"/"}
         className="relative self-center inline-block text-sm font-semibold whitespace-nowrap sm:text-xl dark:text-white"

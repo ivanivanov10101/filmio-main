@@ -25,7 +25,7 @@ const Home = () => {
         <Swiper
           modules={[Navigation]}
           navigation
-          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-xl drop-shadow-lg shadow-lg mb-12"
+          className="mySwiper max-h-[45rem] max-w-[75rem] w-full rounded-xl drop-shadow-lg shadow-lg"
         >
           {articles?.map((article: Article) => (
             <SwiperSlide key={article._id}>
@@ -35,7 +35,7 @@ const Home = () => {
         </Swiper>
       </div>
 
-      <div >
+      <div className="mt-12">
         <Articles category="movies" title="Movies" />
         <Articles category="tvseries" title="TV Series" />
         <Articles category="interviews" title="Interviews" />

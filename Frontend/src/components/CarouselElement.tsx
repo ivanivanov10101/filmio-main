@@ -18,7 +18,7 @@ const CarouselElement = ({ article }: PropsType) => {
       </Link>
       <div className="absolute m-auto p-16 w-full bottom-0 overflow-ellipsis drop-shadow-xl text-white bg-black/[.2] hover:bg-black/[.3]">
         <Link to={`/post/${article.slug}`}>
-          <p className="font-sans font-light text-center sm:text-sm md:text-xl ">
+          <p className="font-sans font-light text-center drop-shadow-2xl sm:text-sm md:text-xl ">
             {article.title}
           </p>
         </Link>

@@ -57,7 +57,7 @@ const ArticlePage = () => {
           <img
             src={post.image}
             alt={post.slug}
-            className=" p-2 max-h-[600px] w-full object-cover rounded-3xl"
+            className="mt-6 p-2 max-h-[600px] w-full object-cover rounded-3xl"
           />
           <div className="flex justify-between w-full max-w-[52rem] p-3 border-b border-gray-600 mx-auto text-sm italic">
             <span>{articleDate}</span>
@@ -73,20 +73,20 @@ const ArticlePage = () => {
             dangerouslySetInnerHTML={{ __html: post.content }}
             className="post-content w-full p-5 text-md mx-auto max-w-5xl"
           ></div>
+          {/*{currentUser?.isAdmin ? (*/}
+          {/*    <Button className="max-w-36 float-right">*/}
+          {/*        <Link*/}
+          {/*            to={`/update-post/${post._id}`}*/}
+          {/*            className="flex:justify-center text-black hover:text-gray-700 dark:text-gray-400 dark:hover:text-white"*/}
+          {/*        >*/}
+          {/*            Edit this article*/}
+          {/*        </Link>*/}
+          {/*    </Button>*/}
+
+          {/*) : null}*/}
           <div>
             <CommentSection postId={post._id} />
           </div>
-          {/*{currentUser?.isAdmin ? (*/}
-          {/*    <div>*/}
-          {/*      <Link*/}
-          {/*          to={`/update-post/${post._id}`}*/}
-          {/*          className="flex:justify-center text-[#63d052] hover:text-[#98e87b] text-sm dark:text-gray-400 dark:hover:text-white"*/}
-          {/*      >*/}
-          {/*        Edit this article*/}
-          {/*      </Link>*/}
-          {/*    </div>*/}
-
-          {/*) : null}*/}
         </main>
         <div className="flex flex-col items-center justify-center mb-14">
           <h1 className="flex flex-col items-center pb-1 mt-5 mb-2 text-2xl">

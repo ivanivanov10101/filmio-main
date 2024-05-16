@@ -173,7 +173,7 @@ const DashboardArticles = () => {
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p className="py-4">You have no articles yet!</p>
       )}
       <Modal
         show={showModal}
