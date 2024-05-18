@@ -40,10 +40,10 @@ const DashboardMainPage = () => {
         <h1 className="text-2xl font-bold pb-3">Statistics</h1>
         <div className="flex flex-wrap gap-4 justify-between ">
           <Link to={"/dashboard?tab=users"}>
-            <div className="flex flex-col w-full gap-4 p-3 bg-white rounded-md shadow-md dark:bg-slate-800 md:w-72">
+            <div className="flex flex-col w-full gap-4 p-3 bg-white rounded-md shadow-md dark:bg-[rgba(49,57,66,1)] md:w-72">
               <div className="flex justify-between">
                 <div>
-                  <h3 className="text-gray-500 uppercase text-md min-w-36">
+                  <h3 className="text-gray-500 dark:text-gray-100 uppercase text-md min-w-36">
                     Total Users
                   </h3>
                   <p className="text-2xl">{usersData?.totalUsers}</p>
@@ -61,15 +61,15 @@ const DashboardMainPage = () => {
                   {usersData?.lastMonthUsers > 0 && <HiArrowNarrowUp />}
                   {usersData?.lastMonthUsers}
                 </span>
-                <div className="text-gray-500">Last month</div>
+                <div className="text-gray-500 dark:text-gray-100">Last month</div>
               </div>
             </div>
           </Link>
           <Link to={"/dashboard?tab=comments"}>
-            <div className="flex flex-col w-full gap-4 p-3 rounded-md bg-white shadow-md dark:bg-slate-800 md:w-72">
+            <div className="flex flex-col w-full gap-4 p-3 rounded-md bg-white shadow-md dark:bg-[rgba(49,57,66,1)] md:w-72">
               <div className="flex justify-between">
                 <div className="">
-                  <h3 className="text-gray-500 uppercase text-md min-w-36">
+                  <h3 className="text-gray-500 dark:text-gray-100 uppercase text-md min-w-36">
                     Total Comments
                   </h3>
                   <p className="text-2xl">{commentsData?.totalComments}</p>
@@ -87,15 +87,15 @@ const DashboardMainPage = () => {
                   {commentsData?.lastMonthComments > 0 && <HiArrowNarrowUp />}
                   {commentsData?.lastMonthComments}
                 </span>
-                <div className="text-gray-500">Last month</div>
+                <div className="text-gray-500 dark:text-gray-100">Last month</div>
               </div>
             </div>
           </Link>
           <Link to={"/dashboard?tab=posts"}>
-            <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md bg-white dark:bg-slate-800 md:w-72">
+            <div className="flex flex-col w-full gap-4 p-3 rounded-md shadow-md bg-white dark:bg-[rgba(49,57,66,1)] md:w-72">
               <div className="flex justify-between">
                 <div className="">
-                  <h3 className="text-gray-500 uppercase text-md min-w-36">
+                  <h3 className="text-gray-500 dark:text-gray-100 uppercase text-md min-w-36">
                     Total Articles
                   </h3>
                   <p className="text-2xl">{articleData?.totalPosts}</p>
@@ -113,7 +113,7 @@ const DashboardMainPage = () => {
                   {articleData?.lastMonthPosts > 0 && <HiArrowNarrowUp />}
                   {articleData?.lastMonthPosts}
                 </span>
-                <div className="text-gray-500">Last month</div>
+                <div className="text-gray-500 dark:text-gray-100">Last month</div>
               </div>
             </div>
           </Link>
@@ -122,9 +122,9 @@ const DashboardMainPage = () => {
       <div className="max-w-6xl py-3 md:mx-auto">
         <div className="rounded-md py-8 px-14">
           <div className="text-2xl font-bold pb-3">Recents</div>
-          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-[rgba(49,57,66,1)]">
             <div className="flex justify-between p-3 text-sm font-semibold">
-              <h1 className="p-2 text-center">Users</h1>
+              <h1 className="text-lg">Users</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                 <Link to={"/dashboard?tab=users"}>See all</Link>
               </Button>
@@ -137,7 +137,7 @@ const DashboardMainPage = () => {
               {usersData &&
                 usersData.users.map((user: UserType) => (
                   <Table.Body key={user._id} className="divide-y">
-                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-[rgba(49,57,66,1)]">
                       <Table.Cell>
                         <img
                           src={user.profilePicture}
@@ -151,9 +151,9 @@ const DashboardMainPage = () => {
                 ))}
             </Table>
           </div>
-          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-1 w-full p-2 my-4 rounded-md shadow-md bg-white md:w-auto dark:bg-[rgba(49,57,66,1)]">
             <div className="flex justify-between p-3 text-sm font-semibold">
-              <h1 className="p-2 text-center">Comments</h1>
+              <h1 className="text-lg">Comments</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                 <Link to={"/dashboard?tab=comments"}>See all</Link>
               </Button>
@@ -166,7 +166,7 @@ const DashboardMainPage = () => {
               {commentsData &&
                 commentsData.comments.map((comment: CommentType) => (
                   <Table.Body key={comment._id} className="divide-y">
-                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-[rgba(49,57,66,1)]">
                       <Table.Cell className="w-96">
                         <p className="line-clamp-2">{comment.content}</p>
                       </Table.Cell>
@@ -176,9 +176,9 @@ const DashboardMainPage = () => {
                 ))}
             </Table>
           </div>
-          <div className="flex flex-col flex-wrap flex-1 p-2 rounded-md shadow-md bg-white md:w-auto dark:bg-gray-800">
+          <div className="flex flex-col flex-wrap flex-1 p-2 rounded-md shadow-md bg-white md:w-auto dark:bg-[rgba(49,57,66,1)]">
             <div className="flex justify-between p-3 text-sm font-semibold">
-              <h1 className="p-2 text-center">Posts</h1>
+              <h1 className="text-lg">Posts</h1>
               <Button className="text-white bg-[#63d052] hover:bg-[#81d973] focus:outline-none focus:ring-[#81d973] font-medium rounded-md text-sm py-0.5 text-center dark:bg-[#63d052] dark:hover:bg-[#63d052] dark:focus:ring-[#81d973]">
                 <Link to={"/dashboard?tab=posts"}>See all</Link>
               </Button>
@@ -194,7 +194,7 @@ const DashboardMainPage = () => {
                   articleData.posts.map((post: Article) => (
                     <Table.Row
                       key={post._id}
-                      className=" bg-white dark:border-gray-700 dark:bg-gray-800 [&>*]:text-center"
+                      className="bg-white dark:border-gray-700 dark:bg-[rgba(49,57,66,1)] [&>*]:text-center"
                     >
                       <Table.Cell className="flex justify-center">
                         <Link to={`/post/${post.slug}`}>

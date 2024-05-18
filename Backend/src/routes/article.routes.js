@@ -6,7 +6,7 @@ import {
   allArticlesGetterHandler,
   articleGetterHandler,
   articleUpdatingHandler,
-} from "../controllers/article.controller.js";
+} from "../controllers/articleController.js";
 import { createArticleSchema } from "../validators/article.validator.js";
 import validate from "../middlewares/validator.middleware.js";
 

@@ -4,7 +4,7 @@ import {
   accountLoginHandler,
   accountRegistrationHandler,
   validateToken,
-} from "../controllers/auth.controller.js";
+} from "../controllers/authorizationController.js";
 import validate from "../middlewares/validator.middleware.js";
 import {
   OAuthSchema,

@@ -8,7 +8,7 @@ type PropsType = {
 
 const ArticleCard = ({ article }: PropsType) => {
   return (
-    <div className="group relative w-full mb-10 shadow-md bg-white dark:bg-[#202a2e] dark:[box-shadow:3px_3px_10px_1px_rgba(0,0,0,0.41)] h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.5rem] mx-0.5">
+    <div className="group relative w-full mb-10 shadow-md bg-white dark:bg-[rgba(49,57,66,1)] dark:[box-shadow:3px_3px_10px_1px_rgba(0,0,0,0.41)] h-[360px] sm:w-[360px] overflow-hidden transition-all rounded-[0.5rem] mx-0.5">
       <Link to={`/post/${article.slug}`}>
         <img
           src={article.image}

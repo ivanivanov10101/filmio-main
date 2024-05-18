@@ -1,27 +1,27 @@
 import Account from "../models/user.model.js";
-import customError from "../utils/customErrorHandler.js";
+import backendErrors from "../utils/backendErrorsHandler.js";
 import jwt from "jsonwebtoken";
 
-const verifyToken = async (req, _, next) => {
+const verifyToken = async (request, _, next) => {
   try {
-    const token = req.cookies?.accessToken;
-    if (!token) {
-      return next(new customError(401, "Unauthorized Access Token"));
+    const currentAccessToken = request.cookies?.accessToken;
+    if (!currentAccessToken) {
+      return next(new backendErrors(401, "Unauthorized Access Token"));
     }
 
-    const jwtVerifyToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const jwtVerifyToken = jwt.verify(currentAccessToken, process.env.ACCESS_TOKEN_SECRET);
 
-    const user = await Account.findById(jwtVerifyToken._id).select(
+    const accountExists = await Account.findById(jwtVerifyToken._id).select(
       "-password -refreshToken",
     );
-    if (!user) {
-      return next(new customError(401, "Invalid Access Token"));
+    if (!accountExists) {
+      return next(new backendErrors(401, "Invalid Access Token"));
     }
 
-    req.user = user;
+    request.user = accountExists;
     next();
   } catch (error) {
-    return new customError(401, "Invalid access token");
+    return new backendErrors(401, "Invalid access token");
   }
 };
 

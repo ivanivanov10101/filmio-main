@@ -1,5 +1,5 @@
 import Account from "../models/user.model.js";
-import customError from "./customErrorHandler.js";
+import backendErrors from "./backendErrorsHandler.js";
 
 export const generateTokens = async (userId) => {
   try {
@@ -13,7 +13,7 @@ export const generateTokens = async (userId) => {
     return { accessToken, refreshToken };
   } catch (error) {
     console.log(error.message);
-    new customError(500, error.message);
+    new backendErrors(500, error.message);
   }
 };
 

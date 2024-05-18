@@ -1,7 +1,7 @@
 import Article from "../models/article.model.js";
-import ApiResponse from "../utils/ApiResponse.js";
+import APIResponse from "../utils/APIResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import customError from "../utils/customErrorHandler.js";
+import backendErrors from "../utils/backendErrorsHandler.js";
 import { slugTrimmer } from "../utils/utils.js";
 
 export const articleCreationHandler = asyncHandler(
@@ -10,7 +10,7 @@ export const articleCreationHandler = asyncHandler(
 
     if (!request.user.isAdmin) {
       return next(
-        new customError(
+        new backendErrors(
           403,
           "You need to be an admin in order to create an article.",
         ),
@@ -20,7 +20,7 @@ export const articleCreationHandler = asyncHandler(
     const existingArticleTitle = await Article.findOne({ title });
     if (existingArticleTitle) {
       return next(
-        new customError(403, "Choose an unique title for your article."),
+        new backendErrors(403, "Choose an unique title for your article."),
       );
     }
 
@@ -36,7 +36,7 @@ export const articleCreationHandler = asyncHandler(
     response
       .status(201)
       .json(
-        new ApiResponse(
+        new APIResponse(
           201,
           { post: createdArticle },
           "Article successfully created.",
@@ -78,26 +78,26 @@ export const articleGetterHandler = asyncHandler(async (request, response) => {
   articleData = Article.find(queryObject);
 
   if (sort) {
-    let sortFix = sort.split(",").join(" ");
+    let sortingType = sort.split(",").join(" ");
     const sortValue =
-      sortFix === "desc"
+      sortingType === "desc"
         ? { createdAt: 1 }
-        : sortFix === "asc"
+        : sortingType === "asc"
           ? { createdAt: -1 }
-          : sortFix;
+          : sortingType;
     articleData = articleData.sort(sortValue);
   }
 
   if (select) {
-    let selectFix = select.split(",").join(" ");
-    articleData = articleData.select(selectFix);
+    let selectingType = select.split(",").join(" ");
+    articleData = articleData.select(selectingType);
   }
 
   let Page = +page || 1;
   let Limit = +limit || 9;
   let skip = (Page - 1) * Limit;
-  const leftRange = skip + 1;
-  const rightRange = Limit * Page || Limit;
+  const leftmostRange = skip + 1;
+  const rightmostRange = Limit * Page || Limit;
   articleData = articleData.skip(skip).limit(Limit);
 
   const posts = await articleData;
@@ -114,14 +114,14 @@ export const articleGetterHandler = asyncHandler(async (request, response) => {
   });
 
   response.status(200).json(
-    new ApiResponse(
+    new APIResponse(
       200,
       {
         posts,
         totalPosts,
         lastMonthPosts,
         pageNo: Page,
-        itemRange: `${leftRange}-${rightRange}`,
+        itemRange: `${leftmostRange}-${rightmostRange}`,
         nbHits: posts.length,
       },
       "success",
@@ -144,35 +144,37 @@ export const allArticlesGetterHandler = asyncHandler(
     } = request.query;
     let queryObject = {};
     let articleData;
+    const filterOption = "i";
 
-    userId && (queryObject.userId = { $regex: userId, $options: "i" });
-    category && (queryObject.category = { $regex: category, $options: "i" });
+    userId && (queryObject.userId = { $regex: userId, $options: filterOption });
+    category &&
+      (queryObject.category = { $regex: category, $options: filterOption });
     category === "all" && delete queryObject.category;
-    slug && (queryObject.slug = { $regex: slug, $options: "i" });
+    slug && (queryObject.slug = { $regex: slug, $options: filterOption });
     postId && (queryObject._id = postId);
     searchTerm && {
       $or: [
-        (queryObject.title = { $regex: searchTerm, $options: "i" }),
-        (queryObject.content = { $regex: searchTerm, $options: "i" }),
+        (queryObject.title = { $regex: searchTerm, $options: filterOption }),
+        (queryObject.content = { $regex: searchTerm, $options: filterOption }),
       ],
     };
-    title && (queryObject.title = { $regex: title, $options: "i" });
+    title && (queryObject.title = { $regex: title, $options: filterOption });
     articleData = Article.find(queryObject);
 
     if (sort) {
-      let sortFix = sort.split(",").join(" ");
+      let sortingType = sort.split(",").join(" ");
       const sortValue =
-        sortFix === "desc"
+        sortingType === "desc"
           ? { createdAt: 1 }
-          : sortFix === "asc"
+          : sortingType === "asc"
             ? { createdAt: -1 }
-            : sortFix;
+            : sortingType;
       articleData = articleData.sort(sortValue);
     }
 
     if (select) {
-      let selectFix = select.split(",").join(" ");
-      articleData = articleData.select(selectFix);
+      let selectingType = select.split(",").join(" ");
+      articleData = articleData.select(selectingType);
     }
 
     let Page = +page || 1;
@@ -193,7 +195,7 @@ export const allArticlesGetterHandler = asyncHandler(
     });
 
     response.status(200).json(
-      new ApiResponse(
+      new APIResponse(
         200,
         {
           posts,
@@ -212,7 +214,7 @@ export const articleDeletionHandler = asyncHandler(
   async (request, response, next) => {
     if (request.user.id !== request.params.userId) {
       return next(
-        new customError(
+        new backendErrors(
           403,
           "You need to be logged in to delete this article.",
         ),
@@ -223,7 +225,7 @@ export const articleDeletionHandler = asyncHandler(
 
     response
       .status(200)
-      .json(new ApiResponse(200, {}, "The article has been deleted."));
+      .json(new APIResponse(200, {}, "The article has been deleted."));
   },
 );
 
@@ -231,7 +233,7 @@ export const articleUpdatingHandler = asyncHandler(
   async (request, response, next) => {
     if (request.user.id !== request.params.userId) {
       return next(
-        new customError(
+        new backendErrors(
           403,
           "You need to be logged in to update this article.",
         ),
@@ -257,7 +259,7 @@ export const articleUpdatingHandler = asyncHandler(
     response
       .status(201)
       .json(
-        new ApiResponse(
+        new APIResponse(
           201,
           updatedArticle,
           "post has been updated successfully",

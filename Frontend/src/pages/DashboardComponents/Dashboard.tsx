@@ -2,7 +2,7 @@ import { lazy, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 const DashboardSidebar = lazy(() => import("./DashboardSidebar.tsx"));
 const DashboardProfile = lazy(() => import("./DashboardProfile.tsx"));
-const DashboardPosts = lazy(() => import("./DashboardArticles.tsx"));
+const DashboardArticles = lazy(() => import("./DashboardArticles.tsx"));
 const DashboardUsers = lazy(() => import("./DashboardUsers.tsx"));
 const DashboardComments = lazy(() => import("./DashboardComments.tsx"));
 const DashboardMainPage = lazy(() => import("./DashboardMainPage.tsx"));
@@ -24,7 +24,7 @@ const Dashboard = () => {
       </div>
       {tabNameFromParam === null && <DashboardMainPage />}
       {tabNameFromParam === "profile" && <DashboardProfile />}
-      {tabNameFromParam === "posts" && <DashboardPosts />}
+      {tabNameFromParam === "posts" && <DashboardArticles />}
       {tabNameFromParam === "users" && <DashboardUsers />}
       {tabNameFromParam === "comments" && <DashboardComments />}
     </div>

@@ -1,7 +1,7 @@
 import Comments from "../models/comment.model.js";
-import ApiResponse from "../utils/ApiResponse.js";
+import APIResponse from "../utils/APIResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import customError from "../utils/customErrorHandler.js";
+import backendErrors from "../utils/backendErrorsHandler.js";
 
 export const commentCreationHandler = asyncHandler(
   async (request, response, next) => {
@@ -9,22 +9,22 @@ export const commentCreationHandler = asyncHandler(
 
     if (userId !== request.user.id) {
       return next(
-        new customError(403, "You need to be logged in to create a comment."),
+        new backendErrors(403, "You need to be logged in to create a comment."),
       );
     }
 
-    const comment = new Comments({
+    const currentComment = new Comments({
       postId,
       userId,
       content,
     });
 
-    const newComment = await comment.save();
+    const newComment = await currentComment.save();
 
     response
       .status(200)
       .send(
-        new ApiResponse(
+        new APIResponse(
           200,
           newComment,
           "Comment has been posted successfully.",
@@ -40,14 +40,14 @@ export const postCommentHandler = asyncHandler(async (request, response) => {
 
   response
     .status(200)
-    .send(new ApiResponse(200, comments, "Comments fetched successfully."));
+    .send(new APIResponse(200, comments, "Comments fetched successfully."));
 });
 
 export const allPostCommentHandler = asyncHandler(
   async (request, response, next) => {
     if (!request.user.isAdmin) {
       return next(
-        new customError(403, "You need to be an admin to get all posts."),
+        new backendErrors(403, "You need to be an admin to get all posts."),
       );
     }
 
@@ -75,7 +75,7 @@ export const allPostCommentHandler = asyncHandler(
     response
       .status(200)
       .json(
-        new ApiResponse(
+        new APIResponse(
           200,
           { comments, totalComments, lastMonthComments },
           "All comments fetched succesfully.",
@@ -89,7 +89,7 @@ export const commentLikesHandler = asyncHandler(
     const commentBody = await Comments.findById(request.params.commentId);
 
     if (!commentBody) {
-      return next(new customError(404, "Comment does not exist."));
+      return next(new backendErrors(404, "Comment does not exist."));
     }
 
     const accountIndex = commentBody.likes.indexOf(request.user.id);
@@ -105,7 +105,7 @@ export const commentLikesHandler = asyncHandler(
 
     response
       .status(200)
-      .json(new ApiResponse(200, commentBody, "Comment Likes Updated"));
+      .json(new APIResponse(200, commentBody, "Comment Likes Updated"));
   },
 );
 
@@ -113,12 +113,12 @@ export const commentEditingHandler = asyncHandler(
   async (request, response, next) => {
     const commentBody = await Comments.findById(request.params.commentId);
     if (!commentBody) {
-      return next(new customError(404, "Comment does not exist."));
+      return next(new backendErrors(404, "Comment does not exist."));
     }
 
     if (commentBody.userId !== request.user.id) {
       return next(
-        new customError(403, "You need to be logged in to edit this comment."),
+        new backendErrors(403, "You need to be logged in to edit this comment."),
       );
     }
 
@@ -130,7 +130,7 @@ export const commentEditingHandler = asyncHandler(
 
     response
       .status(200)
-      .json(new ApiResponse(200, editedComment, "Comment content updated."));
+      .json(new APIResponse(200, editedComment, "Comment content updated."));
   },
 );
 
@@ -138,11 +138,11 @@ export const commentDeletingHandler = asyncHandler(
   async (request, response, next) => {
     const comment = await Comments.findById(request.params.commentId);
     if (!comment) {
-      return next(new customError(404, "Comment has already been deleted."));
+      return next(new backendErrors(404, "Comment has already been deleted."));
     }
     if (comment.userId !== request.user.id && !request.user.isAdmin) {
       return next(
-        new customError(
+        new backendErrors(
           403,
           "You need to be logged in as an admin to delete comments.",
         ),
@@ -151,6 +151,6 @@ export const commentDeletingHandler = asyncHandler(
 
     await Comments.findByIdAndDelete(request.params.commentId);
 
-    response.status(200).json(new ApiResponse(200, null, "Comment deleted."));
+    response.status(200).json(new APIResponse(200, null, "Comment deleted."));
   },
 );

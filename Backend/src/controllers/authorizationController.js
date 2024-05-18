@@ -1,7 +1,7 @@
 import Account from "../models/user.model.js";
-import ApiResponse from "../utils/ApiResponse.js";
+import APIResponse from "../utils/APIResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import customError from "../utils/customErrorHandler.js";
+import backendErrors from "../utils/backendErrorsHandler.js";
 import {
   generateTokens,
   accessTokenOptions,
@@ -17,14 +17,14 @@ export const accountRegistrationHandler = asyncHandler(
     });
     if (accountBody) {
       return next(
-        new customError(
+        new backendErrors(
           409,
           "An account with this username or email already exists.",
         ),
       );
     }
 
-    const singleUser = await Account.create({
+    const singleAccount = await Account.create({
       fullName,
       userName: userName.toLowerCase(),
       email,
@@ -34,9 +34,9 @@ export const accountRegistrationHandler = asyncHandler(
     return response
       .status(201)
       .json(
-        new ApiResponse(
+        new APIResponse(
           200,
-          { userId: singleUser._id },
+          { userId: singleAccount._id },
           "Account created successfully.",
         ),
       );
@@ -50,14 +50,14 @@ export const accountLoginHandler = asyncHandler(
     const accountBody = await Account.findOne({ email });
     if (!accountBody) {
       return next(
-        new customError(401, "The email you have used is incorrect."),
+        new backendErrors(401, "The email you have used is incorrect."),
       );
     }
 
     const isPasswordCorrect = await accountBody.isPasswordCorrect(password);
     if (!isPasswordCorrect) {
       return next(
-        new customError(401, "The password you have used is incorrect."),
+        new backendErrors(401, "The password you have used is incorrect."),
       );
     }
 
@@ -71,7 +71,7 @@ export const accountLoginHandler = asyncHandler(
       .cookie("refreshToken", refreshToken, refreshTokenOptions)
       .status(200)
       .json(
-        new ApiResponse(
+        new APIResponse(
           200,
           { user, accessToken, refreshToken },
           "User logged in successfully",
@@ -101,7 +101,7 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
       .cookie("accessToken", accessToken, accessTokenOptions)
       .cookie("refreshToken", refreshToken, refreshTokenOptions)
       .json(
-        new ApiResponse(
+        new APIResponse(
           200,
           { user: userRes, accessToken, refreshToken },
           "Google Account logged in successfully.",
@@ -134,7 +134,7 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
       .cookie("accessToken", accessToken, accessTokenOptions)
       .cookie("refreshToken", refreshToken, refreshTokenOptions)
       .json(
-        new ApiResponse(
+        new APIResponse(
           200,
           { user: singleUser, accessToken, refreshToken },
           "Google Account logged in successfully.",
@@ -143,13 +143,13 @@ export const OAuthSignIn = asyncHandler(async (request, response) => {
   }
 });
 
-export const validateToken = asyncHandler(async (req, res) => {
-  res
+export const validateToken = asyncHandler(async (request, response) => {
+  response
     .status(200)
     .json(
-      new ApiResponse(
+      new APIResponse(
         200,
-        { user: req.user },
+        { user: request.user },
         "Account successfully validated.",
       ),
     );

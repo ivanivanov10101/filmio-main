@@ -14,6 +14,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { FaPencil } from "react-icons/fa6";
 import { FaRegComments } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
+import {sidebarTheme} from "../../utils/themes.ts";
 
 const DashboardSidebar = () => {
   const { currentUser } = useAppSelector((state) => state.user);
@@ -27,7 +28,6 @@ const DashboardSidebar = () => {
     setTab(tabFromUrl);
   }, [location.search]);
 
-  // SignOut User....*:
   const handleSignOut = async () => {
     try {
       await Axios.post(`/user/logout/${currentUser?._id}`);
@@ -39,7 +39,7 @@ const DashboardSidebar = () => {
   };
 
   return (
-    <Sidebar className="w-full md:w-56 shadow-lg dark:shadow-2xl">
+    <Sidebar className="w-full md:w-56 shadow-lg dark:shadow-2xl" theme={sidebarTheme}>
       <Sidebar.Items>
         <Sidebar.ItemGroup className="flex flex-col gap-1">
           <Link to={`/dashboard`}>

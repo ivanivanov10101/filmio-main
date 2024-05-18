@@ -9,7 +9,7 @@ const accountSignUpSchema = z.object({
   userName: z
     .string({ required_error: "Username is required" })
     .trim()
-    .min(2, { message: "Username must be at least 2 characters" })
+    .min(6, { message: "Username must be at least 6 characters" })
     .max(50, { message: "Username must be at most 500 characters" }),
   email: z
     .string({ required_error: "Email address is required" })

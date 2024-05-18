@@ -7,7 +7,7 @@ import { useAppDispatch } from "./store/storeHooks";
 import { setUserState } from "./store/userSlice.ts";
 import { SkeletonTheme } from "react-loading-skeleton";
 
-import Layout from "./Layouts/Layout";
+import Layout from "./pages/Layout.tsx";
 import PrivateRoute from "./components/PrivateRoutes/PrivateRoute";
 import PrivateAuthRoute from "./components/PrivateRoutes/PrivateAuthRoute";
 import OnlyAdminPrivateRoute from "./components/PrivateRoutes/OnlyAdminPrivateRoute";

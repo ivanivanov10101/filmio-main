@@ -7,7 +7,7 @@ import {
   allPostCommentHandler,
   postCommentHandler,
   commentLikesHandler,
-} from "../controllers/comment.controller.js";
+} from "../controllers/commentsController.js";
 import { commentCreationSchema } from "../validators/comment.validator.js";
 import validate from "../middlewares/validator.middleware.js";
 
