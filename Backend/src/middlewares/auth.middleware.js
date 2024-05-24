@@ -1,5 +1,5 @@
-import Account from "../models/user.model.js";
-import backendErrors from "../utils/backendErrorsHandler.js";
+import Account from "../models/userModel.ts";
+import backendErrors from "../utils/backendErrorsHandler.ts";
 import jwt from "jsonwebtoken";
 
 const verifyToken = async (request, _, next) => {

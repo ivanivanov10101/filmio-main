@@ -1,4 +1,13 @@
-const developmentEnvironmentErrors = (response, error) => {
+type ErrorType = {
+  statusCode: number;
+  status: number | "error";
+  message: string;
+  stack: string;
+  error: Error;
+  isOperational: boolean;
+}
+
+const developmentEnvironmentErrors = (response: any, error: ErrorType) => {
   return response.status(error.statusCode).json({
     status: error.statusCode,
     message: error.message,
@@ -7,7 +16,7 @@ const developmentEnvironmentErrors = (response, error) => {
   });
 };
 
-const productionEnvironmentErrors = (response, error) => {
+const productionEnvironmentErrors = (response: any, error: ErrorType) => {
   if (error.isOperational) {
     return response
       .status(error.statusCode)
@@ -20,7 +29,7 @@ const productionEnvironmentErrors = (response, error) => {
   }
 };
 
-const projectHandler = (error, request, response) => {
+const projectHandler = (error: ErrorType, response: any) => {
   error.statusCode = error.statusCode || 500;
   error.status = error.status || "error";
 

@@ -3,10 +3,10 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { authorizationRoutes } from "./routes/auth.routes.js";
-import { accountRoutes } from "./routes/user.routes.js";
-import { newsArticleRoutes } from "./routes/article.routes.js";
-import { userCommentRoutes } from "./routes/comment.routes.js";
+import { authorizationRoutes } from "./routes/authRoutes.ts";
+import { accountRoutes } from "./routes/userRoutes.ts";
+import { newsArticleRoutes } from "./routes/articleRoutes.ts";
+import { userCommentRoutes } from "./routes/commentRoutes.ts";
 
 const backend = express();
 const configurationCors = {

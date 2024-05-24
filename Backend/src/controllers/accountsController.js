@@ -1,8 +1,8 @@
-import Account from "../models/user.model.js";
-import APIResponse from "../utils/APIResponse.js";
-import asyncHandler from "../utils/asyncHandler.js";
-import backendErrors from "../utils/backendErrorsHandler.js";
-import { accessTokenOptions, refreshTokenOptions } from "../utils/utils.js";
+import Account from "../models/userModel.ts";
+import APIResponse from "../utils/APIResponse.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
+import backendErrors from "../utils/backendErrorsHandler.ts";
+import { accessTokenOptions, refreshTokenOptions } from "../utils/utils.ts";
 
 export const updateAccount = asyncHandler(async (request, response, next) => {
   const { userName, email, password, profilePicture } = request.body;

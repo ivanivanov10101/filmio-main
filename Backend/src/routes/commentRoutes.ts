@@ -8,10 +8,10 @@ import {
   postCommentHandler,
   commentLikesHandler,
 } from "../controllers/commentsController.js";
-import { commentCreationSchema } from "../validators/comment.validator.js";
-import validate from "../middlewares/validator.middleware.js";
+import { commentCreationSchema } from "../validators/commentValidator.ts";
+import validate from "../middlewares/validatorMiddleware.ts";
 
-const expressRouter = new Router();
+const expressRouter = Router();
 
 expressRouter.route("/getPostComments/:postId").get(postCommentHandler);
 

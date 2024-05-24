@@ -7,8 +7,8 @@ import {
   articleGetterHandler,
   articleUpdatingHandler,
 } from "../controllers/articleController.js";
-import { createArticleSchema } from "../validators/article.validator.js";
-import validate from "../middlewares/validator.middleware.js";
+import { createArticleSchema } from "../validators/articleValidator.ts";
+import validate from "../middlewares/validatorMiddleware.ts";
 
 const expressRouter = Router();
 

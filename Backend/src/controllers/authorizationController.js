@@ -1,12 +1,13 @@
-import Account from "../models/user.model.js";
-import APIResponse from "../utils/APIResponse.js";
-import asyncHandler from "../utils/asyncHandler.js";
-import backendErrors from "../utils/backendErrorsHandler.js";
+import Account from "../models/userModel.ts";
+import APIResponse from "../utils/APIResponse.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
+import backendErrors from "../utils/backendErrorsHandler.ts";
 import {
   generateTokens,
   accessTokenOptions,
   refreshTokenOptions,
-} from "../utils/utils.js";
+} from "../utils/utils.ts";
+
 
 export const accountRegistrationHandler = asyncHandler(
   async (request, response, next) => {
@@ -61,7 +62,7 @@ export const accountLoginHandler = asyncHandler(
       );
     }
 
-    const { accessToken, refreshToken } = await generateTokens(accountBody._id);
+    const {accessToken, refreshToken} = await generateTokens(accountBody._id);
     const user = await Account.findById(accountBody._id).select(
       "-password -refreshToken",
     );

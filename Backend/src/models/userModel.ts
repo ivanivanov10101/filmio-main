@@ -26,7 +26,7 @@ accountSchema.pre("save", async function (next) {
   next();
 });
 
-accountSchema.methods.isPasswordCorrect = async function (password) {
+accountSchema.methods.isPasswordCorrect = async function (password: string | Buffer) {
   return await bcrypt.compare(password, this.password);
 };
 
@@ -39,7 +39,7 @@ accountSchema.methods.generateAccessToken = function () {
       fullName: this.fullName,
       isAdmin: this.isAdmin,
     },
-    process.env.ACCESS_TOKEN_SECRET,
+    process.env.ACCESS_TOKEN_SECRET as string,
     {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     },
@@ -55,7 +55,7 @@ accountSchema.methods.generateRefreshToken = function () {
       fullName: this.fullName,
       isAdmin: this.isAdmin,
     },
-    process.env.REFRESH_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SECRET as string,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     },

@@ -1,15 +1,15 @@
 import dotenv from "dotenv";
 dotenv.config();
-import backend from "./backend.js";
-import connectToDatabase from "./db/connectToDatabase.js";
-import backendErrors from "./utils/backendErrorsHandler.js";
-import projectHandler from "./middlewares/projectHandler.middleware.js";
+import backend from "./backend.ts";
+import connectToDatabase from "./db/connectToDatabase.ts";
+import backendErrors from "./utils/backendErrorsHandler.ts";
+import projectHandler from "./middlewares/projectHandlerMiddleware.ts";
 
-backend.all("*", (req, res, next) => {
+backend.all("*", (request, response, next) => {
   return next(
     new backendErrors(
       404,
-      `404 Error The ${req.originalUrl} URL could not be found on the server.`,
+      `404 Error The ${request.originalUrl} URL could not be found on the server.`,
     ),
   );
 });

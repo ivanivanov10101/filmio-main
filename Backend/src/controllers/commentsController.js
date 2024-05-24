@@ -1,7 +1,7 @@
-import Comments from "../models/comment.model.js";
-import APIResponse from "../utils/APIResponse.js";
-import asyncHandler from "../utils/asyncHandler.js";
-import backendErrors from "../utils/backendErrorsHandler.js";
+import Comments from "../models/commentModel.ts";
+import APIResponse from "../utils/APIResponse.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
+import backendErrors from "../utils/backendErrorsHandler.ts";
 
 export const commentCreationHandler = asyncHandler(
   async (request, response, next) => {
@@ -118,7 +118,10 @@ export const commentEditingHandler = asyncHandler(
 
     if (commentBody.userId !== request.user.id) {
       return next(
-        new backendErrors(403, "You need to be logged in to edit this comment."),
+        new backendErrors(
+          403,
+          "You need to be logged in to edit this comment.",
+        ),
       );
     }
 

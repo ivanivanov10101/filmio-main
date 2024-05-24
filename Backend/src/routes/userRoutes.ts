@@ -8,7 +8,7 @@ import {
 } from "../controllers/accountsController.js";
 import verifyToken from "../middlewares/auth.middleware.js";
 
-const expressRouter = new Router();
+const expressRouter = Router();
 
 // Public Routes....*:
 expressRouter.route("/getuser/:userId").get(getAccount);

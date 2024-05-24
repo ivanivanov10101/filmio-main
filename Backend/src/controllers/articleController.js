@@ -1,8 +1,8 @@
-import Article from "../models/article.model.js";
-import APIResponse from "../utils/APIResponse.js";
-import asyncHandler from "../utils/asyncHandler.js";
-import backendErrors from "../utils/backendErrorsHandler.js";
-import { slugTrimmer } from "../utils/utils.js";
+import Article from "../models/articleModel.ts";
+import APIResponse from "../utils/APIResponse.ts";
+import asyncHandler from "../utils/asyncHandler.ts";
+import backendErrors from "../utils/backendErrorsHandler.ts";
+import { slugTrimmer } from "../utils/utils.ts";
 
 export const articleCreationHandler = asyncHandler(
   async (request, response, next) => {

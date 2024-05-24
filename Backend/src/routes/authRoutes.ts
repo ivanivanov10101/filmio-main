@@ -5,12 +5,12 @@ import {
   accountRegistrationHandler,
   validateToken,
 } from "../controllers/authorizationController.js";
-import validate from "../middlewares/validator.middleware.js";
+import validate from "../middlewares/validatorMiddleware.ts";
 import {
   OAuthSchema,
   accountSignInSchema,
   accountSignUpSchema,
-} from "../validators/auth.validator.js";
+} from "../validators/authValidator.ts";
 import verifyToken from "../middlewares/auth.middleware.js";
 
 const expressRouter = Router();

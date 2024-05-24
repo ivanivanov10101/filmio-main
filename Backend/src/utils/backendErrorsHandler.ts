@@ -1,5 +1,8 @@
 class backendErrors extends Error {
-  constructor(statusCode, message) {
+  private statusCode: number;
+  private status: string;
+  private isOperational: boolean;
+  constructor(statusCode: number, message: string | undefined) {
     super(message);
     this.statusCode = statusCode;
     this.status = statusCode >= 400 && statusCode <= 500 ? "failed" : "error";

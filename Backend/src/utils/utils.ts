@@ -1,9 +1,11 @@
-import Account from "../models/user.model.js";
-import backendErrors from "./backendErrorsHandler.js";
+import Account from "../models/userModel.ts";
+import backendErrors from "./backendErrorsHandler.ts";
+import {CookieOptions} from "express";
 
-export const generateTokens = async (userId) => {
+
+export const generateTokens = async (userId: string | Object) => {
   try {
-    const user = await Account.findById(userId);
+    const user: any = await Account.findById(userId); //TODO: FIX ANY
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
@@ -11,27 +13,27 @@ export const generateTokens = async (userId) => {
     await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
     new backendErrors(500, error.message);
   }
 };
 
-export const accessTokenOptions = {
+export const accessTokenOptions: CookieOptions = {
   httpOnly: true,
   sameSite: "none",
   secure: true,
   maxAge: 86400000,
 };
 
-export const refreshTokenOptions = {
+export const refreshTokenOptions: CookieOptions = {
   httpOnly: true,
   sameSite: "none",
   secure: true,
   maxAge: 864000000,
 };
 
-export const slugTrimmer = (title) => {
+export const slugTrimmer = (title: string) => {
   return title
     .split(" ")
     .join("-")
