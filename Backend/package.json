@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "name": "mern-blog",
     "version": "1.0.0",
     "description": "The backend of filmio",
