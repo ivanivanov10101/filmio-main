@@ -6,8 +6,9 @@
     "main": "index.js",
     "proxy": "http://localhost:8000",
     "scripts": {
+        "dev": "ts-node-dev src/index.ts",
         "start": "ts-node-dev src/index.ts",
-        "build": "tsc"
+        "build": "npm install && cd ../Frontend && npm install && npm run build"
     },
     "keywords": [
         "javascript",
