@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+const dotenv = require('dotenv');
 dotenv.config();
 import backend from "./backend.ts";
 import connectToDatabase from "./db/connectToDatabase.ts";
