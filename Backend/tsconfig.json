@@ -9,6 +9,7 @@
 
     "strict": true /* Enable all strict type-checking options. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "outDir": "dist"
   },
   "ts-node": {
     // Tell ts-node CLI to install the --loader automatically
